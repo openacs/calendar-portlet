@@ -19,7 +19,7 @@
 %>
 
 <if @config.shaded_p@ ne "t">
-@cal_stuff@
+@cal_stuff;noquote@
 </if>
 <else>
 &nbsp;

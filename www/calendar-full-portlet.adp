@@ -22,7 +22,7 @@
   <table border=0 width="100%">
     <tr>
       <td valign=top width=180>
-        @cal_nav@
+        @cal_nav;noquote@
         <p align="left">
         <ul align="left">
           <if @create_p@><li> <a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=&time_p=1">#calendar-portlet.Add_an_item#</a></if>
@@ -30,7 +30,7 @@
         </ul>
       </td>
       <td valign=top>
-        @cal_stuff@
+        @cal_stuff;noquote@
       </td>
     </tr>
   </table>
