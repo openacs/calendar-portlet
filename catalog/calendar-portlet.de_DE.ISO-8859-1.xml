@@ -3,7 +3,7 @@
 
   <msg key="Add_an_item">Eintrag hinzufügen</msg>
   <msg key="admin_pretty_name">Kalender verwalten</msg>
-  <msg key="Create_a_new_Event">Neuen Eintrag erstellen</msg>
+  <msg key="Create_a_new_Event">Neuen Eintrag hinzufügen</msg>
   <msg key="full_portlet_pretty_name">Kalender</msg>
   <msg key="lt_Manage_Calendar_Event">Eintragskategorien ändern</msg>
   <msg key="Manage_Item_Types">Eintragskategorien ändern</msg>
