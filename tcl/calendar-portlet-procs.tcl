@@ -218,7 +218,7 @@ namespace eval calendar_portlet {
 		<input type=radio name=value value=month>month</LABEL>
 		<input type=radio name=value value=year>year</LABEL>
 		<input type=radio name=value value=list>list</LABEL>
-		<input type=submit value=\"Update\">""
+		<input type=submit value=\"Update\">"
 	    }
 	    "month" {
 		set html "Set default view to:<P>
@@ -260,11 +260,11 @@ namespace eval calendar_portlet {
     }
 
     
-    ad_proc -public remove_self_from_page { 
-	portal_id 
-	community_id 
+    ad_proc -public remove_self_from_page {
+	portal_id
+	community_id
     } {
-	  Removes a calendar PE from the given page 
+	  Removes a calendar PE from the given page
     
 	  @param page_id The page to remove self from
 	  @param community_id
@@ -273,7 +273,8 @@ namespace eval calendar_portlet {
     } {
 
 	# get the element IDs (could be more than one!)
-	set element_ids [portal::get_element_ids_by_ds $portal_id [my_name]]
+	set element_ids [portal::get_element_ids_by_ds $portal_id \
+		[my_name]]
 
 	# remove all elements
 	db_transaction {
@@ -288,8 +289,8 @@ namespace eval calendar_portlet {
 		    db_exec_plsql delete_calendar {
 			begin
 			calendar.delete(
-			calendar_id   => :calendar_id
-			);	
+			calendar_id => :calendar_id
+			);
 			end;
 		    }
 		}
@@ -299,8 +300,8 @@ namespace eval calendar_portlet {
 	}
     }
     
-    ad_proc -public make_self_available { 
- 	page_id 
+    ad_proc -public make_self_available {
+ 	page_id
     } {
  	Wrapper for the portal:: proc
  	
@@ -312,8 +313,8 @@ namespace eval calendar_portlet {
  		$page_id [portal::get_datasource_id [my_name]]
     }
 
-    ad_proc -public make_self_unavailable { 
-	page_id 
+    ad_proc -public make_self_unavailable {
+	page_id
     } {
 	Wrapper for the portal:: proc
 	
@@ -323,7 +324,5 @@ namespace eval calendar_portlet {
     } {
 	portal::make_datasource_unavailable \
 		$page_id [portal::get_datasource_id [my_name]]
-    }
+    } 
 }
-
-
