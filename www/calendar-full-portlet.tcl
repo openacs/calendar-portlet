@@ -26,6 +26,10 @@ if {[llength $list_of_calendar_ids] > 1} {
     set force_calendar_id [lindex $list_of_calendar_ids 0]
 }
 
+# permissions
+set create_p [ad_permission_p $force_calendar_id cal_item_create]
+set admin_p [ad_permission_p $force_calendar_id calendar_admin]
+
 # set up some vars
 if {[empty_string_p $date]} {
     if {[empty_string_p $julian_date]} {
