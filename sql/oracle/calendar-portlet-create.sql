@@ -56,7 +56,7 @@ begin
 	config_required_p => 't',
 	configured_p => 't',
 	key => 'default_view',
-	value => 'day',
+	value => 'day'
 );	
 
 
