@@ -34,3 +34,78 @@ end;
 /
 show errors;
 
+declare
+	foo integer;
+begin
+
+	-- drop the hooks
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'MyName'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'GetPrettyName'
+	);
+
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'Link'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'AddSelfToPage'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'Show'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'Edit'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'RemoveSelfFromPage'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'MakeSelfAvailable'
+	);
+
+	foo := acs_sc_impl.delete_alias (
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'MakeSelfUnavailable'
+	);
+
+	-- Drop the binding
+	acs_sc_binding.delete (
+	    contract_name => 'portal_datasource',
+	    impl_name => 'calendar_portlet'
+	);
+
+	-- drop the impl
+	foo := acs_sc_impl.delete (
+		'portal_datasource',
+		'calendar_portlet'
+	);
+end;
+/
+show errors
+
