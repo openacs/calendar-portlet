@@ -31,8 +31,6 @@ set list_of_calendar_ids $config(calendar_id)
 
 set scoped_p $config(scoped_p)
 
-ns_log Notice "BMA- $scoped_p"
-
 if {$scoped_p == "t"} {
     set show_calendar_name_p 1
 } else {
