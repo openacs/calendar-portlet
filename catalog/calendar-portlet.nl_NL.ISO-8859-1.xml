@@ -6,7 +6,7 @@
   <msg key="Create_a_new_Event">Aanmaken nieuwe gebeurtenis</msg>
   <msg key="full_portlet_pretty_name">Complete Kalender</msg>
   <msg key="lt_Manage_Calendar_Event">Beheer type kalendergebeurtenissen</msg>
-  <msg key="Manage_Item_Types">Beheer type items </msg>
+  <msg key="Manage_Item_Types">Beheer item types</msg>
   <msg key="pretty_name">Kalender</msg>
   <msg key="Schedule">Schema</msg>
 </message_catalog>
