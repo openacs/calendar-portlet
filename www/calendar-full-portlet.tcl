@@ -84,7 +84,7 @@ set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=$
 
 if {$create_p} {
     set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
-    set item_add_template " <a href=calendar/cal-item-new?start_time=&time_p=1&end_time=&julian_date=\$julian_date><img align=\"right\" border=0 width=\"7\" height=\"7\" src=\"/graphics/add.gif\" alt=\"Add Item\"></a>"
+    set item_add_template " <a href=calendar/cal-item-new?start_time=&time_p=1&end_time=&julian_date=\$julian_date><img align=\"right\" border=0 width=\"7\" height=\"7\" src=\"/shared/images/add.gif\" alt=\"Add Item\"></a>"
 } else {
     set hour_template "\$hour"
     set item_add_template ""
@@ -152,7 +152,7 @@ if {$view == "week"} {
 
     set cal_stuff [calendar::one_week_display \
             -item_template $item_template \
-            -day_template "<a href=\"calendar/cal-item-new?date=\$date&time_p=1&start_time=&end_time=\"><img border=0 align=right height=\"7\" width=\"7\" src=\"/graphics/add.gif\" alt=\"Add Item\"></a><font size=-1><b>\$day</b> - </font><a href=\"?date=\$date&page_num=$page_num&return_url=$encoded_return_url\">\$pretty_date</a>" \
+            -day_template "<a href=\"calendar/cal-item-new?date=\$date&time_p=1&start_time=&end_time=\"><img border=0 align=right height=\"7\" width=\"7\" src=\"/shared/images/add.gif\" alt=\"Add Item\"></a><font size=-1><b>\$day</b> - </font><a href=\"?date=\$date&page_num=$page_num&return_url=$encoded_return_url\">\$pretty_date</a>" \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids \
             -url_stub_callback "calendar_portlet_display::get_url_stub" \
