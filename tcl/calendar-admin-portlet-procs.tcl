@@ -38,7 +38,7 @@ namespace eval calendar_admin_portlet {
 
     ad_proc -public get_pretty_name {
     } {
-        return "Calendar Administration"
+        return "#calendar-portlet.admin_pretty_name#"
     }
 
     ad_proc -public link {
