@@ -23,7 +23,6 @@
     @import "/resources/calendar/calendar.css";
   </style>
 
-HURGA
  <switch @view@>
    <case value="day">
      <include src="/packages/calendar/www/view-one-day-display" 
