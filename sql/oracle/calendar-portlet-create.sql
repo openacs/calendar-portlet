@@ -62,6 +62,15 @@ begin
 	value => 'f'
 );	
 
+  -- link_hideable_p 
+  portal_datasource.set_def_param (
+	datasource_id => ds_id,
+	config_required_p => 't',
+	configured_p => 't',
+	key => 'link_hideable_p',
+	value => 'f'
+);	
+
 
   -- calendar-specific params
 
