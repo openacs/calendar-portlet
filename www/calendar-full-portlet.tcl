@@ -46,7 +46,8 @@ if {[empty_string_p $view]} {
 }
 set list_of_calendar_ids $config(calendar_id)
 
-set base_url [ad_conn url]
+set ad_conn_url [ad_conn url]
+set base_url [ad_conn package_url]
 
 set scoped_p $config(scoped_p)
 if {$scoped_p == "t"} {

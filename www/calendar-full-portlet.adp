@@ -28,7 +28,7 @@
       <td valign="top">
 
 	<include src="/packages/calendar/www/mini-calendar" 
-          base_url="@base_url@" 
+          base_url="@ad_conn_url@" 
           view="@view@" 
           date="@date@" 
           page_num="@page_num@">
