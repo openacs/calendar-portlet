@@ -62,6 +62,11 @@ namespace eval calendar_full_portlet {
 
 	@return element_id The new element's id
     } {
+        set extra_params ""
+        if {![empty_string_p $scoped_p]} {
+            set extra_params [list scoped_p $scoped_p]
+        }        
+
         return [portal::add_element_parameters \
                     -portal_id $portal_id \
                     -page_name $page_name \
@@ -70,7 +75,7 @@ namespace eval calendar_full_portlet {
                     -param_action $param_action \
                     -key calendar_id \
                     -value $calendar_id \
-                    -extra_params [list scoped_p $scoped_p]
+                    -extra_params $extra_params
         ]
     }
 
