@@ -75,7 +75,7 @@ set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=$
 
 if {$create_p} {
     set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
-    set item_add_template " <a href=calendar/cal-item-new?start_time=&time_p=1&end_time=&julian_date=\$julian_date><img align=\"right\" border=0 width=\"7\" height=\"7\" src=\"/graphics/add.gif\" alt=\"Add Item\"></a>"
+    set item_add_template "<a href=calendar/cal-item-new?start_time=&time_p=1&end_time=&julian_date=\$julian_date title=\"[_ calendar.Add_Item]\">+</a>"
 } else {
     set hour_template "\$hour"
     set item_add_template ""
