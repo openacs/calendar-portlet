@@ -37,31 +37,6 @@ ad_page_contract {
         }
     }
 }
-###############
-ad_page_contract {
-    
-    Viewing Calendar Information. Currently offers list, day, week, month view.
-    
-    @author Dirk Gomez (openacs@dirkgomez.de)
-    @author Ben Adida (ben@openforce.net)
-    @creation-date May 29, 2002
-    @cvs-id $Id$
-} {
-    {view day}
-    {date ""}
-    {julian_date ""}
-    {sort_by ""}
-    {start_date ""}
-    {period_days:integer "31"}
-} -validate {
-    valid_date -requires { date } {
-        if {![string equal $date ""]} {
-            if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
-                ad_complain "Your input was not valid. It has to be in the form YYYYMMDD."
-            }
-        }
-    }
-}
 
 # get stuff out of the config array
 array set config $cf
