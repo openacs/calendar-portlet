@@ -58,7 +58,7 @@ if {[empty_string_p $date]} {
 
 set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
-set return_url "../"
+set return_url "[ns_conn url]?[ns_conn query]"
 set encoded_return_url [ns_urlencode $return_url]
 
 set cal_nav [dt_widget_calendar_navigation "" $view $date "page_num=$page_num"]
@@ -70,8 +70,8 @@ if {$create_p} {
 }
 
 if {$create_p} {
-    set hour_template "<a href=calendar/?show_cal_nav=0&date=$current_date&force_calendar_id=$force_calendar_id&action=add&return_url=[ns_urlencode "../"]&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
-    set item_add_template "<a href=calendar/?return_url=../&show_cal_nav=0&action=add&force_calendar_id=$force_calendar_id&start_time=&end_time=&julian_date=\$julian_date>ADD</a>"
+    set hour_template "<a href=calendar/?show_cal_nav=0&date=$current_date&force_calendar_id=$force_calendar_id&action=add&return_url=$encoded_return_url&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
+    set item_add_template "<a href=calendar/?return_url=$encoded_return_url&show_cal_nav=0&action=add&force_calendar_id=$force_calendar_id&start_time=&end_time=&julian_date=\$julian_date>ADD</a>"
 } else {
     set hour_template "\$hour"
     set item_add_template ""
@@ -104,7 +104,7 @@ if {$view == "month"} {
 
 if {$view == "list"} {
     set cal_stuff [calendar::list_display \
-            -item_template {<a href=calendar/?return_url=../&show_cal_nav=0&action=edit&cal_item_id=$item_id>$item</a>} \
+            -item_template {<a href=calendar/?return_url=$encoded_return_url&show_cal_nav=0&action=edit&cal_item_id=$item_id>$item</a>} \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids]
 }
