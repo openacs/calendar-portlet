@@ -19,5 +19,8 @@
 %>
 
 <if @config.shaded_p@ ne "t">
-@cal_list@
+  @cal_list@
 </if>
+<else>
+ <br>
+</else>
