@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2001, 2002 OpenForce, Inc.
+--  Copyright (C) 2001, 2002 MIT
 --
 --  This file is part of dotLRN.
 --
@@ -20,7 +20,6 @@
 
 -- Drops calendar portlet
 
--- Copyright (C) 2001 Openforce, Inc. 
 -- @author Arjun Sanyal (arjun@openforce.net)
 -- @creation-date 2001-30-09
 

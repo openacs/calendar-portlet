@@ -1,5 +1,5 @@
 #
-#  Copyright (C) 2001, 2002 OpenForce, Inc.
+#  Copyright (C) 2001, 2002 MIT
 #
 #  This file is part of dotLRN.
 #
@@ -19,9 +19,6 @@
 ad_library {
 
 Procedures to support the calendar portlet display
-
-Copyright Openforce, Inc.
-Licensed under GNU GPL v2 
 
 @creation-date April 15, 2002
 @author ben@openforce.net

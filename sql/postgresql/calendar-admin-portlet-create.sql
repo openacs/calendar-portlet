@@ -1,5 +1,5 @@
 --
---  Copyright (C) 2001, 2002 OpenForce, Inc.
+--  Copyright (C) 2001, 2002 MIT
 --
 --  This file is part of dotLRN.
 --
@@ -20,7 +20,7 @@
 
 -- Creates calendar admin portlet
 
--- Copyright (C) 2001 OpenForce, Inc.
+-- Copyright (C) 2001 MIT
 -- @author Arjun Sanyal (arjun@openforce.net)
 -- @author Ben Adida (ben@openforce.net)
 -- @creation-date 2002-01-19
