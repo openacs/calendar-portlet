@@ -14,7 +14,7 @@
 #  details.
 #
 
-# www/calendar-portlet.tcl
+# www/calendar-full-portlet.tcl
 ad_page_contract {
     The display logic for the calendar portlet
 
