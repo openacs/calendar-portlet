@@ -58,11 +58,13 @@ if {[empty_string_p $date]} {
 
 set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
+set return_url "../"
+set encoded_return_url [ns_urlencode $return_url]
 
 set cal_nav [dt_widget_calendar_navigation "" $view $date "page_num=$page_num"]
 
 if {$create_p} {
-    set item_template "<a href=calendar/?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\$item</a>"
+    set item_template "<a href=calendar/?show_cal_nav=0&return_url=$encoded_return_url&action=edit&cal_item_id=\$item_id>\$item</a>"
 } else {
     set item_template "\$item"
 }
@@ -86,6 +88,7 @@ if {$view == "day"} {
 if {$view == "week"} {
     set cal_stuff [calendar::one_week_display \
             -item_template $item_template \
+            -day_template "<a href=\"?date=\$date&page_num=$page_num&return_url=$encoded_return_url\">\$day - \$pretty_date</a>" \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids]
 }
