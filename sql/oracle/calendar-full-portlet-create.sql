@@ -141,6 +141,7 @@ begin
 	foo := acs_sc_impl.new (
 		impl_contract_name => 'portal_datasource',
 		impl_name => 'calendar_full_portlet',
+		impl_pretty_name => 'Calendar Full portlet',
 		impl_owner_name => 'calendar_full_portlet'
 	);
 
