@@ -21,6 +21,7 @@ begin
     data_type        => 'tcl_proc',
     mime_type        => 'text/html',
     name             => 'calendar-portlet',
+    link             => 'calendar',
     description      => 'Displays the calendar ',
     content	     => 'calendar_portlet::show',
     configurable_p   => 't'
