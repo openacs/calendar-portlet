@@ -92,7 +92,8 @@
      base_url="@base_url@calendar/"
      page_num=@page_num@
      prev_month_template="@prev_month_template;noquote@"
-     next_month_template="@next_month_template;noquote@">
+     next_month_template="@next_month_template;noquote@"
+     url_stub_callback="@url_stub_callback;noquote@">
   </case>
  </switch>
       </td>
