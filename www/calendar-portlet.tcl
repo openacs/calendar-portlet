@@ -26,7 +26,10 @@ set date_format "YYYY-MM-DD HH24:MI"
 # big switch on the view var
 if { $view == "day" } {
     
-    set cal_stuff [calendar::one_day_display -date $current_date]
+    set cal_stuff [calendar::one_day_display \
+            -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
+            -hour_template "<a href=calendar/?date=$current_date&action=add&return_url=../&start_time=\$start_time&end_time=\$start_time>\$hour</a>" \
+            -date $current_date -start_hour 7 -end_hour 22]
     
 }
 
