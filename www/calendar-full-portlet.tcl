@@ -125,10 +125,6 @@ if {$view == "month"} {
 if {$view == "list"} {
     set sort_by [ns_queryget sort_by]
 
-    if {[empty_string_p $sort_by]} {
-        set sort_by "item_type"
-    }
-
     set cal_stuff [calendar::list_display \
             -item_template $item_template \
             -date $current_date \
