@@ -40,7 +40,7 @@ namespace eval calendar_full_portlet {
 
     ad_proc -public get_pretty_name {
     } {
-        return [parameter::get_from_package_key -package_key full_portlet_pretty_name -parameter pretty_name]
+        return [parameter::get_from_package_key -package_key [my_package_key] -parameter full_portlet_pretty_name]
     }
 
     ad_proc -public link {
@@ -50,8 +50,10 @@ namespace eval calendar_full_portlet {
 
     ad_proc -public add_self_to_page {
 	{-portal_id:required}
-        {-page_name ""}
 	{-calendar_id:required}
+        {-page_name ""}
+        {-scoped_p ""}
+        {-param_action "overwrite"}
     } {
 	Adds a "full" calendar PE to the given portal
 
@@ -60,27 +62,30 @@ namespace eval calendar_full_portlet {
 
 	@return element_id The new element's id
     } {
-        return [portal::add_element_or_append_id \
-            -portal_id $portal_id \
-            -page_name $page_name \
-            -portlet_name [get_my_name] \
-            -pretty_name [get_pretty_name] \
-            -value_id $calendar_id \
-            -key calendar_id]
+        return [portal::add_element_parameters \
+                    -portal_id $portal_id \
+                    -page_name $page_name \
+                    -portlet_name [get_my_name] \
+                    -pretty_name [get_pretty_name] \
+                    -param_action $param_action \
+                    -key calendar_id \
+                    -value $calendar_id \
+                    -extra_params [list scoped_p $scoped_p]
+        ]
     }
 
     ad_proc -public remove_self_from_page {
-	portal_id
-        calendar_id
+	{-portal_id:required}
+        {-calendar_id:required}
     } {
         Removes a "full" calendar PE from the given page or
         a calendar_id from its params
     } {
-        portal::remove_element_or_remove_id \
+        portal::remove_element_parameters \
             -portal_id $portal_id \
             -portlet_name [get_my_name] \
             -key calendar_id \
-            -value_id $calendar_id
+            -value $calendar_id
     }
 
     ad_proc -public show {

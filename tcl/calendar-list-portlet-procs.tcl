@@ -52,6 +52,7 @@ namespace eval calendar_list_portlet {
 	{-portal_id:required}
         {-page_name ""}
 	{-calendar_id:required}
+        {-scoped_p ""}
     } {
 	Adds a "list" calendar PE to the given portal
 
@@ -60,13 +61,18 @@ namespace eval calendar_list_portlet {
 
 	@return element_id The new element's id
     } {
-        return [portal::add_element_or_append_id \
+        if {[empty_string_p $scoped_p]} {
+            set scoped_p f
+        }
+
+        portal::add_element_parameters \
             -portal_id $portal_id \
             -page_name $page_name \
             -portlet_name [get_my_name] \
             -pretty_name [get_pretty_name] \
-            -value_id $calendar_id \
-            -key calendar_id]
+            -value $calendar_id \
+            -key calendar_id \
+            -extra_params [list "scoped_p" $scoped_p]
     }
 
     ad_proc -public remove_self_from_page {
@@ -76,11 +82,11 @@ namespace eval calendar_list_portlet {
         Removes a "list" calendar PE from the given page or
         a calendar_id from its params
     } {
-        portal::remove_element_or_remove_id \
+        portal::remove_element_parameters \
             -portal_id $portal_id \
             -portlet_name [get_my_name] \
             -key calendar_id \
-            -value_id $calendar_id
+            -value $calendar_id
     }
 
     ad_proc -public show {

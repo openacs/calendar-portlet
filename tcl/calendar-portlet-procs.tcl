@@ -38,7 +38,9 @@ namespace eval calendar_portlet {
 
     ad_proc -public get_pretty_name {
     } {
-        return [parameter::get_from_package_key -package_key [my_package_key] -parameter pretty_name]
+        return [parameter::get_from_package_key \
+                    -package_key [my_package_key] \
+                    -parameter pretty_name]
     }
 
     ad_proc -public link {
@@ -48,8 +50,12 @@ namespace eval calendar_portlet {
 
     ad_proc -public add_self_to_page {
 	{-portal_id:required}
-        {-page_name ""}
 	{-calendar_id:required}
+        {-page_name ""}
+        {-pretty_name ""}
+        {-force_region ""}
+	{-scoped_p ""}
+	{-param_action "overwrite"}
     } {
 	Adds a (normal) calendar PE to the given page or appends a
         calendar_id to the current calendar portlet
@@ -59,20 +65,35 @@ namespace eval calendar_portlet {
 
 	@return element_id The new element's id
     } {
-        return [portal::add_element_or_append_id \
-            -portal_id $portal_id \
-            -page_name $page_name \
-            -portlet_name [get_my_name] \
-            -pretty_name [get_pretty_name] \
-            -value_id $calendar_id \
-            -force_region [ad_parameter "force_region" [my_package_key]] \
-            -key calendar_id
+        
+        # allow overrides of pretty_name and force_region
+        if {[empty_string_p $pretty_name]} {
+            set pretty_name [get_pretty_name]
+        }
+
+        if {[empty_string_p $force_region]} {
+            set force_region [parameter::get_from_package_key \
+                                  -package_key [my_package_key] \
+                                  -parameter "force_region"
+            ]
+        }
+
+        return [portal::add_element_parameters \
+                    -portal_id $portal_id \
+                    -page_name $page_name \
+                    -portlet_name [get_my_name] \
+                    -pretty_name $pretty_name \
+                    -force_region $force_region \
+                    -key calendar_id \
+                    -value $calendar_id \
+                    -param_action $param_action \
+                    -extra_params [list "scoped_p" $scoped_p]
         ]
     }
 
     ad_proc -public remove_self_from_page {
-	portal_id
-        calendar_id
+	{-portal_id:required}
+        {-calendar_id:required}
     } {
         Removes a calendar PE from the given page or just
         the given calendar_id
@@ -80,11 +101,11 @@ namespace eval calendar_portlet {
 	  @param portal_id The page to remove self from
 	  @param calendar_id
     } {
-        portal::remove_element_or_remove_id \
+        portal::remove_element_parameters \
             -portal_id $portal_id \
             -portlet_name [get_my_name] \
             -key calendar_id \
-            -value_id $calendar_id
+            -value $calendar_id
     }
 
     ad_proc -public show {
