@@ -1,8 +1,8 @@
 --
--- /fs-portlet/sql/oracle/fs-portlet-drop.sql
+-- /calendar-portlet/sql/oracle/calendar-portlet-drop.sql
 --
 
--- Drops fs portlet
+-- Drops calendar portlet
 
 -- Copyright (C) 2001 Openforce, Inc. 
 -- @author Arjun Sanyal (arjun@openforce.net)
@@ -21,7 +21,7 @@ begin
   begin 
     select datasource_id into ds_id
       from portal_datasources
-     where name = 'fs-portlet';
+     where name = 'calendar-portlet';
    exception when no_data_found then
      ds_id := null;
   end;
