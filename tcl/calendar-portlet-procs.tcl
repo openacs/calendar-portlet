@@ -75,6 +75,7 @@ namespace eval calendar_portlet {
 
 	# otherwise, get the calendar_name for the give_id
 	set calendar_name [calendar_get_name $calendar_id]
+	set view $config(default_view)
 	
 	# big non-ported query, i'm bad
 	db_foreach get_day_items "
@@ -106,7 +107,6 @@ namespace eval calendar_portlet {
 	}  
 
 	# shaded_p support version 1
-
 	if { $config(shaded_p) == "f" } {
 	
 	    set row_html "
@@ -182,6 +182,83 @@ namespace eval calendar_portlet {
 	return $output
 	
     }
+
+    ad_proc -public edit { 
+	element_id
+    } {
+	 Display the PE's edit page
+    
+	 @return HTML string
+	 @param cf A config array
+	 @author arjun@openforce.net
+	 @creation-date Nov 2001
+    } {
+	
+	set calendar_id [portal::get_element_param $element_id "calendar_id"]
+	set current_view [portal::get_element_param $element_id "default_view"]
+	
+	switch $current_view {
+	    "day" {
+		set html "Set default view to:<P>
+		<input type=hidden name=element_id value=$element_id>
+		<input type=hidden name=key value=default_view>
+		<input type=radio name=value value=day checked>day</LABEL>
+		<input type=radio name=value value=week>week</LABEL>
+		<input type=radio name=value value=month>month</LABEL>
+		<input type=radio name=value value=year>year</LABEL>
+		<input type=radio name=value value=list>list</LABEL>
+		<input type=submit value=\"Update\">"
+	    }
+	    "week" {
+		set html "Set default view to:<P>
+		<input type=hidden name=element_id value=$element_id>
+		<input type=hidden name=key value=default_view>
+		<input type=radio name=value value=day>day</LABEL>
+		<input type=radio name=value value=week checked>week</LABEL>
+		<input type=radio name=value value=month>month</LABEL>
+		<input type=radio name=value value=year>year</LABEL>
+		<input type=radio name=value value=list>list</LABEL>
+		<input type=submit value=\"Update\">""
+	    }
+	    "month" {
+		set html "Set default view to:<P>
+		<input type=hidden name=element_id value=$element_id>
+		<input type=hidden name=key value=default_view>
+		<input type=radio name=value value=day>day</LABEL>
+		<input type=radio name=value value=week>week</LABEL>
+		<input type=radio name=value value=month checked>month</LABEL>
+		<input type=radio name=value value=year>year</LABEL>
+		<input type=radio name=value value=list>list</LABEL>
+		<input type=submit value=\"Update\">"
+		
+	    }
+	    "year" {
+		set html "Set default view to:<P>
+		<input type=hidden name=element_id value=$element_id>
+		<input type=hidden name=key value=default_view>
+		<input type=radio name=value value=day>day</LABEL>
+		<input type=radio name=value value=week checked>week</LABEL>
+		<input type=radio name=value value=month>month</LABEL>
+		<input type=radio name=value value=year checked>year</LABEL>
+		<input type=radio name=value value=list>list</LABEL>
+		<input type=submit value=\"Update\">"
+	    }
+	    "list" {
+		set html "Set default view to:<P>
+		<input type=hidden name=element_id value=$element_id>
+		<input type=hidden name=key value=default_view>
+		<input type=radio name=value value=day>day</LABEL>
+		<input type=radio name=value value=week checked>week</LABEL>
+		<input type=radio name=value value=month>month</LABEL>
+		<input type=radio name=value value=year>year</LABEL>
+		<input type=radio name=value value=list checked>list</LABEL>
+		<input type=submit value=\"Update\">"
+	    }
+
+	    return $html
+	}
+    }
+
     
     ad_proc -public remove_self_from_page { 
 	portal_id 
