@@ -19,7 +19,18 @@
 %>
 
 <if @config.shaded_p@ ne "t">
+  <if @view@ eq "day">
+  <include src="/packages/calendar/www/view-one-day-display" 
+  base_url=@base_url@
+  date="@date@" start_display_hour=7 end_display_hour=22
+  hour_template="@hour_template;noquote@" item_add_template="@item_add_template;noquote@"
+  prev_nav_template="@previous_link;noquote@"
+  next_nav_template="@next_link;noquote@"
+  calendar_id_list="@list_of_calendar_ids@">
+  </if>
+  <else>
 @cal_stuff;noquote@
+</else>
 </if>
 <else>
 &nbsp;

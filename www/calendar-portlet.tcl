@@ -42,6 +42,7 @@ ad_page_contract {
 array set config $cf
 set view $config(default_view)
 set list_of_calendar_ids $config(calendar_id)
+set base_url [ad_conn url]
 
 set scoped_p $config(scoped_p)
 
@@ -73,10 +74,10 @@ set date_format "YYYY-MM-DD HH24:MI"
 set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\$item</a>"
 
 if {$create_p} {
-    set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
-    set item_add_template "<a href=calendar/cal-item-new?start_time=&end_time=&julian_date=\$julian_date>ADD</a>"
+    set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$day_current_hour>\$localized_day_current_hour</a>"
+    set item_add_template "<a href=calendar/cal-item-new?start_time=&time_p=1&end_time=&julian_date=\$julian_date title=\"[_ calendar.Add_Item]\">+</a>"
 } else {
-    set hour_template "\$hour"
+    set hour_template "\$localized_day_current_hour"
     set item_add_template ""
 }
 
@@ -105,16 +106,8 @@ if { $view == "day" } {
 	}
     }
 
-
-    set cal_stuff [calendar::one_day_display \
-            -prev_nav_template $previous_link \
-            -next_nav_template $next_link \
-            -item_template $item_template \
-            -hour_template $hour_template \
-            -date $current_date -start_hour 7 -end_hour 22 \
-            -calendar_id_list $list_of_calendar_ids \
-            -url_stub_callback "calendar_portlet_display::get_url_stub" \
-            -show_calendar_name_p $show_calendar_name_p]
+#             -url_stub_callback "calendar_portlet_display::get_url_stub" \
+#             -show_calendar_name_p $show_calendar_name_p]
     
 }
 
