@@ -45,6 +45,7 @@
       end_date=@end_date@ 
       date=@current_date@ 
       period_days=@period_days@
+      item_template="@item_template;noquote@"
       calendar_id_list=@list_of_calendar_ids@ 
       page_num=@page_num@
       url_template="@url_template;noquote@" 
