@@ -29,6 +29,7 @@
      date="@date@" 
      start_display_hour=7 
      end_display_hour=22
+     page_num=@page_num@
      hour_template="@hour_template;noquote@" 
      item_template="@item_template;noquote@"
      item_add_template="@item_add_template;noquote@"
@@ -73,7 +74,8 @@
       base_url="@base_url@calendar/"
       page_num=@page_num@
       prev_month_template="@prev_month_template;noquote@"
-      next_month_template="@next_month_template;noquote@">
+      next_month_template="@next_month_template;noquote@"
+      url_stub_callback="@url_stub_callback;noquote@">
     </case>
   </switch>
 </if>
