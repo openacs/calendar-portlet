@@ -20,5 +20,6 @@
 
 
 <ul>
-<li> <a href=@url@?action=add&force_calendar_id=@calendar_id@>Create a new Event</a>
+<li> <a href="@url@?action=add&show_cal_nav=0&force_calendar_id=@calendar_id@">Create a new Event</a>
+<li> <a href="@url@calendar-item-types?calendar_id=@calendar_id@">Manage Calendar Event Types</a>
 </ul>
