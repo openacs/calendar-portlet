@@ -22,12 +22,19 @@
     @import "/resources/calendar/calendar.css";
   </style>
 
-<if @config.shaded_p@ ne "t">
-  <table border=0 width="100%">
+<if @config.shaded_p@ false>
+  <table border="0" width="100%">
     <tr>
-      <td valign=top width=180>
-	<include src="/packages/calendar/www/mini-calendar" base_url="@base_url@" view="@view@" date="@date@" page_num=@page_num@>
+      <td valign="top">
+
+	<include src="/packages/calendar/www/mini-calendar" 
+          base_url="@base_url@" 
+          view="@view@" 
+          date="@date@" 
+          page_num="@page_num@">
+
         <p align="left">
+
         <ul align="left">
           <if @create_p@><li> <a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=&time_p=1">#calendar-portlet.Add_an_item#</a></if>
           <if @admin_p@><li> <a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@">#calendar-portlet.Manage_Item_Types#</a></if>
@@ -60,6 +67,7 @@
      calendar_id_list=@list_of_calendar_ids@ 
      url_template="@url_template;noquote@" 
      url_stub_callback="@url_stub_callback;noquote@" 
+     page_num=@page_num@
      sort_by=@sort_by@> 
   </case>
   

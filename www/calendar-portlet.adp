@@ -19,6 +19,10 @@
 %>
 
 <if @config.shaded_p@ ne "t">
+  <style type="text/css" media="all">
+    @import "/resources/calendar/calendar.css";
+  </style>
+
  <switch @view@>
    <case value="day">
      <include src="/packages/calendar/www/view-one-day-display" 
@@ -35,43 +39,43 @@
      calendar_id_list="@list_of_calendar_ids@">
    </case>
 
-  <case value="list">
-     <include src="/packages/calendar/www/view-list-display" 
-     start_date=@start_date@ 
-     end_date=@end_date@ 
-     date=@current_date@ 
-     period_days=@period_days@
-     calendar_id_list=@list_of_calendar_ids@ 
-     url_template="@url_template;noquote@" 
-     url_stub_callback="@url_stub_callback;noquote@" 
-     sort_by=@sort_by@> 
-  </case>
-  
-  <case value="week">
-     <include src="/packages/calendar/www/view-week-display" 
-     date="@current_date@"
-     calendar_id_list=@list_of_calendar_ids@ 
-     base_url="@base_url@calendar/"
-     item_template="@item_template;noquote@"
-     page_num=@page_num@
-     prev_week_template="@prev_week_template;noquote@"
-     next_week_template="@next_week_template;noquote@"
-     url_stub_callback="@url_stub_callback;noquote@">
-  </case>
+    <case value="list">
+      <include src="/packages/calendar/www/view-list-display" 
+      start_date=@start_date@ 
+      end_date=@end_date@ 
+      date=@current_date@ 
+      period_days=@period_days@
+      calendar_id_list=@list_of_calendar_ids@ 
+      page_num=@page_num@
+      url_template="@url_template;noquote@" 
+      url_stub_callback="@url_stub_callback;noquote@" 
+      sort_by=@sort_by@> 
+    </case>
+   
+    <case value="week">
+      <include src="/packages/calendar/www/view-week-display" 
+      date="@current_date@"
+      calendar_id_list=@list_of_calendar_ids@ 
+      base_url="@base_url@calendar/"
+      item_template="@item_template;noquote@"
+      page_num=@page_num@
+      prev_week_template="@prev_week_template;noquote@"
+      next_week_template="@next_week_template;noquote@"
+      url_stub_callback="@url_stub_callback;noquote@">
+    </case>
 
-  <case value="month">
-     <include src="/packages/calendar/www/view-month-display"
-     date=@current_date@
-     calendar_id_list=@list_of_calendar_ids@ 
-     item_template="@item_template;noquote@"
-     base_url="@base_url@calendar/"
-     page_num=@page_num@
-     prev_month_template="@prev_month_template;noquote@"
-     next_month_template="@next_month_template;noquote@">
-  </case>
- </switch>
-
+    <case value="month">
+      <include src="/packages/calendar/www/view-month-display"
+      date=@current_date@
+      calendar_id_list=@list_of_calendar_ids@ 
+      item_template="@item_template;noquote@"
+      base_url="@base_url@calendar/"
+      page_num=@page_num@
+      prev_month_template="@prev_month_template;noquote@"
+      next_month_template="@next_month_template;noquote@">
+    </case>
+  </switch>
 </if>
 <else>
-&nbsp;
+  &nbsp;
 </else>
