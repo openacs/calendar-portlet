@@ -40,7 +40,7 @@ namespace eval calendar_list_portlet {
 
     ad_proc -public get_pretty_name {
     } {
-        return "Schedule"
+        return "[_ calendar-portlet.Schedule]"
     }
 
     ad_proc -public link {
