@@ -24,6 +24,7 @@ ad_page_contract {
     {view ""}
     {page_num ""}
     {date ""}
+    {period_days 30}
     {julian_date ""}
 } -properties {
     
@@ -173,7 +174,6 @@ if {$view == "list"} {
 
     set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
 }
-
 
 ad_return_template
 

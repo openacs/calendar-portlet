@@ -25,6 +25,7 @@ ad_page_contract {
     {page_num ""}
     {date ""}
     {julian_date ""}
+    {period_days 30}
     {sort_by ""}
 } -properties {
     
@@ -87,15 +88,7 @@ set thirty_days [expr 60*60*24*30]
 set start_date [ns_fmttime [expr [ns_time] - $thirty_days] "%Y-%m-%d 00:00"]
 set end_date [ns_fmttime [expr [ns_time] + $thirty_days] "%Y-%m-%d 00:00"]
 
-set cal_list [calendar::list_display \
-        -item_template $item_template \
-        -date $current_date \
-	-start_date $start_date \
-	-end_date $end_date \
-        -calendar_id_list $list_of_calendar_ids \
-        -sort_by $sort_by \
-        -url_template "?sort_by=\$order_by&page_num=$page_num" \
-        -url_stub_callback "calendar_portlet_display::get_url_stub" \
-        -show_calendar_name_p $show_calendar_name_p]
+set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
+set url_stub_callback "calendar_portlet_display::get_url_stub" 
 
 ad_return_template

@@ -19,7 +19,15 @@
 %>
 
 <if @config.shaded_p@ ne "t">
-  @cal_list;noquote@
+  <include src="/packages/calendar/www/view-list-display" 
+  start_date=@start_date@ 
+  end_date=@end_date@ 
+  date=@current_date@ 
+  period_days=@period_days@
+  calendar_id_list=@list_of_calendar_ids@ 
+  url_template="@url_template;noquote@" 
+  url_stub_callback="@url_stub_callback;noquote@" 
+  sort_by=@sort_by@> 
 </if>
 <else>
  <br>

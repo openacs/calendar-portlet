@@ -24,6 +24,7 @@ ad_page_contract {
     {view ""}
     {page_num ""}
     {date ""}
+    {period_days 30}
     {julian_date ""}
 } -properties {
     
@@ -81,11 +82,9 @@ if {$create_p} {
     set item_add_template ""
 }
 
-# big switch on the view var
+set url_stub_callback "calendar_portlet_display::get_url_stub" 
+
 if { $view == "day" } {
-    
-    # Check that the previous and next days are in the tcl boundaries
-    # so that the calendar widget doesn't bomb when it creates the next/prev links
     if {[catch {set yest [clock format [clock scan "1 day ago" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {
 	set previous_link ""
     } else {
@@ -105,16 +104,9 @@ if { $view == "day" } {
 	    set next_link "<a href=\"?page_num=$page_num&date=\$tomorrow\"><img border=0 src=[dt_right_arrow] alt=\"forward one day\"></a>"
 	}
     }
-
-#             -url_stub_callback "calendar_portlet_display::get_url_stub" \
-#             -show_calendar_name_p $show_calendar_name_p]
-    
 }
 
 if {$view == "week"} {
-
-    # Check that the previous and next weeks are in the tcl boundaries
-    # so that the calendar widget doesn't bomb when it creates the next/prev links
     if {[catch {set last_w [clock format [clock scan "1 week ago" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {
         set previous_link ""
     } else {
@@ -134,21 +126,11 @@ if {$view == "week"} {
 	    set next_link "<a href=\"?date=\$next_week&view=week&page_num=$page_num\"><img border=0 src=[dt_right_arrow] alt=\"forward one week\"></a>"
 	}
     }
-
-    set cal_stuff [calendar::one_week_display \
-            -item_template $item_template \
-            -date $current_date \
-            -calendar_id_list $list_of_calendar_ids \
-            -url_stub_callback "calendar_portlet_display::get_url_stub" \
-            -prev_week_template $previous_link \
-            -next_week_template $next_link \
-            -show_calendar_name_p $show_calendar_name_p]
+    set prev_week_template "<a href=\"?date=\[ad_urlencode \[dt_julian_to_ansi \[expr \$first_weekday_julian - 7\]\]\]&view=week&page_num=$page_num\"><img border=0 src=[dt_left_arrow] alt=\"back one week\"></a>" 
+    set next_week_template "<a href=\"?date=\[ad_urlencode \[dt_julian_to_ansi \[expr \$first_weekday_julian + 7\]\]\]&view=week&page_num=$page_num\"><img border=0 src=[dt_right_arrow] alt=\"forward one week\"></a>" 
 }
 
 if {$view == "month"} {
-
-    # Check that the previous and next months are in the tcl boundaries
-    # so that the calendar widget doesn't bomb when it creates the next/prev links
     if {[catch {set prev_m [clock format [clock scan "1 month ago" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {
         set previous_link ""
     } else {
@@ -168,27 +150,17 @@ if {$view == "month"} {
 	    set next_link "<a href=?view=month&date=\$ansi_date&page_num=$page_num><img border=0 src=[dt_right_arrow] alt=\"forward one month\"></a>"
 	}
     }
-
-
-    set cal_stuff [calendar::one_month_display \
-            -item_template $item_template \
-            -day_template "<a href=?julian_date=\$julian_date>\$day_number</a>" \
-            -date $current_date \
-            -item_add_template $item_add_template \
-            -calendar_id_list $list_of_calendar_ids \
-            -url_stub_callback "calendar_portlet_display::get_url_stub" \
-            -show_calendar_name_p $show_calendar_name_p]
 }
 
 if {$view == "list"} {
-    set cal_stuff [calendar::list_display \
-            -item_template $item_template \
-            -date $current_date \
-            -calendar_id_list $list_of_calendar_ids \
-            -url_stub_callback "calendar_portlet_display::get_url_stub" \
-            -prev_month_template $previous_link \
-            -next_month_template $next_link \
-            -show_calendar_name_p $show_calendar_name_p]
+    set sort_by [ns_queryget sort_by]
+
+    set thirty_days [expr 60*60*24*30]
+
+    set start_date [ns_fmttime [expr [ns_time] - $thirty_days] "%Y-%m-%d 00:00"]
+    set end_date [ns_fmttime [expr [ns_time] + $thirty_days] "%Y-%m-%d 00:00"]
+
+    set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
 }
 
 
