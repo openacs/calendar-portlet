@@ -24,7 +24,7 @@
       and  e.activity_id = a.activity_id
       and  start_date between
         to_date(:current_date,:date_format) and
-        to_date(:current_date,:date_format) + (24 - 1/3600)/24
+        to_date(:current_date,:date_format) + cast('23 hours 59 minutes 59 seconds' as interval)
       and e.event_id = ci.cal_item_id
       and c.calendar_id = ci.on_which_calendar
       and c.calendar_id in ($list_of_calendar_ids)

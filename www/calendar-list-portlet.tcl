@@ -28,7 +28,16 @@ ad_page_contract {
     {sort_by ""}
 } -properties {
     
+}  -validate {
+    valid_date -requires { date } {
+        if {![string equal $date ""]} {
+            if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
+                ad_complain "Your input was not valid. It has to be in the form YYYYMMDD."
+            }
+        }
+    }
 }
+
 
 # get stuff out of the config array
 array set config $cf
@@ -45,7 +54,7 @@ if {$scoped_p == "t"} {
 }
 
 if {[llength $list_of_calendar_ids] > 1} {
-    set force_calendar_id [calendar_have_private_p -return_id 1 [ad_conn user_id]]
+    set force_calendar_id [calendar_have_private_p -return_id 1 -calendar_id_list $list_of_calendar_ids [ad_conn user_id]]
 } else {
     set force_calendar_id [lindex $list_of_calendar_ids 0]
 }
