@@ -50,7 +50,7 @@ namespace eval calendar_portlet {
 
     ad_proc -public link {
     } {
-	return "calendar"
+	return [get_pretty_name]
     }
 
     ad_proc -public add_self_to_page { 
@@ -86,12 +86,6 @@ namespace eval calendar_portlet {
 	  @author arjun@openforce.net
 	  @creation-date Sept 2001
     } {
-        ## YOWSA (ben)
-        # calendar portlet should NOT be creating and deleting calendars!
-        # I've taken out a chunk of code here that was removing calendars. No way! (ben).
-        
-        # get rid of this portal element
-        # This automatically removes all element params
         portal::remove_element_or_remove_id -portal_id $portal_id -portlet_name [my_name] -key calendar_id -value_id $package_id
     }
 
