@@ -22,28 +22,9 @@ set date_format "YYYY-MM-DD HH24:MI"
 
 # big switch on the view var
 if { $view == "day" } {
-
-#
-#create table hours_of_the_day (
-#pretty_start_date char(5),
-#pretty_end_date char(5)
-#);
-#
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('00:00', '00:59');
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('01:00', '01:59');
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('02:00', '02:59');
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('03:00', '03:59');
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('04:00', '04:59');
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('05:00', '05:59');
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('06:00', '06:59');
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('07:00', '07:59');
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('08:00', '08:59');
-#insert into hours_of_the_day (pretty_start_date, pretty_end_date) values ('09:00', '09:59');
-#
-#
-    set list_of_calendar_ids [join $list_of_calendar_ids ", "]
-   
-    db_multirow -local foo select_day_items "" {}
+    
+    set cal_stuff [calendar::one_day_display -date $current_date]
+    
 }
 
 
