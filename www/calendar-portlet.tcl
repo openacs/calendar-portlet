@@ -1,4 +1,3 @@
-
 #
 #  Copyright (C) 2001, 2002 MIT
 #
@@ -38,6 +37,7 @@ ad_page_contract {
     }
 }
 
+
 # get stuff out of the config array
 array set config $cf
 set view $config(default_view)
@@ -70,19 +70,133 @@ if {[empty_string_p $date]} {
 set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
 
-set calendar_list [calendar::calendar_list]
-set date [calendar::adjust_date -date $date -julian_date $julian_date]
+set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\$item</a>"
 
-if {$view == "list"} {
-    if {[empty_string_p $start_date]} {
-        set start_date $date
-    }
-
-    set ansi_list [split $start_date "- "]
-    set ansi_year [lindex $ansi_list 0]
-    set ansi_month [string trimleft [lindex $ansi_list 1] "0"]
-    set ansi_day [string trimleft [lindex $ansi_list 2] "0"]
-    set end_date [dt_julian_to_ansi [expr [dt_ansi_to_julian $ansi_year $ansi_month $ansi_day ] + $period_days]]
+if {$create_p} {
+    set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
+    set item_add_template "<a href=calendar/cal-item-new?start_time=&end_time=&julian_date=\$julian_date>ADD</a>"
+} else {
+    set hour_template "\$hour"
+    set item_add_template ""
 }
 
-ad_return_template 
+# big switch on the view var
+if { $view == "day" } {
+    
+    # Check that the previous and next days are in the tcl boundaries
+    # so that the calendar widget doesn't bomb when it creates the next/prev links
+    if {[catch {set yest [clock format [clock scan "1 day ago" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {
+	set previous_link ""
+    } else {
+	if {[catch {clock scan $yest}]} {
+	    set previous_link ""
+	} else {
+	    set previous_link "<a href=\"?page_num=$page_num&date=\$yesterday\"><img border=0 src=\"[dt_left_arrow]\" alt=\"back one day\"></a>"
+	}
+    }
+
+    if {[catch {set tomor [clock format [clock scan "1 day" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {
+        set next_link ""
+    } else {
+	if {[catch {clock scan $tomor}]} {
+	    set next_link ""
+	} else {
+	    set next_link "<a href=\"?page_num=$page_num&date=\$tomorrow\"><img border=0 src=[dt_right_arrow] alt=\"forward one day\"></a>"
+	}
+    }
+
+
+    set cal_stuff [calendar::one_day_display \
+            -prev_nav_template $previous_link \
+            -next_nav_template $next_link \
+            -item_template $item_template \
+            -hour_template $hour_template \
+            -date $current_date -start_hour 7 -end_hour 22 \
+            -calendar_id_list $list_of_calendar_ids \
+            -url_stub_callback "calendar_portlet_display::get_url_stub" \
+            -show_calendar_name_p $show_calendar_name_p]
+    
+}
+
+if {$view == "week"} {
+
+    # Check that the previous and next weeks are in the tcl boundaries
+    # so that the calendar widget doesn't bomb when it creates the next/prev links
+    if {[catch {set last_w [clock format [clock scan "1 week ago" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {
+        set previous_link ""
+    } else {
+	if {[catch {clock scan $last_w}]} {
+	    set previous_link ""
+	} else {
+	    set previous_link "<a href=\"?date=\$last_week&view=week&page_num=$page_num\"><img border=0 src=[dt_left_arrow] alt=\"back one week\"></a>"
+	}
+    }
+
+    if {[catch {set next_w [clock format [clock scan "1 week" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {
+        set next_link ""
+    } else {
+	if {[catch {clock scan $next_w}]} {
+	    set next_link ""
+	} else {
+	    set next_link "<a href=\"?date=\$next_week&view=week&page_num=$page_num\"><img border=0 src=[dt_right_arrow] alt=\"forward one week\"></a>"
+	}
+    }
+
+    set cal_stuff [calendar::one_week_display \
+            -item_template $item_template \
+            -date $current_date \
+            -calendar_id_list $list_of_calendar_ids \
+            -url_stub_callback "calendar_portlet_display::get_url_stub" \
+            -prev_week_template $previous_link \
+            -next_week_template $next_link \
+            -show_calendar_name_p $show_calendar_name_p]
+}
+
+if {$view == "month"} {
+
+    # Check that the previous and next months are in the tcl boundaries
+    # so that the calendar widget doesn't bomb when it creates the next/prev links
+    if {[catch {set prev_m [clock format [clock scan "1 month ago" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {
+        set previous_link ""
+    } else {
+	if {[catch {clock scan $prev_m}]} {
+	    set previous_link ""
+	} else {
+	    set previous_link "<a href=?view=month&date=\$ansi_date&page_num=$page_num><img border=0 src=[dt_left_arrow] alt=\"back one month\"></a>"
+	}
+    }
+	
+    if {[catch {set next_m [clock format [clock scan "1 month" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {
+        set next_link ""
+    } else {
+	if {[catch {clock scan $next_m}]} {
+	    set next_link ""
+	} else {
+	    set next_link "<a href=?view=month&date=\$ansi_date&page_num=$page_num><img border=0 src=[dt_right_arrow] alt=\"forward one month\"></a>"
+	}
+    }
+
+
+    set cal_stuff [calendar::one_month_display \
+            -item_template $item_template \
+            -day_template "<a href=?julian_date=\$julian_date>\$day_number</a>" \
+            -date $current_date \
+            -item_add_template $item_add_template \
+            -calendar_id_list $list_of_calendar_ids \
+            -url_stub_callback "calendar_portlet_display::get_url_stub" \
+            -show_calendar_name_p $show_calendar_name_p]
+}
+
+if {$view == "list"} {
+    set cal_stuff [calendar::list_display \
+            -item_template $item_template \
+            -date $current_date \
+            -calendar_id_list $list_of_calendar_ids \
+            -url_stub_callback "calendar_portlet_display::get_url_stub" \
+            -prev_month_template $previous_link \
+            -next_month_template $next_link \
+            -show_calendar_name_p $show_calendar_name_p]
+}
+
+
+ad_return_template
