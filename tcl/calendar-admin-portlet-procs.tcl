@@ -81,7 +81,7 @@ namespace eval calendar_admin_portlet {
 			[portal::get_element_param $element_id "calendar_id"]
 		
 		set g_cal_id \
-			[portal::get_element_param $element_id "group_calendar_id"]
+			[portal::get_element_param $element_id "calendar_id"]
 
 		# don't delete the public calendar!
 		if {[calendar_public_p $calendar_id] == "f"} {
