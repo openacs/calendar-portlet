@@ -31,7 +31,7 @@ set date_format "YYYY-MM-DD HH24:MI"
 if { $view == "day" } {
     
     set cal_stuff [calendar::one_day_display \
-            -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
+            -item_template {<a href=calendar/?return_url=../&action=edit&cal_item_id=$item_id>$item</a>} \
             -hour_template "<a href=calendar/?date=$current_date&action=add&force_calendar_id=$force_calendar_id&return_url=../&start_time=\$start_time&end_time=\$end_time>\$hour</a>" \
             -date $current_date -start_hour 7 -end_hour 22 \
             -calendar_id_list $list_of_calendar_ids]
@@ -40,14 +40,14 @@ if { $view == "day" } {
 
 if {$view == "week"} {
     set cal_stuff [calendar::one_week_display \
-            -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
+            -item_template {<a href=calendar/?return_url=../&action=edit&cal_item_id=$item_id>$item</a>} \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids]
 }
 
 if {$view == "month"} {
     set cal_stuff [calendar::one_month_display \
-            -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
+            -item_template {<a href=calendar/?return_url=../&action=edit&cal_item_id=$item_id>$item</a>} \
             -day_template "<a href=?julian_date=\$julian_date>\$day_number</a>" \
             -date $current_date \
             -item_add_template "<a href=calendar/?action=add&start_time=&end_time=&force_calendar_id=$force_calendar_id&julian_date=\$julian_date>ADD</a>" \
@@ -56,7 +56,7 @@ if {$view == "month"} {
 
 if {$view == "list"} {
     set cal_stuff [calendar::list_display \
-            -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
+            -item_template {<a href=calendar/?return_url=../&action=edit&cal_item_id=$item_id>$item</a>} \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids]
 }
