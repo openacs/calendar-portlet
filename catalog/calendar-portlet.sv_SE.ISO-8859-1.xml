@@ -3,10 +3,10 @@
 
   <msg key="Add_an_item">Lägg till en post</msg>
   <msg key="admin_pretty_name">Kalenderadministration</msg>
-  <msg key="Create_a_new_Event">Skapa ny händelse</msg>
+  <msg key="Create_a_new_Event">Skapa en ny händelse</msg>
   <msg key="full_portlet_pretty_name">Detaljerad kalender</msg>
   <msg key="lt_Manage_Calendar_Event">Hantera typer av händelser</msg>
-  <msg key="Manage_Item_Types">Hantera posttyper</msg>
-  <msg key="pretty_name">Almanacka</msg>
+  <msg key="Manage_Item_Types">Hantera typer av poster</msg>
+  <msg key="pretty_name">Kalender</msg>
   <msg key="Schedule">Schema</msg>
 </message_catalog>
