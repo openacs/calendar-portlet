@@ -26,16 +26,19 @@ begin
     configurable_p   => 't'
   );
 
-  -- community_calendar_id must be configured 
+
+  -- for the personal calendar
+
+  -- calendar_id must be configured 
   portal_datasource.set_def_param (
 	  datasource_id => ds_id,
 	  config_required_p => 't',
 	  configured_p => 'f',
-	  key => 'community_calendar_id',
+	  key => 'calendar_id',
 	  value => ''
 );
 
--- XXX personal calendars?
+-- XXX community calendars
 
 --
 --
