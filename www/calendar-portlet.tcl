@@ -34,5 +34,28 @@ if { $view == "day" } {
     
 }
 
+if {$view == "week"} {
+    set cal_stuff [calendar::one_week_display \
+            -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
+            -date $current_date \
+            -calendar_id_list $list_of_calendar_ids]
+}
+
+if {$view == "month"} {
+    set cal_stuff [calendar::one_month_display \
+            -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
+            -day_template "<a href=?julian_date=\$julian_date>\$day_number</a>" \
+            -date $current_date \
+            -item_add_template "<a href=calendar/?action=add&start_time=&end_time=&julian_date=\$julian_date>ADD</a>" \
+            -calendar_id_list $list_of_calendar_ids]
+}
+
+if {$view == "list"} {
+    set cal_stuff [calendar::list_display \
+            -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
+            -date $current_date \
+            -calendar_id_list $list_of_calendar_ids]
+}
+
 
 ad_return_template
