@@ -82,7 +82,7 @@ namespace eval calendar_full_portlet {
                 -portal_id $portal_id \
                 -portlet_name [get_my_name] \
                 -key calendar_id \
-                -value_id $package_id
+                -value_id $calendar_id
     }
     ad_proc -public show { 
 	 cf 
