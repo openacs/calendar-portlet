@@ -15,11 +15,11 @@
 #
 
 ad_library {
-    
+
     Procedures to support the calendar admin portlet
 
     @creation-date Jan 2002
-    @author arjun@openforce.net 
+    @author arjun@openforce.net
     @author ben@openforce.net
     @cvs-id $Id$
 }
@@ -46,44 +46,45 @@ namespace eval calendar_admin_portlet {
 	return ""
     }
 
-    ad_proc -public add_self_to_page { 
-	portal_id 
-	calendar_id
+    ad_proc -public add_self_to_page {
+	{-portal_id:required}
+	{-calendar_id:required}
     } {
 	Adds a admin calendar PE to the given portal
-    
+
 	@param portal_id The page to add self to
 	@param calendar_id The new calendar_id to add
+
 	@return element_id The new element's id
     } {
         set element_id [portal::add_element \
-                           -portal_id $portal_id \
-                           -portlet_name [get_my_name]
+            -portal_id $portal_id \
+            -portlet_name [get_my_name] \
         ]
 
-        portal::set_element_param $element_id "calendar_id" $calendar_id
+        portal::set_element_param $element_id calendar_id $calendar_id
 
         return $element_id
     }
-   
+
     ad_proc -public remove_self_from_page {
 	portal_id
     } {
 	  Removes a calendar admin PE
     } {
         portal::remove_element \
-                -portal_id $portal_id \
-                -portlet_name [get_my_name]
+            -portal_id $portal_id \
+            -portlet_name [get_my_name]
     }
 
-    ad_proc -public show { 
-	 cf 
+    ad_proc -public show {
+	 cf
     } {
     } {
         portal::show_proc_helper \
-                -package_key [my_package_key] \
-                -config_list $cf \
-                -template_src "calendar-admin-portlet"
+            -package_key [my_package_key] \
+            -config_list $cf \
+            -template_src "calendar-admin-portlet"
     }
 
 }

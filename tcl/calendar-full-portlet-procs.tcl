@@ -16,13 +16,13 @@
 
 ad_library {
 
-    Procedures to support the "full" calendar portlet. This is the 
+    Procedures to support the "full" calendar portlet. This is the
     "wide" calendar with the navigation widget and helpful links. Not
-    to be confused with the (regular, narrow) calendar portlet that is titled 
+    to be confused with the (regular, narrow) calendar portlet that is titled
     "Day Summary" by default.
 
     @creation-date Oct 26 2001
-    @author arjun@openforce.net 
+    @author arjun@openforce.net
     @cvs-id $Id$
 }
 
@@ -51,47 +51,49 @@ namespace eval calendar_full_portlet {
 	return ""
     }
 
-    ad_proc -public add_self_to_page { 
-        {-page_id ""}
-	portal_id 
-	calendar_id
+    ad_proc -public add_self_to_page {
+	{-portal_id:required}
+        {-page_name ""}
+	{-calendar_id:required}
     } {
 	Adds a "full" calendar PE to the given portal
-    
+
 	@param portal_id The page to add self to
 	@param calendar_id The new calendar_id to add
+
 	@return element_id The new element's id
     } {
         return [portal::add_element_or_append_id \
-                -portal_id $portal_id \
-                -page_id $page_id \
-                -portlet_name [get_my_name] \
-                -pretty_name [get_pretty_name] \
-                -value_id $calendar_id \
-                -key calendar_id]
+            -portal_id $portal_id \
+            -page_name $page_name \
+            -portlet_name [get_my_name] \
+            -pretty_name [get_pretty_name] \
+            -value_id $calendar_id \
+            -key calendar_id]
     }
 
     ad_proc -public remove_self_from_page {
 	portal_id
         calendar_id
     } {
-        Removes a "full" calendar PE from the given page or 
+        Removes a "full" calendar PE from the given page or
         a calendar_id from its params
     } {
         portal::remove_element_or_remove_id \
-                -portal_id $portal_id \
-                -portlet_name [get_my_name] \
-                -key calendar_id \
-                -value_id $calendar_id
+            -portal_id $portal_id \
+            -portlet_name [get_my_name] \
+            -key calendar_id \
+            -value_id $calendar_id
     }
-    ad_proc -public show { 
-	 cf 
+
+    ad_proc -public show {
+	 cf
     } {
     } {
         portal::show_proc_helper \
-                -package_key [my_package_key] \
-                -config_list $cf \
-                -template_src "calendar-full-portlet"
+            -package_key [my_package_key] \
+            -config_list $cf \
+            -template_src "calendar-full-portlet"
     }
 
 }
