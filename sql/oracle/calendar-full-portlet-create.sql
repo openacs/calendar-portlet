@@ -1,12 +1,13 @@
 --
--- /calendar-portlet/sql/oracle/calendar-portlet-create.sql
+-- /calendar-portlet/sql/oracle/calendar-full-portlet-create.sql
 --
 
 -- Creates calendar portlet
 
 -- Copyright (C) 2001 OpenForce, Inc.
 -- @author Arjun Sanyal (arjun@openforce.net)
--- @creation-date 2001-26-10
+-- @author Ben Adida (ben@openforce)
+-- @creation-date 2002-02-10
 
 -- $Id$
 
@@ -18,7 +19,7 @@ declare
   ds_id portal_datasources.datasource_id%TYPE;
 begin
   ds_id := portal_datasource.new(
-    name             => 'calendar_portlet',
+    name             => 'calendar_full_portlet',
     description      => 'Displays the calendar '
   );
 
@@ -50,7 +51,7 @@ begin
 	config_required_p => 't',
 	configured_p => 't',
 	key => 'user_editable_p',
-	value => 't'
+	value => 'f'
 );	
 
   -- shaded_p 
@@ -115,8 +116,8 @@ begin
 	-- create the implementation
 	foo := acs_sc_impl.new (
 		'portal_datasource',
-		'calendar_portlet',
-		'calendar_portlet'
+		'calendar_full_portlet',
+		'calendar_full_portlet'
 	);
 
 end;
@@ -130,73 +131,73 @@ begin
 	-- add all the hooks
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_full_portlet',
 	       'MyName',
-	       'calendar_portlet::my_name',
+	       'calendar_full_portlet::my_name',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_full_portlet',
 	       'GetPrettyName',
-	       'calendar_portlet::get_pretty_name',
+	       'calendar_full_portlet::get_pretty_name',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_full_portlet',
 	       'Link',
-	       'calendar_portlet::link',
+	       'calendar_full_portlet::link',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_full_portlet',
 	       'AddSelfToPage',
-	       'calendar_portlet::add_self_to_page',
+	       'calendar_full_portlet::add_self_to_page',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_full_portlet',
 	       'Show',
-	       'calendar_portlet::show',
+	       'calendar_full_portlet::show',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_full_portlet',
 	       'Edit',
-	       'calendar_portlet::edit',
+	       'calendar_full_portlet::edit',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_full_portlet',
 	       'RemoveSelfFromPage',
-	       'calendar_portlet::remove_self_from_page',
+	       'calendar_full_portlet::remove_self_from_page',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_full_portlet',
 	       'MakeSelfAvailable',
-	       'calendar_portlet::make_self_available',
+	       'calendar_full_portlet::make_self_available',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_full_portlet',
 	       'MakeSelfUnavailable',
-	       'calendar_portlet::make_self_unavailable',
+	       'calendar_full_portlet::make_self_unavailable',
 	       'TCL'
 	);
 
@@ -211,41 +212,9 @@ begin
 	-- Add the binding
 	acs_sc_binding.new (
 	    contract_name => 'portal_datasource',
-	    impl_name => 'calendar_portlet'
+	    impl_name => 'calendar_full_portlet'
 	);
 end;
 /
 show errors
 
-create table hours_of_the_day (
-    hour                        integer not null
-);
-
-insert into hours_of_the_day values (0);
-insert into hours_of_the_day values (1);
-insert into hours_of_the_day values (2);
-insert into hours_of_the_day values (3);
-insert into hours_of_the_day values (4);
-insert into hours_of_the_day values (5);
-insert into hours_of_the_day values (6);
-insert into hours_of_the_day values (7);
-insert into hours_of_the_day values (8);
-insert into hours_of_the_day values (9);
-insert into hours_of_the_day values (10);
-insert into hours_of_the_day values (11);
-insert into hours_of_the_day values (12);
-insert into hours_of_the_day values (13);
-insert into hours_of_the_day values (14);
-insert into hours_of_the_day values (15);
-insert into hours_of_the_day values (16);
-insert into hours_of_the_day values (17);
-insert into hours_of_the_day values (18);
-insert into hours_of_the_day values (19);
-insert into hours_of_the_day values (20);
-insert into hours_of_the_day values (21);
-insert into hours_of_the_day values (22);
-insert into hours_of_the_day values (23);
-
-
-@calendar-full-portlet-create.sql
-@calendar-admin-portlet-create.sql
