@@ -34,7 +34,7 @@ namespace eval calendar_portlet_display {
     ad_proc -public get_url_stub {
         calendar_id
     } {
-        return [portal::mapping::get_url -object_id $calendar_id]
+        return [site_node_object_map::get_url -object_id $calendar_id]
     }
     
 }
