@@ -70,10 +70,6 @@ namespace eval calendar_portlet {
 	set bgcolor_html "border=1 color=blue"
 	set view day
 
-
-	# AKS: code from calendar/www/cal-dayview.tcl
-	# ---
-
 	set mlist ""
 	set set_id [ns_set new day_items]
 
@@ -109,72 +105,76 @@ namespace eval calendar_portlet {
 	    </a><br>"
 	}  
 
+	# shaded_p support version 1
+
+	if { $config(shaded_p) == "f" } {
 	
-	set row_html "
-	<table cellpadding=2 cellspacing=0 border=1>
-	<tr><td width=90><b>Time</b></td><td><b>Title</b></td></tr>"
-	
-	while {$i < $num_hour_rows} {
-	    set filled_cell_count 0
-	    	    
-	    # making hours before 10 looks prettier
-	    if {$i < 10} { set cal_hour "0$i" } else { set cal_hour "$i" }
-	    
-	    # am or pm determination logic
-	    if {$i < 12} {
-		if {$i == 0} {
-	    set time "12:00 am"
-		} else {
-		    set time "$cal_hour:00 am"
-		}
-	    } else {
-		if {$i == 12} {
-	    set time "12:00 pm"
-		} else {
-		    set fm_hour [expr $i - 12]
-		    if {$fm_hour < 10} {
-			set fm_hour "0$fm_hour"
-		    } 
-		    set time "$fm_hour:00 pm"
-		}    
-	    }
-	    
-	    set cal_item_index [ns_set find $set_id $cal_hour]    
-	    
-	    append row_html "
+	    set row_html "
+	    <table cellpadding=2 cellspacing=0 border=1>
 	    <tr>
-	    <td valign=top nowrap $bgcolor_html width=10%>
-	    <a href=calendar/?date=$date&view=$view&action=add&start_time=$i:00&end_time=[expr $i+1]:00> $time </a>
-	    </td>
+	        <td width=90><b>Time</b></td><td><b>Title</b></td>
+	    </tr>\n"
 	    
-	    <td valign=top border=1>"
+	    while {$i < $num_hour_rows} {
+		set filled_cell_count 0
+		
+		# making hours before 10 looks prettier
+		if {$i < 10} { set cal_hour "0$i" } else { set cal_hour "$i" }
+		
+		# am or pm determination logic
+		if {$i < 12} {
+		    if {$i == 0} {
+			set time "12:00 am"
+		    } else {
+			set time "$cal_hour:00 am"
+		    }
+		} else {
+		    if {$i == 12} {
+			set time "12:00 pm"
+		    } else {
+			set fm_hour [expr $i - 12]
+			if {$fm_hour < 10} {
+			    set fm_hour "0$fm_hour"
+			} 
+			set time "$fm_hour:00 pm"
+		    }    
+		}
+		
+		set cal_item_index [ns_set find $set_id $cal_hour]    
+		
+		append row_html "
+		<tr>
+	            <td valign=top nowrap $bgcolor_html width=10%>
+	             <a href=calendar/?date=$date&view=$view&action=add&start_time=$i:00&end_time=[expr $i+1]:00> $time </a>
+	             </td>
+	             <td valign=top border=1>"
+
+		if {$cal_item_index == -1} {
+		    append row_html "&nbsp;"
+		}
+		
+		while {$cal_item_index > -1} {		
+		    append row_html "[ns_set value $set_id $cal_item_index]"
+		    ns_set delete $set_id $cal_item_index
+		    set cal_item_index [ns_set find $set_id $cal_hour]     
+		}
+		
+		append row_html "</td>
+		</tr>\n"
 	    
-	    if {$cal_item_index == -1} {
-		append row_html "&nbsp;"
-	    }
-	    
-	    while {$cal_item_index > -1} {		
-		append row_html "[ns_set value $set_id $cal_item_index]"
-		ns_set delete $set_id $cal_item_index
-		set cal_item_index [ns_set find $set_id $cal_hour]     
-	    }
-    
-	    append row_html "</td></tr>"
-	    
-	    incr i
-	} 
+		incr i
+	    } 
 	
-	append row_html "</table>"
+	    append row_html "</table>"
 
-
-	# ---
-	# AKS: end lots of code from calendar/www/cal-dayview.tcl	
+	} else {
+	    # shaded_p
+	    set row_html ""
+	}
 	
 	set template "
-	<table border=1 cellpadding=2 cellspacing=2>
 	$row_html
-	</table>"
-	
+	"	
 	
 	set code [template::adp_compile -string $template]
 	

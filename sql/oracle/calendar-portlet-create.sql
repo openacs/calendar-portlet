@@ -38,6 +38,17 @@ begin
 	  value => ''
 );
 
+  -- shaded_p 
+  portal_datasource.set_def_param (
+	datasource_id => ds_id,
+	config_required_p => 't',
+	configured_p => 't',
+	key => 'shaded_p',
+	value => 'f'
+);	
+
+
+
 -- XXX community calendars
 
 --
