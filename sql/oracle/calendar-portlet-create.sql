@@ -68,7 +68,7 @@ begin
 	config_required_p => 't',
 	configured_p => 't',
 	key => 'link_hideable_p',
-	value => 'f'
+	value => 't'
 );	
 
 
@@ -217,4 +217,31 @@ end;
 /
 show errors
 
-@calendar-admin-portlet-create.sql
+create table hours_of_the_day (
+    hour                        integer not null
+);
+
+insert into hours_of_the_day values (0);
+insert into hours_of_the_day values (1);
+insert into hours_of_the_day values (2);
+insert into hours_of_the_day values (3);
+insert into hours_of_the_day values (4);
+insert into hours_of_the_day values (5);
+insert into hours_of_the_day values (6);
+insert into hours_of_the_day values (7);
+insert into hours_of_the_day values (8);
+insert into hours_of_the_day values (9);
+insert into hours_of_the_day values (10);
+insert into hours_of_the_day values (11);
+insert into hours_of_the_day values (12);
+insert into hours_of_the_day values (13);
+insert into hours_of_the_day values (14);
+insert into hours_of_the_day values (15);
+insert into hours_of_the_day values (16);
+insert into hours_of_the_day values (17);
+insert into hours_of_the_day values (18);
+insert into hours_of_the_day values (19);
+insert into hours_of_the_day values (20);
+insert into hours_of_the_day values (21);
+insert into hours_of_the_day values (22);
+insert into hours_of_the_day values (23);
