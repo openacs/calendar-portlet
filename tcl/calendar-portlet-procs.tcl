@@ -111,7 +111,7 @@ namespace eval calendar_portlet {
 
 	
 	set row_html "
-	<table cellpadding=2 cellspacing=0 border=1 width=200>
+	<table cellpadding=2 cellspacing=0 border=1>
 	<tr><td width=90><b>Time</b></td><td><b>Title</b></td></tr>"
 	
 	while {$i < $num_hour_rows} {
@@ -147,7 +147,7 @@ namespace eval calendar_portlet {
 	    <a href=calendar/?date=$date&view=$view&action=add&start_time=$i:00&end_time=[expr $i+1]:00> $time </a>
 	    </td>
 	    
-	    <td valign=top nowrap border=1>"
+	    <td valign=top border=1>"
 	    
 	    if {$cal_item_index == -1} {
 		append row_html "&nbsp;"
