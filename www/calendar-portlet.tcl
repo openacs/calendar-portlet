@@ -29,7 +29,8 @@ if { $view == "day" } {
     set cal_stuff [calendar::one_day_display \
             -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
             -hour_template "<a href=calendar/?date=$current_date&action=add&return_url=../&start_time=\$start_time&end_time=\$start_time>\$hour</a>" \
-            -date $current_date -start_hour 7 -end_hour 22]
+            -date $current_date -start_hour 7 -end_hour 22 \
+            -calendar_id_list $list_of_calendar_ids]
     
 }
 

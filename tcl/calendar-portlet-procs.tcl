@@ -59,7 +59,7 @@ namespace eval calendar_portlet {
 
     ad_proc -public remove_self_from_page {
 	portal_id
-	community_id
+        package_id
     } {
 	  Removes a calendar PE from the given page
     
@@ -68,41 +68,13 @@ namespace eval calendar_portlet {
 	  @author arjun@openforce.net
 	  @creation-date Sept 2001
     } {
-        # it's more simple not to use portal::remove_element_or_remove_id here
-
-	# get the element IDs (could be more than one!)
-	set element_ids [portal::get_element_ids_by_ds $portal_id \
-		[my_name]]
-
-	# remove all elements
-	db_transaction {
-	    foreach element_id $element_ids {
-
-		set calendar_id \
-			[portal::get_element_param $element_id "calendar_id"]
-		
-		set g_cal_id \
-			[portal::get_element_param $element_id "group_calendar_id"]
-
-		# don't delete the public calendar!
-		if {[calendar_public_p $calendar_id] == "f"} {
-
-                ns_log notice "aks15 in calendar_portlet remove_self_from_page $calendar_id/$element_id/$g_cal_id"
-
-		    # delete the personal calendar associated with this element
-		    db_exec_plsql delete_calendar {
-			begin
-			calendar.delete(
-			calendar_id => :calendar_id
-			);
-			end;
-		    }
-		}
-		# get rid of this portal element
-		portal::remove_element $element_id
-	    }
-	}
-
+        ## YOWSA (ben)
+        # calendar portlet should NOT be creating and deleting calendars!
+        # I've taken out a chunk of code here that was removing calendars. No way! (ben).
+        
+        # get rid of this portal element
+        # This automatically removes all element params
+        portal::remove_element_or_remove_id -portal_id $portal_id -portlet_name [my_name] -key calendar_id -value_id $package_id
     }
 
 
