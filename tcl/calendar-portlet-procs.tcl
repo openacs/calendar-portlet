@@ -27,7 +27,7 @@ namespace eval calendar_portlet {
 
     ad_proc -public add_self_to_page { 
 	page_id 
-	community_id
+	calendar_id
     } {
 	Adds a calendar PE to the given page with the community_id.
     
@@ -40,9 +40,9 @@ namespace eval calendar_portlet {
 	# Tell portal to add this element to the page
 	set element_id [portal::add_element $page_id [my_name]]
 	
-	# The default param "community_id" must be configured
-	set key "community_id"
-	portal::set_element_param $element_id $key $community_id
+	# The default param "calendar_id" must be configured
+	set key "calendar_id"
+	portal::set_element_param $element_id $key $calendar_id
 
 	return $element_id
     }
@@ -138,12 +138,29 @@ in       (
 	  @author arjun@openforce.net
 	  @creation-date Sept 2001
     } {
+
 	# get the element IDs (could be more than one!)
 	set element_ids [portal::get_element_ids_by_ds $portal_id [my_name]]
 
 	# remove all elements
 	db_transaction {
 	    foreach element_id $element_ids {
+
+		set calendar_id \
+			[portal::get_element_param $element_id "calendar_id"]
+		
+		# don't delete the public calendar!
+		if {[calendar_public_p $calendar_id] == "f"} {
+		    # delete the personal calendar associated with this element
+		    db_exec_plsql delete_calendar {
+			begin
+			calendar.delete(
+			calendar_id   => :calendar_id
+			);	
+			end;
+		    }
+		}
+		# get rid of this portal element
 		portal::remove_element $element_id
 	    }
 	}
