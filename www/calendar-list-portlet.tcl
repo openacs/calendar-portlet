@@ -26,8 +26,14 @@ ad_page_contract {
     {date ""}
     {julian_date ""}
     {sort_by ""}
-} -properties {
-    
+} -validate {
+    valid_date -requires { date } {
+        if {![string equal $date ""]} {
+            if {[catch {set date [clock format [clock scan $date] -format "%Y%m%d"]} err]} {
+                ad_complain "Your input was not valid. It has to be in the form YYYYMMDD."
+            }
+        }
+    }
 }
 
 # get stuff out of the config array
