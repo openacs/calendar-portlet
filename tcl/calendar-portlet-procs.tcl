@@ -59,7 +59,7 @@ namespace eval calendar_portlet {
 	calendar_id
     } {
 	Adds a calendar PE to the given page with the community_id.
-    
+
 	@return element_id The new element's id
 	@param portal_id The page to add self to
 	@param calendar_id The new calendar_id to add
@@ -77,7 +77,7 @@ namespace eval calendar_portlet {
 
     ad_proc -public remove_self_from_page {
 	portal_id
-        package_id
+        calendar_id
     } {
 	  Removes a calendar PE from the given page
     
@@ -86,7 +86,13 @@ namespace eval calendar_portlet {
 	  @author arjun@openforce.net
 	  @creation-date Sept 2001
     } {
-        portal::remove_element_or_remove_id -portal_id $portal_id -portlet_name [my_name] -key calendar_id -value_id $package_id
+        ## YOWSA (ben)
+        # calendar portlet should NOT be creating and deleting calendars!
+        # I've taken out a chunk of code here that was removing calendars. No way! (ben).
+        
+        # get rid of this portal element
+        # This automatically removes all element params
+        portal::remove_element_or_remove_id -portal_id $portal_id -portlet_name [my_name] -key calendar_id -value_id $calendar_id
     }
 
 

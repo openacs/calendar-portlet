@@ -48,11 +48,7 @@ if {[empty_string_p $date]} {
 set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
 
-if {$create_p} {
-    set item_template "<a href=calendar/?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\$item</a>"
-} else {
-    set item_template "\$item"
-}
+set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\$item</a>"
 
 if {$create_p} {
     set hour_template "<a href=calendar/?show_cal_nav=0&date=$current_date&force_calendar_id=$force_calendar_id&action=add&return_url=[ns_urlencode "../"]&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
@@ -69,7 +65,8 @@ if { $view == "day" } {
             -item_template $item_template \
             -hour_template $hour_template \
             -date $current_date -start_hour 7 -end_hour 22 \
-            -calendar_id_list $list_of_calendar_ids]
+            -calendar_id_list $list_of_calendar_ids \
+            -url_stub_callback "calendar_portlet_display::get_url_stub"]
     
 }
 
@@ -77,7 +74,8 @@ if {$view == "week"} {
     set cal_stuff [calendar::one_week_display \
             -item_template $item_template \
             -date $current_date \
-            -calendar_id_list $list_of_calendar_ids]
+            -calendar_id_list $list_of_calendar_ids \
+            -url_stub_callback "calendar_portlet_display::get_url_stub"]
 }
 
 if {$view == "month"} {
@@ -86,14 +84,16 @@ if {$view == "month"} {
             -day_template "<a href=?julian_date=\$julian_date>\$day_number</a>" \
             -date $current_date \
             -item_add_template $item_add_template \
-            -calendar_id_list $list_of_calendar_ids]
+            -calendar_id_list $list_of_calendar_ids \
+            -url_stub_callback "calendar_portlet_display::get_url_stub"]
 }
 
 if {$view == "list"} {
     set cal_stuff [calendar::list_display \
-            -item_template {<a href=calendar/?show_cal_nav=0&return_url=../&action=edit&cal_item_id=$item_id>$item</a>} \
+            -item_template $item_template \
             -date $current_date \
-            -calendar_id_list $list_of_calendar_ids]
+            -calendar_id_list $list_of_calendar_ids \
+            -url_stub_callback "calendar_portlet_display::get_url_stub"]
 }
 
 
