@@ -168,10 +168,9 @@ if {$view == "month"} {
 if {$view == "list"} {
     set sort_by [ns_queryget sort_by]
 
-    set thirty_days [expr 60*60*24*30]
 
-    set start_date [ns_fmttime [expr [ns_time] - $thirty_days] "%Y-%m-%d 00:00"]
-    set end_date [ns_fmttime [expr [ns_time] + $thirty_days] "%Y-%m-%d 00:00"]
+    set start_date [ns_fmttime [expr [ns_time]] "%Y-%m-%d 00:00"]
+    set end_date [ns_fmttime [expr {[ns_time] + 60*60*24*$period_days}] "%Y-%m-%d 00:00"]
 
     set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
 }
