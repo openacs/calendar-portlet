@@ -64,7 +64,7 @@ set encoded_return_url [ns_urlencode $return_url]
 set cal_nav [dt_widget_calendar_navigation "" $view $date "page_num=$page_num"]
 
 if {$create_p} {
-    set item_template "<a href=calendar/?show_cal_nav=0&return_url=$encoded_return_url&action=edit&cal_item_id=\$item_id>\$item</a>"
+    set item_template "<a href=calendar/cal-item-view?show_cal_nav=0&return_url=$encoded_return_url&action=edit&cal_item_id=\$item_id>\$item</a>"
 } else {
     set item_template "\$item"
 }
@@ -79,6 +79,8 @@ if {$create_p} {
 
 if {$view == "day"} {
     set cal_stuff [calendar::one_day_display \
+            -prev_nav_template "<a href=\"?page_num=$page_num&date=\$yesterday\">&lt;</a>" \
+            -next_nav_template "<a href=\"?page_num=$page_num&date=\$tomorrow\">&gt;</a>" \
             -item_template $item_template \
             -hour_template $hour_template \
             -date $current_date -start_hour 7 -end_hour 22 \
