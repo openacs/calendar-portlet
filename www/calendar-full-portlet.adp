@@ -25,7 +25,7 @@
 @cal_nav@
 <p>
 <ul>
-<if @create_p@><li> <a href=calendar/?force_calendar_id=@force_calendar_id@&date=@current_date@&action=add&start_time=&end_time=&return_url=../&show_cal_nav=0>Add an item</a></if>
+<if @create_p@><li> <a href=calendar/?force_calendar_id=@force_calendar_id@&date=@current_date@&action=add&start_time=&end_time=&return_url=@encoded_return_url@&show_cal_nav=0>Add an item</a></if>
 <if @admin_p@><li> <a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@">Manage Item Types</a></if>
 </ul>
 </td>
