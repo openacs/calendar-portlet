@@ -70,8 +70,8 @@ if {$create_p} {
 }
 
 if {$create_p} {
-    set hour_template "<a href=calendar/?show_cal_nav=0&date=$current_date&force_calendar_id=$force_calendar_id&action=add&return_url=$encoded_return_url&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
-    set item_add_template "<a href=calendar/?return_url=$encoded_return_url&show_cal_nav=0&action=add&force_calendar_id=$force_calendar_id&start_time=&end_time=&julian_date=\$julian_date>ADD</a>"
+    set hour_template "<a href=calendar/?show_cal_nav=0&date=$current_date&force_calendar_id=$force_calendar_id&action=add&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
+    set item_add_template "<a href=calendar/?show_cal_nav=0&action=add&force_calendar_id=$force_calendar_id&start_time=&end_time=&julian_date=\$julian_date>ADD</a>"
 } else {
     set hour_template "\$hour"
     set item_add_template ""
@@ -109,7 +109,7 @@ if {$view == "month"} {
 
 if {$view == "list"} {
     set cal_stuff [calendar::list_display \
-            -item_template {<a href=calendar/?return_url=$encoded_return_url&show_cal_nav=0&action=edit&cal_item_id=$item_id>$item</a>} \
+            -item_template $item_template \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids \
             -url_stub_callback "calendar_portlet_display::get_url_stub"]

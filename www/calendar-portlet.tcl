@@ -51,8 +51,8 @@ set date_format "YYYY-MM-DD HH24:MI"
 set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\$item</a>"
 
 if {$create_p} {
-    set hour_template "<a href=calendar/?show_cal_nav=0&date=$current_date&force_calendar_id=$force_calendar_id&action=add&return_url=[ns_urlencode "../"]&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
-    set item_add_template "<a href=calendar/?return_url=../&show_cal_nav=0&action=add&force_calendar_id=$force_calendar_id&start_time=&end_time=&julian_date=\$julian_date>ADD</a>"
+    set hour_template "<a href=calendar/?show_cal_nav=0&date=$current_date&force_calendar_id=$force_calendar_id&action=add&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
+    set item_add_template "<a href=calendar/?show_cal_nav=0&action=add&force_calendar_id=$force_calendar_id&start_time=&end_time=&julian_date=\$julian_date>ADD</a>"
 } else {
     set hour_template "\$hour"
     set item_add_template ""
