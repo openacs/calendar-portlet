@@ -111,12 +111,14 @@ if {$view == "week"} {
 
 if {$view == "month"} {
     set cal_stuff [calendar::one_month_display \
-            -item_template $item_template \
-            -day_template "<a href=?julian_date=\$julian_date&page_num=$page_num>\$day_number</a>" \
+            -item_template "<font size=-2>$item_template</font>" \
+            -day_template "<font size=-1><b><a href=?julian_date=\$julian_date&page_num=$page_num>\$day_number</a></b></font>" \
             -date $current_date \
-            -item_add_template $item_add_template \
+            -item_add_template "<font size=-3>$item_add_template</font>" \
             -calendar_id_list $list_of_calendar_ids \
             -url_stub_callback "calendar_portlet_display::get_url_stub" \
+            -prev_month_template "<a href=?view=month&date=\$ansi_date&page_num=$page_num>&lt;</a>" \
+            -next_month_template "<a href=?view=month&date=\$ansi_date&page_num=$page_num>&gt;</a>" \
             -show_calendar_name_p $show_calendar_name_p]
 }
 
