@@ -25,8 +25,8 @@
         @cal_nav@
         <p align="left">
         <ul align="left">
-          <if @create_p@><li> <a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=&time_p=1">Add an item</a></if>
-          <if @admin_p@><li> <a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@">Manage Item Types</a></if>
+          <if @create_p@><li> <a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=&time_p=1">#calendar-portlet.Add_an_item#</a></if>
+          <if @admin_p@><li> <a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@">#calendar-portlet.Manage_Item_Types#</a></if>
         </ul>
       </td>
       <td valign=top>
@@ -38,4 +38,5 @@
 <else>
   <br>
 </else>
+
 
