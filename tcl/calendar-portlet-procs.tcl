@@ -104,14 +104,14 @@ namespace eval calendar_portlet {
 	where   on_which_calendar = :calendar_id
 	)" {
 	    ns_set put $set_id $start_hour \
-		    "<a href=?date=$date&action=edit&cal_item_id=$item_id>
+		    "<a href=calendar/?date=$date&action=edit&cal_item_id=$item_id>
 	    $pretty_start_date - $pretty_end_date $name ($calendar_name)
 	    </a><br>"
 	}  
 
 	
 	set row_html "
-	<table cellpadding=2 cellspacing=0 border=1 width=500>
+	<table cellpadding=2 cellspacing=0 border=1 width=200>
 	<tr><td width=90><b>Time</b></td><td><b>Title</b></td></tr>"
 	
 	while {$i < $num_hour_rows} {
@@ -144,7 +144,7 @@ namespace eval calendar_portlet {
 	    append row_html "
 	    <tr>
 	    <td valign=top nowrap $bgcolor_html width=10%>
-	    <a href=?date=$date&view=$view&action=add&start_time=$i:00&end_time=[expr $i+1]:00> $time </a>
+	    <a href=calendar/?date=$date&view=$view&action=add&start_time=$i:00&end_time=[expr $i+1]:00> $time </a>
 	    </td>
 	    
 	    <td valign=top nowrap border=1>"
