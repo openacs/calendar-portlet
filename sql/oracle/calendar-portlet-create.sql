@@ -84,6 +84,16 @@ begin
 	value => 'day'
 );	
 
+
+  -- default_view see cal-table-create.sql
+  portal_datasource.set_def_param (
+	datasource_id => ds_id,
+	config_required_p => 't',
+	configured_p => 't',
+	key => 'group_calendar_id',
+	value => NULL
+);	
+
 -- XXX community calendars
 
 end;
