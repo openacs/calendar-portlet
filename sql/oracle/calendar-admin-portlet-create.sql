@@ -2,11 +2,12 @@
 -- /calendar-portlet/sql/oracle/calendar-portlet-create.sql
 --
 
--- Creates calendar portlet
+-- Creates calendar admin portlet
 
 -- Copyright (C) 2001 OpenForce, Inc.
 -- @author Arjun Sanyal (arjun@openforce.net)
--- @creation-date 2001-26-10
+-- @author Ben Adida (ben@openforce.net)
+-- @creation-date 2002-01-19
 
 -- $Id$
 
@@ -18,8 +19,8 @@ declare
   ds_id portal_datasources.datasource_id%TYPE;
 begin
   ds_id := portal_datasource.new(
-    name             => 'calendar_portlet',
-    description      => 'Displays the calendar '
+    name             => 'calendar_admin_portlet',
+    description      => 'Displays the calendar_admin '
   );
 
   
@@ -72,7 +73,7 @@ begin
 );	
 
 
-  -- calendar-specific params
+  -- calendar_admin-specific params
 
   -- calendar_id must be configured 
   portal_datasource.set_def_param (
@@ -115,8 +116,8 @@ begin
 	-- create the implementation
 	foo := acs_sc_impl.new (
 		'portal_datasource',
-		'calendar_portlet',
-		'calendar_portlet'
+		'calendar_admin_portlet',
+		'calendar_admin_portlet'
 	);
 
 end;
@@ -130,73 +131,73 @@ begin
 	-- add all the hooks
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_admin_portlet',
 	       'MyName',
-	       'calendar_portlet::my_name',
+	       'calendar_admin_portlet::my_name',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_admin_portlet',
 	       'GetPrettyName',
-	       'calendar_portlet::get_pretty_name',
+	       'calendar_admin_portlet::get_pretty_name',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_admin_portlet',
 	       'Link',
-	       'calendar_portlet::link',
+	       'calendar_admin_portlet::link',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_admin_portlet',
 	       'AddSelfToPage',
-	       'calendar_portlet::add_self_to_page',
+	       'calendar_admin_portlet::add_self_to_page',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_admin_portlet',
 	       'Show',
-	       'calendar_portlet::show',
+	       'calendar_admin_portlet::show',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_admin_portlet',
 	       'Edit',
-	       'calendar_portlet::edit',
+	       'calendar_admin_portlet::edit',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_admin_portlet',
 	       'RemoveSelfFromPage',
-	       'calendar_portlet::remove_self_from_page',
+	       'calendar_admin_portlet::remove_self_from_page',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_admin_portlet',
 	       'MakeSelfAvailable',
-	       'calendar_portlet::make_self_available',
+	       'calendar_admin_portlet::make_self_available',
 	       'TCL'
 	);
 
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
-	       'calendar_portlet',
+	       'calendar_admin_portlet',
 	       'MakeSelfUnavailable',
-	       'calendar_portlet::make_self_unavailable',
+	       'calendar_admin_portlet::make_self_unavailable',
 	       'TCL'
 	);
 
@@ -211,10 +212,9 @@ begin
 	-- Add the binding
 	acs_sc_binding.new (
 	    contract_name => 'portal_datasource',
-	    impl_name => 'calendar_portlet'
+	    impl_name => 'calendar_admin_portlet'
 	);
 end;
 /
 show errors
 
-@calendar-admin-portlet-create.sql
