@@ -23,9 +23,9 @@
     <tr>
       <td valign=top width=180>
         @cal_nav@
-        <p>
-        <ul>
-          <if @create_p@><li> <a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=">Add an item</a></if>
+        <p align="left">
+        <ul align="left">
+          <if @create_p@><li> <a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=&time_p=1">Add an item</a></if>
           <if @admin_p@><li> <a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@">Manage Item Types</a></if>
         </ul>
       </td>
