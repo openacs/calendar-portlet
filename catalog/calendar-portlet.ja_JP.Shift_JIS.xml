@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<message_catalog package_key="calendar-portlet" package_version="0.1a" locale="ja_JP" charset="Shift_JIS">
-
-  <msg key="full_portlet_pretty_name">カレンダー全体</msg>
-</message_catalog>
