@@ -28,9 +28,9 @@ namespace eval calendar_admin_portlet {
 
     ad_proc -public get_pretty_name {
     } {
-	return [ad_parameter \
+        return "[ad_parameter \
                 -package_id [apm_package_id_from_key [my_package_key]] \
-                "pretty_name"]
+                pretty_name] Administration"
     }
 
     ad_proc -public link {

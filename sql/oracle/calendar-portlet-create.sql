@@ -245,3 +245,6 @@ insert into hours_of_the_day values (20);
 insert into hours_of_the_day values (21);
 insert into hours_of_the_day values (22);
 insert into hours_of_the_day values (23);
+
+
+@calendar-admin-portlet-create.sql

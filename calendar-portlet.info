@@ -34,7 +34,7 @@
             <file type="content_page" path="www/calendar-portlet.tcl"/>
         </files>
         <parameters>
-        <!-- No version parameters -->
+            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="pretty_name"  default="Calendar" description="Pretty Name"/>
         </parameters>
 
     </version>

@@ -27,7 +27,7 @@ namespace eval calendar_portlet {
 
     ad_proc -public get_pretty_name {
     } {
-	return [ad_parameter \
+        return [ad_parameter \
                 -package_id [apm_package_id_from_key [my_package_key]] \
                 "pretty_name"]
     }
@@ -38,6 +38,7 @@ namespace eval calendar_portlet {
     }
 
     ad_proc -public add_self_to_page { 
+        {-page_id ""}
 	portal_id 
 	calendar_id
     } {
@@ -50,6 +51,7 @@ namespace eval calendar_portlet {
 	@creation-date Sept 2001
     } {
         return [portal::add_element_or_append_id -portal_id $portal_id \
+                -page_id $page_id \
                 -portlet_name [my_name] \
                 -value_id $calendar_id \
                 -key calendar_id]
