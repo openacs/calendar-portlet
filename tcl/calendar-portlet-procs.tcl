@@ -221,7 +221,19 @@ namespace eval calendar_portlet {
 	    }
 	}
     }
+    
+    ad_proc -public make_self_available { 
+ 	page_id 
+    } {
+ 	Wrapper for the portal:: proc
+ 	
+ 	@param page_id
+ 	@author arjun@openforce.net
+ 	@creation-date Nov 2001
+    } {
+ 	portal::make_datasource_available \
+ 		$page_id [get_datasource_id [my_name]]
+    }
 }
 
- 
 
