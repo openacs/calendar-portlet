@@ -43,6 +43,7 @@
   date=@date@ 
   period_days=@period_days@
   calendar_id_list=@calendar_list@ 
+  hour_template="@hour_template;noquote@" item_add_template="@item_add_template;noquote@"
   sort_by=@sort_by@> 
   </if>
 
@@ -51,6 +52,7 @@
   <include src="/packages/calendar/www/view-one-day-display" 
   base_url=@base_url@
   date="@date@" start_hour=0 end_hour=23
+  hour_template="@hour_template;noquote@" item_add_template="@item_add_template;noquote@"
   calendar_id_list="@calendar_list@">
   </if>
 
@@ -58,6 +60,7 @@
   <include src="/packages/calendar/www/view-week-display" 
   base_url=@base_url@
   date="@date@"
+  hour_template="@hour_template;noquote@" item_add_template="@item_add_template;noquote@"
   calendar_id_list="@calendar_list@">
   </if>
 
@@ -66,6 +69,7 @@
   <include src="/packages/calendar/www/view-month-display"
   base_url=@base_url@
   date=@date@
+  hour_template="@hour_template;noquote@" item_add_template="@item_add_template;noquote@"
   calendar_id_list= @calendar_list@>
   </if>
       </td>
