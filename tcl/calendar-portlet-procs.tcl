@@ -232,7 +232,20 @@ namespace eval calendar_portlet {
  	@creation-date Nov 2001
     } {
  	portal::make_datasource_available \
- 		$page_id [get_datasource_id [my_name]]
+ 		$page_id [portal::get_datasource_id [my_name]]
+    }
+
+    ad_proc -public make_self_unavailable { 
+	page_id 
+    } {
+	Wrapper for the portal:: proc
+	
+	@param page_id
+	@author arjun@openforce.net
+	@creation-date Nov 2001
+    } {
+	portal::make_datasource_unavailable \
+		$page_id [portal::get_datasource_id [my_name]]
     }
 }
 
