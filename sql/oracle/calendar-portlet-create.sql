@@ -24,6 +24,7 @@ begin
     link             => 'calendar',
     description      => 'Displays the calendar ',
     content	     => 'calendar_portlet::show',
+    edit_content     => 'calendar_portlet::edit',
     configurable_p   => 't'
   );
 
@@ -48,6 +49,15 @@ begin
 	value => 'f'
 );	
 
+
+  -- defaul_view see cal-table-create.sql
+  portal_datasource.set_def_param (
+	datasource_id => ds_id,
+	config_required_p => 't',
+	configured_p => 't',
+	key => 'default_view',
+	value => 'day',
+);	
 
 
 -- XXX community calendars
