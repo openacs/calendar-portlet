@@ -28,6 +28,7 @@ if {[llength $list_of_calendar_ids] > 1} {
 
 # permissions
 set create_p [ad_permission_p $force_calendar_id cal_item_create]
+set edit_p [ad_permission_p $force_calendar_id cal_item_edit]
 set admin_p [ad_permission_p $force_calendar_id calendar_admin]
 
 # set up some vars
@@ -44,27 +45,41 @@ set date_format "YYYY-MM-DD HH24:MI"
 
 set cal_nav [dt_widget_calendar_navigation "" $view $date "page_num=$page_num"]
 
+if {$create_p} {
+    set item_template "<a href=calendar/?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\$item</a>"
+} else {
+    set item_template "\$item"
+}
+
+if {$create_p} {
+    set hour_template "<a href=calendar/?show_cal_nav=0&date=$current_date&force_calendar_id=$force_calendar_id&action=add&return_url=[ns_urlencode "../"]&start_time=\$start_time&end_time=\$end_time>\$hour</a>"
+    set item_add_template "<a href=calendar/?return_url=../&show_cal_nav=0&action=add&force_calendar_id=$force_calendar_id&start_time=&end_time=&julian_date=\$julian_date>ADD</a>"
+} else {
+    set hour_template "\$hour"
+    set item_add_template ""
+}
+
 if {$view == "day"} {
     set cal_stuff [calendar::one_day_display \
-            -item_template "<a href=calendar/?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\$item</a>" \
-            -hour_template "<a href=calendar/?show_cal_nav=0&date=$current_date&force_calendar_id=$force_calendar_id&action=add&return_url=[ns_urlencode "../"]&start_time=\$start_time&end_time=\$end_time>\$hour</a>" \
+            -item_template $item_template \
+            -hour_template $hour_template \
             -date $current_date -start_hour 7 -end_hour 22 \
             -calendar_id_list $list_of_calendar_ids]
 } 
 
 if {$view == "week"} {
     set cal_stuff [calendar::one_week_display \
-            -item_template {<a href=calendar/?return_url=../&show_cal_nav=0&action=edit&cal_item_id=$item_id>$item</a>} \
+            -item_template $item_template \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids]
 }
 
 if {$view == "month"} {
     set cal_stuff [calendar::one_month_display \
-            -item_template {<a href=calendar/?return_url=../&show_cal_nav=0&action=edit&cal_item_id=$item_id>$item</a>} \
+            -item_template $item_template \
             -day_template "<a href=?julian_date=\$julian_date&page_num=$page_num>\$day_number</a>" \
             -date $current_date \
-            -item_add_template "<a href=calendar/?return_url=../&show_cal_nav=0&action=add&force_calendar_id=$force_calendar_id&start_time=&end_time=&julian_date=\$julian_date>ADD</a>" \
+            -item_add_template $item_add_template \
             -calendar_id_list $list_of_calendar_ids]
 }
 
