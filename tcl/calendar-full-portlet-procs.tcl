@@ -40,10 +40,7 @@ namespace eval calendar_full_portlet {
 
     ad_proc -public get_pretty_name {
     } {
-        return [oacs_util::parameter \
-                -key "full_portlet_pretty_name" \
-                -package_key [my_package_key]
-        ]
+        return [parameter::get_from_package_key -package_key full_portlet_pretty_name -parameter pretty_name]
     }
 
     ad_proc -public link {
