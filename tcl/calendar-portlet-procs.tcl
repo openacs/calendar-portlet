@@ -17,7 +17,7 @@ namespace eval calendar_portlet {
 
     ad_proc -private my_name {
     } {
-    return "calendar-portlet"
+    return "calendar_portlet"
     }
 
     ad_proc -public get_pretty_name {
