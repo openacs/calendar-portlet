@@ -23,12 +23,14 @@
     @import "/resources/calendar/calendar.css";
   </style>
 
+HURGA
  <switch @view@>
    <case value="day">
      <include src="/packages/calendar/www/view-one-day-display" 
      date="@date@" 
      start_display_hour=7 
      end_display_hour=22
+     page_num=@page_num@
      hour_template="@hour_template;noquote@" 
      item_template="@item_template;noquote@"
      item_add_template="@item_add_template;noquote@"
