@@ -5,6 +5,7 @@
 @cal_nav@
 <p>
 <li> <a href=calendar/?force_calendar_id=@force_calendar_id@&date=@current_date@&action=add&start_time=&end_time=&return_url=../&show_cal_nav=0>Add an item</a>
+<li> <a href="calendar/admin/calendar-item-types?calendar_id=@force_calendar_id@">Manage Item Types</a>
 </td>
 <td valign=top>
 @cal_stuff@
