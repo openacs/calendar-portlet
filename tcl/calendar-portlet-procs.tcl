@@ -71,6 +71,7 @@ namespace eval calendar_portlet {
                 -portlet_name [my_name] \
                 -pretty_name [get_pretty_name] \
                 -value_id $calendar_id \
+                -force_region 2 \
                 -key calendar_id]
     }
 
