@@ -42,12 +42,24 @@ namespace eval calendar_portlet {
 	@author arjun@openforce.net
 	@creation-date Sept 2001
     } {
-	# Tell portal to add this element to the page
-	set element_id [portal::add_element $portal_id [my_name]]
-	
-	# The default param "calendar_id" must be configured
-	set key "calendar_id"
-	portal::set_element_param $element_id $key $calendar_id
+
+	# Find out if this calendar already exists
+	set element_id_list \
+                [portal::get_element_ids_by_ds $portal_id [my_name]]
+
+	if {[llength $element_id_list] == 0} {
+	    set element_id [portal::add_element $portal_id [my_name]]
+
+	    # Set the single calendar_id as a param
+	    portal::set_element_param $element_id "calendar_id"  $calendar_id
+	} else {
+	    set element_id [lindex $element_id_list 0]
+	    # There are existing calendar_id's which should NOT be overwritten
+	    portal::add_element_param_value \
+		    -element_id $element_id \
+                    -key calendar_id \
+                    -value $calendar_id
+	}
 
 	return $element_id
     }
@@ -82,37 +94,45 @@ namespace eval calendar_portlet {
 	set calendar_name [calendar_get_name $calendar_id]
 	set view $config(default_view)
 
+	set list_of_calendar_ids $config(calendar_id)
+        
+        foreach calendar_id $list_of_calendar_ids {
 
-	if { $view == "day" } {
-	    # big non-ported query, i'm bad
-	    db_foreach get_day_items "
-	    select   to_char(start_date, 'HH24') as start_hour,
-	    to_char(start_date, 'HH24:MI') as pretty_start_date,
-	    to_char(end_date, 'HH24:MI') as pretty_end_date,
-	    nvl(e.name, a.name) as name,
-	    e.event_id as item_id
-	    from     acs_activities a,
-	    acs_events e,
-	    timespans s,
-	    time_intervals t
-	    where    e.timespan_id = s.timespan_id
-	    and      s.interval_id = t.interval_id
-	    and      e.activity_id = a.activity_id
-	    and      start_date between
-	    to_date(:current_date,:date_format) and
-	    to_date(:current_date,:date_format) + (24 - 1/3600)/24
-	    and      e.event_id
-	    in       (
-	    select  cal_item_id
-	    from    cal_items
-	    where   on_which_calendar = :calendar_id
-	    )" {
-		ns_set put $set_id $start_hour \
-			"<a href=calendar/?date=$date&action=edit&cal_item_id=$item_id>
-		$pretty_start_date - $pretty_end_date $name ($calendar_name)
-		</a><br>"
-	    }  
-	    
+            set calendar_name ""
+            # [calendar_get_name $calendar_id]
+            
+            if { $view == "day" } {
+                # big non-ported query, i'm bad
+                db_foreach get_day_items "
+                select   to_char(start_date, 'HH24') as start_hour,
+                to_char(start_date, 'HH24:MI') as pretty_start_date,
+                to_char(end_date, 'HH24:MI') as pretty_end_date,
+                nvl(e.name, a.name) as name,
+                e.event_id as item_id
+                from     acs_activities a,
+                acs_events e,
+                timespans s,
+                time_intervals t
+                where    e.timespan_id = s.timespan_id
+                and      s.interval_id = t.interval_id
+                and      e.activity_id = a.activity_id
+                and      start_date between
+                to_date(:current_date,:date_format) and
+                to_date(:current_date,:date_format) + (24 - 1/3600)/24
+                and      e.event_id
+                in       (
+                select  cal_item_id
+                from    cal_items
+                where   on_which_calendar = :calendar_id
+                )" {
+                    ns_set put $set_id $start_hour \
+                            "<a href=calendar/?date=$date&action=edit&cal_item_id=$item_id>
+                    $pretty_start_date - $pretty_end_date $name ($calendar_name)
+                    </a><br>"
+                }  
+                
+            }
+            
 	    # shaded_p support version 1
 	    
 	    set row_html "
