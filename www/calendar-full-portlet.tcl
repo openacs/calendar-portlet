@@ -123,10 +123,18 @@ if {$view == "month"} {
 }
 
 if {$view == "list"} {
+    set sort_by [ns_queryget sort_by]
+
+    if {[empty_string_p $sort_by]} {
+        set sort_by "item_type"
+    }
+
     set cal_stuff [calendar::list_display \
             -item_template $item_template \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids \
+            -sort_by $sort_by \
+            -url_template "?view=list&sort_by=\$order_by&page_num=$page_num" \
             -url_stub_callback "calendar_portlet_display::get_url_stub" \
             -show_calendar_name_p $show_calendar_name_p]
 }
