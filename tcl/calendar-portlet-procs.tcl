@@ -294,7 +294,7 @@ namespace eval calendar_portlet {
 	    where   on_which_calendar = :calendar_id
 	    ) " {
 		ns_set put $set_id  $start_date \
-			"<a href=?action=edit&cal_item_id=$item_id>
+			"<a href=calendar/?action=edit&cal_item_id=$item_id>
 		$name ($calendar_name)
 		</a><br>"
 	    }
@@ -330,10 +330,10 @@ namespace eval calendar_portlet {
 	    where     on_which_calendar = :calendar_id
 	    )" {
 		ns_set put $set_id  $start_date \
-			"<a href=?action=edit&cal_item_id=$item_id>
+			"<a href=calendar/?action=edit&cal_item_id=$item_id>
 		$pretty_start_date - $pretty_end_date $name ($calendar_name)
 		</a><br>"
-		append items "<li> <a href=?action=edit&cal_item_id=$item_id>
+		append items "<li> <a href=calendar/?action=edit&cal_item_id=$item_id>
 		$pretty_start_date - $pretty_end_date $name ($calendar_name)
 		</a><br>"
 	    }
