@@ -91,10 +91,13 @@ if {$view == "day"} {
 if {$view == "week"} {
     set cal_stuff [calendar::one_week_display \
             -item_template $item_template \
-            -day_template "<a href=\"?date=\$date&page_num=$page_num&return_url=$encoded_return_url\">\$day - \$pretty_date</a>" \
+            -day_template "<font size=-1><b>\$day</b> - <a href=\"?date=\$date&page_num=$page_num&return_url=$encoded_return_url\">\$pretty_date</a> &nbsp; &nbsp; <a href=\"calendar/?date=\$date&show_cal_nav=0&action=add&force_calendar_id=$force_calendar_id&start_time=&end_time=\">(Add Item)</a></font>" \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids \
-            -url_stub_callback "calendar_portlet_display::get_url_stub"]
+            -url_stub_callback "calendar_portlet_display::get_url_stub" \
+            -prev_week_template "<a href=\"?date=\$last_week&view=week&page_num=$page_num\">&lt;</a>" \
+            -next_week_template "<a href=\"?date=\$next_week&view=week&page_num=$page_num\">&gt;</a>"
+    ]
 }
 
 if {$view == "month"} {
