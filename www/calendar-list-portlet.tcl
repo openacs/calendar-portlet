@@ -84,7 +84,7 @@ set sort_by [ns_queryget sort_by]
 set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=$encoded_return_url&action=edit&cal_item_id=\$item_id>\$item</a>"
 
 set thirty_days [expr 60*60*24*30]
-set start_date [ns_fmttime [expr [ns_time] - $thirty_days] "%Y-%m-%d 00:00"]
+set start_date [ns_fmttime [ns_time] "%Y-%m-%d 00:00"]
 set end_date [ns_fmttime [expr [ns_time] + $thirty_days] "%Y-%m-%d 00:00"]
 
 set cal_list [calendar::list_display \
