@@ -40,6 +40,7 @@
         <parameters>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="pretty_name"  default="Day Summary" description="Pretty Name"/>
             <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="full_portlet_pretty_name"  default="Full Calendar" description="Description of Full Calendar Pretty Name"/>
+            <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="force_region"  default="2" description="the portal region to add the calendar portlet"/>
         </parameters>
 
     </version>

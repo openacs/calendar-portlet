@@ -147,8 +147,8 @@ begin
 	foo := acs_sc_impl.new_alias (
 	       'portal_datasource',
 	       'calendar_portlet',
-	       'MyName',
-	       'calendar_portlet::my_name',
+	       'GetMyName',
+	       'calendar_portlet::get_my_name',
 	       'TCL'
 	);
 
@@ -197,22 +197,6 @@ begin
 	       'calendar_portlet',
 	       'RemoveSelfFromPage',
 	       'calendar_portlet::remove_self_from_page',
-	       'TCL'
-	);
-
-	foo := acs_sc_impl.new_alias (
-	       'portal_datasource',
-	       'calendar_portlet',
-	       'MakeSelfAvailable',
-	       'calendar_portlet::make_self_available',
-	       'TCL'
-	);
-
-	foo := acs_sc_impl.new_alias (
-	       'portal_datasource',
-	       'calendar_portlet',
-	       'MakeSelfUnavailable',
-	       'calendar_portlet::make_self_unavailable',
 	       'TCL'
 	);
 
