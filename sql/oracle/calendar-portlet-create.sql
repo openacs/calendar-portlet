@@ -50,7 +50,7 @@ begin
 	config_required_p => 't',
 	configured_p => 't',
 	key => 'user_editable_p',
-	value => 'f'
+	value => 't'
 );	
 
   -- shaded_p 
