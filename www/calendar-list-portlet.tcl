@@ -45,7 +45,7 @@ if {$scoped_p == "t"} {
 }
 
 if {[llength $list_of_calendar_ids] > 1} {
-    set force_calendar_id [calendar_have_private_p -return_id 1 [ad_conn user_id]]
+    set force_calendar_id [calendar_have_private_p -return_id 1 -calendar_id_list $list_of_calendar_ids [ad_conn user_id]]
 } else {
     set force_calendar_id [lindex $list_of_calendar_ids 0]
 }
