@@ -82,7 +82,7 @@ set date_format "YYYY-MM-DD HH24:MI"
 set return_url "[ns_conn url]?[ns_conn query]"
 set encoded_return_url [ns_urlencode $return_url]
 
-set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=$encoded_return_url&action=edit&cal_item_id=\$item_id>\$item</a>"
+set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=$encoded_return_url&action=edit&cal_item_id=\$item_id>\[ad_quotehtml \$item\]</a>"
 
 if {$create_p} {
     set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$day_current_hour>\$localized_day_current_hour</a>"

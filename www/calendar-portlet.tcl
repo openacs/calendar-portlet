@@ -72,7 +72,7 @@ if {[empty_string_p $date]} {
 set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
 
-set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\$item</a>"
+set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=[ns_urlencode "../"]&action=edit&cal_item_id=\$item_id>\[ad_quotehtml \$item\]</a>"
 
 if {$create_p} {
     set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$day_current_hour>\$localized_day_current_hour</a>"
