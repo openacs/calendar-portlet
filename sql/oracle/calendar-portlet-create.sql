@@ -18,8 +18,6 @@ declare
   ds_id portal_datasources.datasource_id%TYPE;
 begin
   ds_id := portal_datasource.new(
-    data_type        => 'tcl_proc',
-    mime_type        => 'text/html',
     name             => 'calendar-portlet',
     link             => 'calendar',
     description      => 'Displays the calendar ',
