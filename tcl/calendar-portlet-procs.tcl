@@ -25,6 +25,11 @@ namespace eval calendar_portlet {
 	return "Calendar"
     }
 
+    ad_proc -public link {
+    } {
+	return "calendar"
+    }
+
     ad_proc -public add_self_to_page { 
 	page_id 
 	calendar_id
