@@ -16,7 +16,10 @@ set list_of_calendar_ids $config(calendar_id)
 # ad_return_complaint 1 "$cf"
 
 # set up some vars
-set date [dt_sysdate]
+set date [ns_queryget date]
+if {[empty_string_p $date]} {
+    set date [dt_sysdate]
+}
 set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
 
