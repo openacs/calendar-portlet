@@ -36,6 +36,13 @@ if {[empty_string_p $view]} {
 }
 set list_of_calendar_ids $config(calendar_id)
 
+set scoped_p $config(scoped_p)
+if {$scoped_p == "t"} {
+    set show_calendar_name_p 1
+} else {
+    set show_calendar_name_p 0
+}
+
 if {[llength $list_of_calendar_ids] > 1} {
     set force_calendar_id [calendar_have_private_p -return_id 1 [ad_conn user_id]]
 } else {
@@ -85,7 +92,8 @@ if {$view == "day"} {
             -hour_template $hour_template \
             -date $current_date -start_hour 7 -end_hour 22 \
             -calendar_id_list $list_of_calendar_ids \
-            -url_stub_callback "calendar_portlet_display::get_url_stub"]
+            -url_stub_callback "calendar_portlet_display::get_url_stub" \
+            -show_calendar_name_p $show_calendar_name_p]
 } 
 
 if {$view == "week"} {
@@ -96,7 +104,8 @@ if {$view == "week"} {
             -calendar_id_list $list_of_calendar_ids \
             -url_stub_callback "calendar_portlet_display::get_url_stub" \
             -prev_week_template "<a href=\"?date=\$last_week&view=week&page_num=$page_num\">&lt;</a>" \
-            -next_week_template "<a href=\"?date=\$next_week&view=week&page_num=$page_num\">&gt;</a>"
+            -next_week_template "<a href=\"?date=\$next_week&view=week&page_num=$page_num\">&gt;</a>" \
+            -show_calendar_name_p $show_calendar_name_p
     ]
 }
 
@@ -107,7 +116,8 @@ if {$view == "month"} {
             -date $current_date \
             -item_add_template $item_add_template \
             -calendar_id_list $list_of_calendar_ids \
-            -url_stub_callback "calendar_portlet_display::get_url_stub"]
+            -url_stub_callback "calendar_portlet_display::get_url_stub" \
+            -show_calendar_name_p $show_calendar_name_p]
 }
 
 if {$view == "list"} {
@@ -115,7 +125,8 @@ if {$view == "list"} {
             -item_template $item_template \
             -date $current_date \
             -calendar_id_list $list_of_calendar_ids \
-            -url_stub_callback "calendar_portlet_display::get_url_stub"]
+            -url_stub_callback "calendar_portlet_display::get_url_stub" \
+            -show_calendar_name_p $show_calendar_name_p]
 }
 
 if {$view == "year"} {

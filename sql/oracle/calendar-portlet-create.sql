@@ -88,6 +88,15 @@ begin
 );	
 
 
+    portal_datasource.set_def_param(
+        datasource_id => ds_id,
+        config_required_p => 't',
+        configured_p => 'f',
+        key => 'scoped_p',
+        value => 't'
+    );
+
+
   -- calendar-specific params
 
   -- calendar_id must be configured 
@@ -249,3 +258,4 @@ insert into hours_of_the_day values (23);
 
 @calendar-full-portlet-create.sql
 @calendar-admin-portlet-create.sql
+@calendar-list-portlet-create.sql

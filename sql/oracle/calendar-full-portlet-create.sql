@@ -61,6 +61,14 @@ begin
 	value => 't'
 );	
 
+    portal_datasource.set_def_param(
+        datasource_id => ds_id,
+        config_required_p => 't',
+        configured_p => 'f',
+        key => 'scoped_p',
+        value => 't'
+    );
+
   -- user_editable_p 
   portal_datasource.set_def_param (
 	datasource_id => ds_id,
