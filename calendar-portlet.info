@@ -16,6 +16,7 @@
         <vendor url="http://openforce.net/">OpenForce, Inc.</vendor>
 
         <provides url="calendar-portlet" version="0.1a"/>
+        <requires url="calendar" version="1.0"/>
         <requires url="new-portal" version="0.1a"/>
 
         <files>
