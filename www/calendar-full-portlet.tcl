@@ -59,11 +59,14 @@ if {$view == "month"} {
 }
 
 if {$view == "list"} {
-    set cal_stuff "This will eventually just list the items for today"
+    set cal_stuff [calendar::list_display \
+            -item_template {<a href=calendar/?action=edit&cal_item_id=$item_id>$item</a>} \
+            -date $current_date \
+            -calendar_id_list $list_of_calendar_ids]
 }
 
 if {$view == "year"} {
-    set cal_stuff "yeah, this view is boring"
+    set cal_stuff ""
 }
 
 ad_return_template
