@@ -25,7 +25,7 @@ ad_page_contract {
     {page_num ""}
     {date ""}
     {julian_date ""}
-    {period_days 30}
+    {period_days 60}
     {sort_by ""}
 } -properties {
     
@@ -86,7 +86,6 @@ set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=$
 
 set thirty_days [expr 60*60*24*30]
 set start_date [ns_fmttime [expr [ns_time] - $thirty_days] "%Y-%m-%d 00:00"]
-set end_date [ns_fmttime [expr [ns_time] + $thirty_days] "%Y-%m-%d 00:00"]
 
 set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
 set url_stub_callback "calendar_portlet_display::get_url_stub" 
