@@ -1,26 +1,34 @@
-<%
+<if @config.shaded_p@ ne "t">    
+  <if @view@ eq "list">
+  <include src="view-list-display" 
+  start_date=@start_date@ 
+  end_date=@end_date@ 
+  date=@date@ 
+  period_days=@period_days@
+  calendar_id_list=@calendar_list@ 
+  sort_by=@sort_by@> 
+  </if>
 
-    #
-    #  Copyright (C) 2001, 2002 MIT
-    #
-    #  This file is part of dotLRN.
-    #
-    #  dotLRN is free software; you can redistribute it and/or modify it under the
-    #  terms of the GNU General Public License as published by the Free Software
-    #  Foundation; either version 2 of the License, or (at your option) any later
-    #  version.
-    #
-    #  dotLRN is distributed in the hope that it will be useful, but WITHOUT ANY
-    #  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-    #  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
-    #  details.
-    #
 
-%>
+  <if @view@ eq "day">
+  <include src="/packages/calendar/www/view-one-day-display" 
+  date="@date@" start_hour=0 end_hour=23
+  calendar_id_list="@calendar_list@">
+  </if>
 
-<if @config.shaded_p@ ne "t">
-@cal_stuff;noquote@
+  <if @view@ eq "week">
+  <include src="/packages/calendar/www/view-week-display" 
+  date="@date@"
+  calendar_id_list="@calendar_list@">
+  </if>
+
+
+  <if @view@ eq "month">
+  <include src="/packages/calendar/www/view-month-display"
+  date=@date@
+  calendar_id_list= @calendar_list@>
+  </if>
 </if>
 <else>
-&nbsp;
+  <br>
 </else>
