@@ -14,11 +14,14 @@
 
         <provides url="calendar-portlet" version="2.0.3"/>
         <requires url="calendar" version="1.0"/>
-        <requires url="new-portal" version="0.1a"/>
+        <requires url="portal" version="0.9"/>
+
+        <callbacks>
+            <callback type="after-install"  proc="calendar_portlet::install::package_install"/>
+            <callback type="before-uninstall"  proc="calendar_portlet::install::package_uninstall"/>
+        </callbacks>
 
         <parameters>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="pretty_name"  default="#calendar-portlet.pretty_name#" description="Pretty Name"/>
-            <parameter datatype="string"  min_n_values="1"  max_n_values="1"  name="full_portlet_pretty_name"  default="#calendar-portlet.full_portlet_pretty_name#" description="Description of Full Calendar Pretty Name"/>
             <parameter datatype="number"  min_n_values="1"  max_n_values="1"  name="force_region"  default="2" description="the portal region to add the calendar portlet"/>
         </parameters>
 

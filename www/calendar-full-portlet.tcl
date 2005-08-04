@@ -49,15 +49,8 @@ set list_of_calendar_ids $config(calendar_id)
 set ad_conn_url [ad_conn url]
 set base_url [ad_conn package_url]
 
-set scoped_p $config(scoped_p)
-if {$scoped_p == "t"} {
-    set show_calendar_name_p 1
-} else {
-    set show_calendar_name_p 0
-}
-
 if {[llength $list_of_calendar_ids] > 1} {
-    set force_calendar_id [calendar_have_private_p -return_id 1 -calendar_id_list $list_of_calendar_ids [ad_conn user_id]]
+    set force_calendar_id [calendar::have_private_p -return_id 1 -calendar_id_list $list_of_calendar_ids [ad_conn user_id]]
 } else {
     set force_calendar_id [lindex $list_of_calendar_ids 0]
 }

@@ -27,7 +27,6 @@ ad_page_contract {
 
 # get stuff out of the config array
 array set config $cf
-set view $config(default_view)
 set list_of_calendar_ids $config(calendar_id)
 
 if {[llength $list_of_calendar_ids] > 1} {
