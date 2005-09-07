@@ -150,6 +150,8 @@ if {$view == "month"} {
 	    set next_link "<a href=?view=month&date=\$ansi_date&page_num=$page_num><img border=0 src=[dt_right_arrow] alt=\"forward one month\"></a>"
 	}
     }
+    if { [exists_and_not_null previous_link] } { set prev_month_template $previous_link }
+    if { [exists_and_not_null next_link] } { set next_month_template $next_link }
 }
 
 if {$view == "list"} {
