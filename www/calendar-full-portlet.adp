@@ -94,7 +94,8 @@
      page_num=@page_num@
      prev_month_template="@prev_month_template;noquote@"
      next_month_template="@next_month_template;noquote@"
-     url_stub_callback="@url_stub_callback;noquote@">
+     url_stub_callback="@url_stub_callback;noquote@"
+     show_calendar_name_p="@show_calendar_name_p;noquote@">
   </case>
  </switch>
       </td>
