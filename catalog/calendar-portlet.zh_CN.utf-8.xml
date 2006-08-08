@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<message_catalog package_key="calendar-portlet" package_version="2.1.0b1" locale="zh_CN" charset="utf-8">
+<message_catalog package_key="calendar-portlet" package_version="2.2.0b2" locale="zh_CN" charset="utf-8">
 
   <msg key="Add_an_item">增加条目</msg>
   <msg key="admin_pretty_name">日历管理</msg>
@@ -8,5 +8,5 @@
   <msg key="lt_Manage_Calendar_Event">设置日历事件类型</msg>
   <msg key="Manage_Item_Types">设置条目类型</msg>
   <msg key="pretty_name">日历</msg>
-  <msg key="Schedule">时间表</msg>
+  <msg key="Schedule">日程表</msg>
 </message_catalog>
