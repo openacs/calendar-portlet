@@ -24,7 +24,7 @@ ad_page_contract {
     {view ""}
     {page_num ""}
     {date ""}
-    {period_days 30}
+    {period_days:optional}
     {julian_date ""}
 } -properties {
     
@@ -45,6 +45,38 @@ if {[empty_string_p $view]} {
     set view $config(default_view)
 }
 set list_of_calendar_ids $config(calendar_id)
+
+# Set the community. Is set to NULL if under dotlrn
+set community_id [dotlrn_community::get_community_id]
+
+# Set the first list entry to calendar_id. Will not be used if under
+# dotlrn. Otherwise the list will actually contain only one calendar_id (the
+# first one, though)
+set calendar_id [lindex $list_of_calendar_ids 0]
+
+# Get the package_id depending on which calender_id was set
+db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
+
+# If period_days was NOT passed to the site, it will be reset with the
+# corresponding parameter value
+if { ![info exists period_days] } {
+    # Check if under dotlrn or in a community and set period_days to the
+    # relevant parameter
+    if { [exists_and_not_null community_id] } {
+        # in a community the correct package_id is already set and can be used
+        set period_days [parameter::get -package_id $package_id -parameter DefaultPeriodDays -default 31]
+    } else {
+        foreach calendar $list_of_calendar_ids {
+            # returns 1 if calendar_id is user's personal calendar
+            if { [calendar::personal_p -calendar_id $calendar] } {
+                # get the package_id of this calendar and the corresponding parameter
+                db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar}
+                set period_days [parameter::get -package_id $package_id -parameter DefaultPeriodDays -default 31]
+                break
+            }
+        }
+    }
+}
 
 set ad_conn_url [ad_conn url]
 set base_url [ad_conn package_url]
