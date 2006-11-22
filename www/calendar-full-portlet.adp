@@ -36,8 +36,8 @@
         <p align="left">
 
         <ul align="left">
-          <if @create_p@><li> <a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=&time_p=1">#calendar-portlet.Add_an_item#</a></li></if>
-          <if @admin_p@><li> <a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@">#calendar-portlet.Manage_Item_Types#</a></li></if>
+          <if @create_p@><li> <a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=&time_p=1" title="#calendar-portlet.Add_an_item#">#calendar-portlet.Add_an_item#</a></li></if>
+          <if @admin_p@><li> <a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@" title="#calendar-portlet.Manage_Item_Types#">#calendar-portlet.Manage_Item_Types#</a></li></if>
         </ul>
       </td>
       <td valign=top>
