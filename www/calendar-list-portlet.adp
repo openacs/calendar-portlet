@@ -35,7 +35,5 @@
   sort_by=@sort_by@> 
 </if>
 <else>
-  <small>
-    #new-portal.when_portlet_shaded#
-  </small>
+ <br>
 </else>

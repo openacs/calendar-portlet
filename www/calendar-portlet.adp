@@ -80,7 +80,5 @@
   </switch>
 </if>
 <else>
-  <small>
-    #new-portal.when_portlet_shaded#
-  </small>
+  &nbsp;
 </else>
