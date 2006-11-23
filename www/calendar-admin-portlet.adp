@@ -20,7 +20,7 @@
 
 
 <ul>
-<li> <a href="@url@?calendar_id=@calendar_id@">#calendar-portlet.Create_a_new_Event#</a></li>
-<li> <a href="@url@calendar-item-types?calendar_id=@calendar_id@">#calendar-portlet.lt_Manage_Calendar_Event#</a></li>
+<li> <a href="@url@?calendar_id=@calendar_id@" title="#calendar-portlet.Create_a_new_Event#">#calendar-portlet.Create_a_new_Event#</a></li>
+<li> <a href="@url@calendar-item-types?calendar_id=@calendar_id@" title="#calendar-portlet.lt_Manage_Calendar_Event#">#calendar-portlet.lt_Manage_Calendar_Event#</a></li>
 </ul>
 
