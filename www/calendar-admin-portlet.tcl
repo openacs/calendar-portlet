@@ -36,6 +36,6 @@ if {[llength $list_of_calendar_ids] > 1} {
 
 set calendar_id [lindex $list_of_calendar_ids 0]
 
-set url "calendar/cal-item-new"
+set url "calendar/"
 
 ad_return_template
