@@ -38,6 +38,10 @@ ad_page_contract {
     }
 }
 
+#ad_page_contract doesn't do the defaulting correctly in included files like this one.
+if { ![exists_and_not_null period_days] } {
+    set period_days 30
+}
 
 # get stuff out of the config array
 array set config $cf
@@ -66,6 +70,17 @@ if {[llength $list_of_calendar_ids] > 1} {
 set create_p [ad_permission_p $force_calendar_id cal_item_create]
 set edit_p [ad_permission_p $force_calendar_id cal_item_edit]
 set admin_p [ad_permission_p $force_calendar_id calendar_admin]
+
+if {[empty_string_p $view]} {
+    set view $config(default_view)
+}
+#  else {
+#     if { [string equal $scoped_p t] && $admin_p } {
+#         #This is a user scoped portlet.  Save the current view for next time.
+#         ns_log Debug "calendar-full-portlet: Saving view $view for next time."
+#         portal::set_element_param $config(element_id) default_view $view
+#     }
+# }
 
 # set up some vars
 if {[empty_string_p $date]} {
@@ -175,12 +190,17 @@ if {$view == "list"} {
     set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
 }
 
-ad_return_template
+set export [ns_queryget export]
 
-
-
-
-
-
-
-
+if { [lsearch [list csv vcalendar] $export] != -1 } {
+    set user_id [ad_conn user_id]
+    set package_id [ad_conn package_id]
+    if { [string equal $view list] } {
+        calendar::export::$export -calendar_id_list $list_of_calendar_ids -view $view -date $date -start_date $start_date -end_date $end_date $user_id $package_id
+    } else {
+        calendar::export::$export -calendar_id_list $list_of_calendar_ids -view $view -date $date $user_id $package_id
+    }
+    ad_script_abort
+} else {
+    ad_return_template 
+}

@@ -17,21 +17,28 @@
     #
 
 %>
-
   <style type="text/css" media="all">
     @import "/resources/calendar/calendar.css";
   </style>
-
 <if @config.shaded_p@ false>
-  <table border="0" width="100%">
+<span class="cal-overrides">
+
+  <include src="/packages/calendar/www/navbar"
+    date="@date@"
+    period_days="@period_days@"
+    base_url="@ad_conn_url@"
+    page_num="@page_num@"
+    view="@view@">
+
+  <table id="valign-hack" border="0" width="100%">
     <tr>
-      <td valign="top">
+      <td valign="top" width="200">
 
 	<include src="/packages/calendar/www/mini-calendar" 
-          base_url="@ad_conn_url@" 
           view="@view@" 
           date="@date@" 
           page_num="@page_num@">
+
 
         <p align="left">
 
@@ -39,7 +46,9 @@
           <if @create_p@><li> <a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=&time_p=1" title="#calendar-portlet.Add_an_item#">#calendar-portlet.Add_an_item#</a></li></if>
           <if @admin_p@><li> <a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@" title="#calendar-portlet.Manage_Item_Types#">#calendar-portlet.Manage_Item_Types#</a></li></if>
         </ul>
+
       </td>
+
       <td valign=top>
 
  <switch @view@>
@@ -56,7 +65,8 @@
      next_nav_template="@next_link;noquote@"
      base_url="@base_url@calendar/"
      url_stub_callback="@url_stub_callback;noquote@" 
-     calendar_id_list="@list_of_calendar_ids@">
+     calendar_id_list="@list_of_calendar_ids@"
+     export=@export@>
    </case>
 
   <case value="list">
@@ -70,7 +80,8 @@
      url_template="@url_template;noquote@" 
      url_stub_callback="@url_stub_callback;noquote@" 
      page_num=@page_num@
-     sort_by=@sort_by@> 
+     sort_by=@sort_by@
+     export=@export@
   </case>
   
   <case value="week">
@@ -82,7 +93,8 @@
      page_num=@page_num@
      prev_week_template="@prev_week_template;noquote@"
      next_week_template="@next_week_template;noquote@"
-     url_stub_callback="@url_stub_callback;noquote@">
+     url_stub_callback="@url_stub_callback;noquote@"
+     export=@export@
   </case>
 
   <case value="month">
@@ -95,12 +107,14 @@
      prev_month_template="@prev_month_template;noquote@"
      next_month_template="@next_month_template;noquote@"
      url_stub_callback="@url_stub_callback;noquote@"
-     show_calendar_name_p="@show_calendar_name_p;noquote@">
+     export=@export@>
   </case>
  </switch>
       </td>
     </tr>
   </table>
+
+</span><!-- calendar-overrides -->
 </if>
 <else>
   <br>

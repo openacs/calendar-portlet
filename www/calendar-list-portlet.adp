@@ -25,6 +25,7 @@
 <if @config.shaded_p@ ne "t">
   <include src="/packages/calendar/www/view-list-display" 
   start_date=@start_date@ 
+  end_date=@end_date@ 
   date=@current_date@ 
   period_days=@period_days@
   item_template="@item_template;noquote@"
