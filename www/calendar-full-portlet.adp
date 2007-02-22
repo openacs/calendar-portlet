@@ -51,6 +51,7 @@
 
       <td valign=top>
 
+
  <switch @view@>
    <case value="day">
      <include src="/packages/calendar/www/view-one-day-display" 
@@ -81,7 +82,7 @@
      url_stub_callback="@url_stub_callback;noquote@" 
      page_num=@page_num@
      sort_by=@sort_by@
-     export=@export@
+     export=@export@>
   </case>
   
   <case value="week">
@@ -94,8 +95,8 @@
      prev_week_template="@prev_week_template;noquote@"
      next_week_template="@next_week_template;noquote@"
      url_stub_callback="@url_stub_callback;noquote@"
-     export=@export@
-  </case>
+     export=@export@>
+ </case>
 
   <case value="month">
      <include src="/packages/calendar/www/view-month-display"
