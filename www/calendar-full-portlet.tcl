@@ -24,7 +24,7 @@ ad_page_contract {
     {view ""}
     {page_num ""}
     {date ""}
-    {period_days 30}
+    {period_days:optional}
     {julian_date ""}
 } -properties {
     

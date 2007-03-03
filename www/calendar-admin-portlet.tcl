@@ -21,6 +21,8 @@ ad_page_contract {
     @author Arjun Sanyal (arjun@openforce.net)
     @author Ben Adida (ben@openforce.net)
     @cvs_id $Id$
+} {
+    {period_days:optional}
 } -properties {
     
 }
@@ -29,6 +31,15 @@ ad_page_contract {
 array set config $cf
 set view $config(default_view)
 set list_of_calendar_ids $config(calendar_id)
+
+set calendar_id [lindex $list_of_calendar_ids 0]
+db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
+
+if { ![info exists period_days] } {
+    set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays]
+} else {
+    parameter::set_value -package_id $package_id -parameter ListView_DefaultPeriodDays -value $period_days
+}
 
 if {[llength $list_of_calendar_ids] > 1} {
     return -code error "shouldn't be more than one calendar in admin!"

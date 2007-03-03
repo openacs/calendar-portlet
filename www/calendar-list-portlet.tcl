@@ -25,7 +25,7 @@ ad_page_contract {
     {page_num ""}
     {date ""}
     {julian_date ""}
-    {period_days 30}
+    {period_days:optional}
     {sort_by ""}
 } -properties {
     
@@ -46,6 +46,17 @@ if {[empty_string_p $view]} {
     set view $config(default_view)
 }
 set list_of_calendar_ids $config(calendar_id)
+
+# Set the first list entry to calendar_id. Will not be used if under
+# dotlrn. Otherwise the list will actually contain only one calendar_id
+# (the first one, though)
+set calendar_id [lindex $list_of_calendar_ids 0]
+# Get the package_id depending on which calender_id was set
+db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
+
+if { ![info exists period_days] } {
+    set period_days [parameter::get -package_id $package_id -parameter DefaultPeriodDays -default 31]
+}
 
 set scoped_p $config(scoped_p)
 if {$scoped_p == "t"} {
