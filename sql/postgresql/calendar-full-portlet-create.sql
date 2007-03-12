@@ -41,7 +41,8 @@ declare
 begin
   ds_id := portal_datasource__new(
          ''calendar_full_portlet'',
-         ''Displays the calendar ''
+         ''Displays the calendar '',
+         ''/resources/calendar''
   );
 
   
