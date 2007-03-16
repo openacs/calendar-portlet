@@ -18,10 +18,6 @@
 
 %>
 
-<style type="text/css" media="all">
-  @import "/resources/calendar/calendar.css";
-</style>
-
 <if @config.shaded_p@ ne "t">
   <include src="/packages/calendar/www/view-list-display" 
   start_date=@start_date@ 

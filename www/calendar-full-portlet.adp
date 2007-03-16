@@ -17,11 +17,7 @@
     #
 
 %>
-  <style type="text/css" media="all">
-    @import "/resources/calendar/calendar.css";
-  </style>
 <if @config.shaded_p@ false>
-<span class="cal-overrides">
 
   <include src="/packages/calendar/www/navbar"
     date="@date@"
@@ -40,7 +36,7 @@
           page_num="@page_num@">
  
 		<if @create_p@> 
-			<a href="calendar/cal-item-new?date=@current_date@&start_time=&end_time=&time_p=1" title="#calendar-portlet.Add_an_item#" class="button">#calendar-portlet.Add_an_item#</a>
+			<a href="@add_item_url@" title="#calendar-portlet.Add_an_item#" class="button">#calendar-portlet.Add_an_item#</a>
 		</if>
 		<if @admin_p@>
 			<a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@" title="#calendar-portlet.Manage_Item_Types#" class="button">#calendar-portlet.Manage_Item_Types#</a>
@@ -114,7 +110,6 @@
     </tr>
   </table>
 
-</span><!-- calendar-overrides -->
 </if>
 <else>
   <small>

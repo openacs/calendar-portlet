@@ -19,9 +19,6 @@
 %>
 
 <if @config.shaded_p@ ne "t">
-  <style type="text/css" media="all">
-    @import "/resources/calendar/calendar.css";
-  </style>
 
  <switch @view@>
    <case value="day">
