@@ -7,7 +7,7 @@
   <msg key="full_portlet_pretty_name">Full Calendar</msg>
   <msg key="lt_Manage_Calendar_Event">Manage Calendar Event Types</msg>
   <msg key="Manage_Item_Types">Manage Item Types</msg>
-  <msg key="Parameter_Period_Days">Period Days</msg>
+  <msg key="Parameter_Period_Days">Period days for the list view (default)</msg>
   <msg key="pretty_name">Calendar</msg>
   <msg key="Schedule">Schedule</msg>
 </message_catalog>

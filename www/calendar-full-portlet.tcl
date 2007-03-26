@@ -38,11 +38,6 @@ ad_page_contract {
     }
 }
 
-#ad_page_contract doesn't do the defaulting correctly in included files like this one.
-if { ![exists_and_not_null period_days] } {
-    set period_days 30
-}
-
 # get stuff out of the config array
 array set config $cf
 if {[empty_string_p $view]} {
@@ -58,6 +53,33 @@ if {$scoped_p == "t"} {
     set show_calendar_name_p 1
 } else {
     set show_calendar_name_p 0
+}
+
+# set the period_days for calendar's list view, therefore we need
+# to check which instance of calendar is currently displayed
+if {[apm_package_installed_p dotlrn]} {
+    set site_node [site_node::get_node_id_from_object_id -object_id [ad_conn package_id]]
+    set dotlrn_package_id [site_node::closest_ancestor_package -node_id $site_node -package_key dotlrn -include_self]
+    set community_id [db_string get_community_id {select community_id from dotlrn_communities_all where package_id=:dotlrn_package_id} -default [db_null]]
+} else {
+    set community_id ""
+}
+
+set calendar_id [lindex $list_of_calendar_ids 0]
+db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
+if { ![info exists period_days] } {
+    if { [exists_and_not_null community_id] } {
+        set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
+    } else {
+        foreach calendar $list_of_calendar_ids {
+            # returns 1 if calendar_id is user's personal calendar
+            if { [calendar::personal_p -calendar_id $calendar] } {
+                db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar}
+                set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
+                break
+            }
+        }
+    }
 }
 
 if {[llength $list_of_calendar_ids] > 1} {

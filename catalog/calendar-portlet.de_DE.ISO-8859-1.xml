@@ -7,6 +7,7 @@
   <msg key="full_portlet_pretty_name">Kalender</msg>
   <msg key="lt_Manage_Calendar_Event">Eintragskategorien ändern</msg>
   <msg key="Manage_Item_Types">Eintragskategorien ändern</msg>
+  <msg key="Parameter_Period_Days">Angezeigte Tage in der Listendarstellung (standard)</msg>
   <msg key="pretty_name">Kalender</msg>
   <msg key="Schedule">Tagesplan</msg>
 </message_catalog>

@@ -45,8 +45,6 @@ if {[llength $list_of_calendar_ids] > 1} {
     return -code error "shouldn't be more than one calendar in admin!"
 }
 
-set calendar_id [lindex $list_of_calendar_ids 0]
-
 set url "calendar/"
 
 ad_return_template

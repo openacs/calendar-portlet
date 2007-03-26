@@ -55,7 +55,7 @@ set calendar_id [lindex $list_of_calendar_ids 0]
 db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
 
 if { ![info exists period_days] } {
-    set period_days [parameter::get -package_id $package_id -parameter DefaultPeriodDays -default 31]
+    set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
 }
 
 set scoped_p $config(scoped_p)
