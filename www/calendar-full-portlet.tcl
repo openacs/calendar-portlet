@@ -123,8 +123,8 @@ set add_item_url [export_vars -base "calendar/cal-item-new" {{date $current_date
 set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=$encoded_return_url&action=edit&cal_item_id=\$item_id>\[ad_quotehtml \$item\]</a>"
 
 if {$create_p} {
-    set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$day_current_hour>\$localized_day_current_hour</a>"
-    set item_add_template "<a href=calendar/cal-item-new?start_time=&time_p=1&end_time=&julian_date=\$julian_date title=\"[_ calendar.Add_Item]\">+</a>"
+    set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$day_current_hour&return_url=$encoded_return_url>\$localized_day_current_hour</a>"
+    set item_add_template "<a href=calendar/cal-item-new?start_time=&time_p=1&end_time=&julian_date=\$julian_date&return_url=$encoded_return_url title=\"[_ calendar.Add_Item]\">+</a>"
 } else {
     set hour_template "\$localized_day_current_hour"
     set item_add_template ""
