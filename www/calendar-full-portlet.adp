@@ -61,8 +61,7 @@
      next_nav_template="@next_link;noquote@"
      base_url="@base_url@calendar/"
      url_stub_callback="@url_stub_callback;noquote@" 
-     calendar_id_list="@list_of_calendar_ids@"
-     export=@export@>
+     return_url="@encoded_return_url;noquote@">
    </case>
 
   <case value="list">
@@ -76,8 +75,7 @@
      url_template="@url_template;noquote@" 
      url_stub_callback="@url_stub_callback;noquote@" 
      page_num=@page_num@
-     sort_by=@sort_by@
-     export=@export@>
+     return_url="@encoded_return_url;noquote@">
   </case>
   
   <case value="week">
@@ -89,6 +87,7 @@
      page_num=@page_num@
      prev_week_template="@prev_week_template;noquote@"
      next_week_template="@next_week_template;noquote@"
+     return_url="@encoded_return_url;noquote@">
      url_stub_callback="@url_stub_callback;noquote@"
      export=@export@>
  </case>
@@ -103,6 +102,8 @@
      prev_month_template="@prev_month_template;noquote@"
      next_month_template="@next_month_template;noquote@"
      url_stub_callback="@url_stub_callback;noquote@"
+     show_calendar_name_p="@show_calendar_name_p;noquote@"
+     return_url="@encoded_return_url;noquote@">
      export=@export@>
   </case>
  </switch>
