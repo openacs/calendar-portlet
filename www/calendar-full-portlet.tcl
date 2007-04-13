@@ -117,8 +117,9 @@ if {[empty_string_p $date]} {
 set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
 set return_url "[ns_conn url]?[ns_conn query]"
+
 set encoded_return_url [ns_urlencode $return_url]
-set add_item_url [export_vars -base "calendar/cal-item-new" {{date $current_date} {time_p 1}}]
+set add_item_url [export_vars -base "calendar/cal-item-new" {{date $current_date} {time_p 1} return_url}]
 
 set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=$encoded_return_url&action=edit&cal_item_id=\$item_id>\[ad_quotehtml \$item\]</a>"
 
