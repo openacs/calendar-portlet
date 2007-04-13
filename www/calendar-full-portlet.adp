@@ -56,6 +56,7 @@
      page_num=@page_num@
      hour_template="@hour_template;noquote@" 
      item_template="@item_template;noquote@"
+     calendar_id_list=@list_of_calendar_ids@ 
      item_add_template="@item_add_template;noquote@"
      prev_nav_template="@previous_link;noquote@"
      next_nav_template="@next_link;noquote@"
@@ -87,7 +88,7 @@
      page_num=@page_num@
      prev_week_template="@prev_week_template;noquote@"
      next_week_template="@next_week_template;noquote@"
-     return_url="@encoded_return_url;noquote@">
+     return_url="@encoded_return_url;noquote@"
      url_stub_callback="@url_stub_callback;noquote@"
      export=@export@>
  </case>
