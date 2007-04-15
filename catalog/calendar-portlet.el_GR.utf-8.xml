@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<message_catalog package_key="calendar-portlet" package_version="2.3.0a2" locale="el_GR" charset="utf-8">
+
+  <msg key="Add_an_item">Προσθήκη συμβάντος</msg>
+  <msg key="full_portlet_pretty_name">Πλήρες ημερολόγιο</msg>
+  <msg key="Manage_Item_Types">Διαχείριση τύπων συμβάντων</msg>
+  <msg key="Schedule">Πρόγραμμα</msg>
+</message_catalog>
