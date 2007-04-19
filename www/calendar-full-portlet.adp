@@ -104,7 +104,7 @@
      next_month_template="@next_month_template;noquote@"
      url_stub_callback="@url_stub_callback;noquote@"
      show_calendar_name_p="@show_calendar_name_p;noquote@"
-     return_url="@encoded_return_url;noquote@">
+     return_url="@encoded_return_url;noquote@"
      export=@export@>
   </case>
  </switch>
