@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<message_catalog package_key="calendar-portlet" package_version="2.2.0" locale="ms_MY" charset="utf-8">
+<message_catalog package_key="calendar-portlet" package_version="2.3.0" locale="ms_MY" charset="utf-8">
 
   <msg key="Add_an_item">Tambah satu butiran</msg>
   <msg key="admin_pretty_name">Pengendalian Takwim</msg>
