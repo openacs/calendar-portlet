@@ -18,13 +18,10 @@
 
 %>
 
-<style type="text/css" media="all">
-  @import "/resources/calendar/calendar.css";
-</style>
-
 <if @config.shaded_p@ ne "t">
   <include src="/packages/calendar/www/view-list-display" 
   start_date=@start_date@ 
+  end_date=@end_date@ 
   date=@current_date@ 
   period_days=@period_days@
   item_template="@item_template;noquote@"
@@ -35,5 +32,7 @@
   sort_by=@sort_by@> 
 </if>
 <else>
- <br>
+  <small>
+    #new-portal.when_portlet_shaded#
+  </small>
 </else>

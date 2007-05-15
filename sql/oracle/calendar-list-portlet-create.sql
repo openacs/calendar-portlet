@@ -32,7 +32,8 @@ declare
 begin
   ds_id := portal_datasource.new(
     name             => 'calendar_list_portlet',
-    description      => 'Displays the calendar list as a schedule'
+    description      => 'Displays the calendar list as a schedule',
+    css_dir          => '/resources/calendar'
   );
 
   

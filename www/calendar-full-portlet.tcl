@@ -24,7 +24,7 @@ ad_page_contract {
     {view ""}
     {page_num ""}
     {date ""}
-    {period_days 30}
+    {period_days:optional}
     {julian_date ""}
 } -properties {
     
@@ -37,7 +37,6 @@ ad_page_contract {
         }
     }
 }
-
 
 # get stuff out of the config array
 array set config $cf
@@ -56,6 +55,33 @@ if {$scoped_p == "t"} {
     set show_calendar_name_p 0
 }
 
+# set the period_days for calendar's list view, therefore we need
+# to check which instance of calendar is currently displayed
+if {[apm_package_installed_p dotlrn]} {
+    set site_node [site_node::get_node_id_from_object_id -object_id [ad_conn package_id]]
+    set dotlrn_package_id [site_node::closest_ancestor_package -node_id $site_node -package_key dotlrn -include_self]
+    set community_id [db_string get_community_id {select community_id from dotlrn_communities_all where package_id=:dotlrn_package_id} -default [db_null]]
+} else {
+    set community_id ""
+}
+
+set calendar_id [lindex $list_of_calendar_ids 0]
+db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
+if { ![info exists period_days] } {
+    if { [exists_and_not_null community_id] } {
+        set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
+    } else {
+        foreach calendar $list_of_calendar_ids {
+            # returns 1 if calendar_id is user's personal calendar
+            if { [calendar::personal_p -calendar_id $calendar] } {
+                db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar}
+                set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
+                break
+            }
+        }
+    }
+}
+
 if {[llength $list_of_calendar_ids] > 1} {
     set force_calendar_id [calendar::have_private_p -return_id 1 -calendar_id_list $list_of_calendar_ids -party_id [ad_conn user_id]]
 } else {
@@ -66,6 +92,17 @@ if {[llength $list_of_calendar_ids] > 1} {
 set create_p [ad_permission_p $force_calendar_id cal_item_create]
 set edit_p [ad_permission_p $force_calendar_id cal_item_edit]
 set admin_p [ad_permission_p $force_calendar_id calendar_admin]
+
+if {[empty_string_p $view]} {
+    set view $config(default_view)
+}
+#  else {
+#     if { [string equal $scoped_p t] && $admin_p } {
+#         #This is a user scoped portlet.  Save the current view for next time.
+#         ns_log Debug "calendar-full-portlet: Saving view $view for next time."
+#         portal::set_element_param $config(element_id) default_view $view
+#     }
+# }
 
 # set up some vars
 if {[empty_string_p $date]} {
@@ -80,13 +117,15 @@ if {[empty_string_p $date]} {
 set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
 set return_url "[ns_conn url]?[ns_conn query]"
+
 set encoded_return_url [ns_urlencode $return_url]
+set add_item_url [export_vars -base "calendar/cal-item-new" {{date $current_date} {time_p 1} return_url}]
 
 set item_template "<a href=\${url_stub}cal-item-view?show_cal_nav=0&return_url=$encoded_return_url&action=edit&cal_item_id=\$item_id>\[ad_quotehtml \$item\]</a>"
 
 if {$create_p} {
-    set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$day_current_hour>\$localized_day_current_hour</a>"
-    set item_add_template "<a href=calendar/cal-item-new?start_time=&time_p=1&end_time=&julian_date=\$julian_date title=\"[_ calendar.Add_Item]\">+</a>"
+    set hour_template "<a href=calendar/cal-item-new?date=$current_date&start_time=\$day_current_hour&return_url=$encoded_return_url>\$localized_day_current_hour</a>"
+    set item_add_template "<a href=calendar/cal-item-new?start_time=&time_p=1&end_time=&julian_date=\$julian_date&return_url=$encoded_return_url title=\"[_ calendar.Add_Item]\">+</a>"
 } else {
     set hour_template "\$localized_day_current_hour"
     set item_add_template ""
@@ -175,12 +214,17 @@ if {$view == "list"} {
     set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
 }
 
-ad_return_template
+set export [ns_queryget export]
 
-
-
-
-
-
-
-
+if { [lsearch [list csv vcalendar] $export] != -1 } {
+    set user_id [ad_conn user_id]
+    set package_id [ad_conn package_id]
+    if { [string equal $view list] } {
+        calendar::export::$export -calendar_id_list $list_of_calendar_ids -view $view -date $date -start_date $start_date -end_date $end_date $user_id $package_id
+    } else {
+        calendar::export::$export -calendar_id_list $list_of_calendar_ids -view $view -date $date $user_id $package_id
+    }
+    ad_script_abort
+} else {
+    ad_return_template 
+}

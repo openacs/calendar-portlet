@@ -24,7 +24,7 @@ ad_page_contract {
     {view ""}
     {page_num ""}
     {date ""}
-    {period_days 30}
+    {period_days:optional}
     {julian_date ""}
 } -properties {
     
@@ -38,6 +38,7 @@ ad_page_contract {
     }
 }
 
+set period_days [parameter::get -parameter ListView_DefaultPeriodDays -default 30]
 
 # get stuff out of the config array
 array set config $cf
