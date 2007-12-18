@@ -55,6 +55,9 @@ if {$scoped_p == "t"} {
     set show_calendar_name_p 0
 }
 
+# Styles for calendar
+template::head::add_css -href "/resources/calendar/calendar.css"
+
 # set the period_days for calendar's list view, therefore we need
 # to check which instance of calendar is currently displayed
 if {[apm_package_installed_p dotlrn]} {

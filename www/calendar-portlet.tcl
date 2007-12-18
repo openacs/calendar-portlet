@@ -166,5 +166,6 @@ if {$view == "list"} {
     set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
 }
 
+template::head::add_css -href "/resources/calendar/calendar.css"
 
 ad_return_template

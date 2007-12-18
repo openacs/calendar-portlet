@@ -101,4 +101,7 @@ set end_date [ns_fmttime [expr {[ns_time] + 60*60*24*$period_days}] "%Y-%m-%d 00
 set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
 set url_stub_callback "calendar_portlet_display::get_url_stub" 
 
+# Stylesheet
+template::head::add_css -href "/resources/calendar/calendar.css"
+
 ad_return_template
