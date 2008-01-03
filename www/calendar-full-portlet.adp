@@ -28,7 +28,7 @@
 
   <table id="valign-hack" border="0" width="100%">
     <tr>
-      <td valign="top" width="200">
+      <td valign="top" style="width: 200px">
 
 	<include src="/packages/calendar/www/mini-calendar" 
           view="@view@" 
