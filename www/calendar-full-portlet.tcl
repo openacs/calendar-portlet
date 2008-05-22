@@ -57,6 +57,7 @@ if {$scoped_p == "t"} {
 
 # Styles for calendar
 template::head::add_css -href "/resources/calendar/calendar.css"
+template::head::add_css -alternate -href "/resources/calendar/calendar-hc.css" -title "highContrast"
 
 # set the period_days for calendar's list view, therefore we need
 # to check which instance of calendar is currently displayed

@@ -103,5 +103,6 @@ set url_stub_callback "calendar_portlet_display::get_url_stub"
 
 # Stylesheet
 template::head::add_css -href "/resources/calendar/calendar.css"
+template::head::add_css -alternate -href "/resources/calendar/calendar-hc.css" -title "highContrast"
 
 ad_return_template
