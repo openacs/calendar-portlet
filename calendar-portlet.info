@@ -13,7 +13,7 @@
         <vendor url="http://openacs.org">OpenACS</vendor>
 
         <provides url="calendar-portlet" version="2.4.0b1"/>
-        <requires url="calendar" version="2.1.0b7"/>
+        <requires url="calendar" version="2.4.0b1"/>
         <requires url="new-portal" version="2.4.0b1"/>
 
         <callbacks>
