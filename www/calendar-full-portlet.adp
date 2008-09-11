@@ -54,14 +54,8 @@
      start_display_hour=7 
      end_display_hour=22
      page_num=@page_num@
-     hour_template="@hour_template;noquote@" 
-     item_template="@item_template;noquote@"
      calendar_id_list=@list_of_calendar_ids@ 
-     item_add_template="@item_add_template;noquote@"
-     prev_nav_template="@previous_link;noquote@"
-     next_nav_template="@next_link;noquote@"
-     base_url="@base_url@calendar/"
-     url_stub_callback="@url_stub_callback;noquote@" 
+     calendar_url="@calendar_url@"
      return_url="@encoded_return_url;noquote@">
    </case>
 
@@ -71,11 +65,9 @@
      end_date=@end_date@ 
      date=@current_date@ 
      period_days=@period_days@
-     item_template="@item_template;noquote@"
      calendar_id_list=@list_of_calendar_ids@ 
-     url_template="@url_template;noquote@" 
-     url_stub_callback="@url_stub_callback;noquote@" 
      page_num=@page_num@
+     calendar_url="@calendar_url@"
      return_url="@encoded_return_url;noquote@">
   </case>
   
@@ -83,13 +75,9 @@
      <include src="/packages/calendar/www/view-week-display" 
      date="@current_date@"
      calendar_id_list=@list_of_calendar_ids@ 
-     base_url="@base_url@calendar/"
-     item_template="@item_template;noquote@"
      page_num=@page_num@
-     prev_week_template="@prev_week_template;noquote@"
-     next_week_template="@next_week_template;noquote@"
      return_url="@encoded_return_url;noquote@"
-     url_stub_callback="@url_stub_callback;noquote@"
+     calendar_url="@calendar_url@"
      export=@export@>
  </case>
 
@@ -97,14 +85,10 @@
      <include src="/packages/calendar/www/view-month-display"
      date=@current_date@
      calendar_id_list=@list_of_calendar_ids@ 
-     item_template="@item_template;noquote@"
-     base_url="@base_url@calendar/"
      page_num=@page_num@
-     prev_month_template="@prev_month_template;noquote@"
-     next_month_template="@next_month_template;noquote@"
-     url_stub_callback="@url_stub_callback;noquote@"
      show_calendar_name_p="@show_calendar_name_p;noquote@"
      return_url="@encoded_return_url;noquote@"
+     calendar_url="@calendar_url@"
      export=@export@>
   </case>
  </switch>
