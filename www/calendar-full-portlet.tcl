@@ -114,7 +114,6 @@ set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
 set return_url "[ns_conn url]?[ns_conn query]"
 
-set encoded_return_url [ns_urlencode $return_url]
 set add_item_url [export_vars -base "calendar/cal-item-new" {{date $current_date} {time_p 1} return_url}]
 
 if {$view == "list"} {

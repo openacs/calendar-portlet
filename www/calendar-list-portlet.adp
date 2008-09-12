@@ -27,6 +27,7 @@
   page_num=@page_num@
   calendar_id_list=@list_of_calendar_ids@ 
   calendar_url="@calendar_url@"
+  return_url="@return_url@"
   sort_by=@sort_by@> 
 </if>
 <else>

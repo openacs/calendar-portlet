@@ -23,6 +23,7 @@
  <switch @view@>
    <case value="day">
      <include src="/packages/calendar/www/view-one-day-display" 
+     return_url="@return_url;noquote@"
      date="@date@" 
      start_display_hour=7 
      end_display_hour=22
@@ -33,6 +34,7 @@
 
     <case value="list">
       <include src="/packages/calendar/www/view-list-display" 
+      return_url="@return_url;noquote@"
       start_date=@start_date@ 
       end_date=@end_date@ 
       date=@current_date@ 
@@ -46,6 +48,7 @@
    
     <case value="week">
       <include src="/packages/calendar/www/view-week-display" 
+      return_url="@return_url;noquote@"
       date="@current_date@"
       calendar_id_list=@list_of_calendar_ids@ 
       calendar_url="@calendar_url@"
@@ -54,9 +57,11 @@
 
     <case value="month">
       <include src="/packages/calendar/www/view-month-display"
+      return_url="@return_url;noquote@"
       date=@current_date@
       calendar_id_list=@list_of_calendar_ids@ 
       page_num=@page_num@
+      calendar_url="@calendar_url@"
     </case>
   </switch>
 </if>

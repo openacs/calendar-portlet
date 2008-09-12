@@ -56,7 +56,7 @@
      page_num=@page_num@
      calendar_id_list=@list_of_calendar_ids@ 
      calendar_url="@calendar_url@"
-     return_url="@encoded_return_url;noquote@">
+     return_url="@return_url;noquote@">
    </case>
 
   <case value="list">
@@ -68,7 +68,7 @@
      calendar_id_list=@list_of_calendar_ids@ 
      page_num=@page_num@
      calendar_url="@calendar_url@"
-     return_url="@encoded_return_url;noquote@">
+     return_url="@return_url;noquote@">
   </case>
   
   <case value="week">
@@ -76,7 +76,7 @@
      date="@current_date@"
      calendar_id_list=@list_of_calendar_ids@ 
      page_num=@page_num@
-     return_url="@encoded_return_url;noquote@"
+     return_url="@return_url;noquote@"
      calendar_url="@calendar_url@"
      export=@export@>
  </case>
@@ -87,7 +87,7 @@
      calendar_id_list=@list_of_calendar_ids@ 
      page_num=@page_num@
      show_calendar_name_p="@show_calendar_name_p;noquote@"
-     return_url="@encoded_return_url;noquote@"
+     return_url="@return_url;noquote@"
      calendar_url="@calendar_url@"
      export=@export@>
   </case>

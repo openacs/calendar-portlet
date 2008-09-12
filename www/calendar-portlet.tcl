@@ -38,6 +38,7 @@ ad_page_contract {
     }
 }
 
+set return_url "[ns_conn url]?[ns_conn query]"
 set period_days [parameter::get -parameter ListView_DefaultPeriodDays -default 30]
 
 # get stuff out of the config array
