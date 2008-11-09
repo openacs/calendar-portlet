@@ -93,5 +93,6 @@ set end_date [ns_fmttime [expr {[ns_time] + 60*60*24*$period_days}] "%Y-%m-%d 00
 
 # Stylesheet
 template::head::add_css -href "/resources/calendar/calendar.css"
+template::head::add_css -alternate -href "/resources/calendar/calendar-hc.css" -title "highContrast"
 
 ad_return_template

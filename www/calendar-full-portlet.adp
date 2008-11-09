@@ -35,13 +35,14 @@
           date="@date@" 
           page_num="@page_num@">
  
+       <p>
 		<if @create_p@> 
 			<a href="@add_item_url@" title="#calendar-portlet.Add_an_item#" class="button">#calendar-portlet.Add_an_item#</a>
 		</if>
 		<if @admin_p@>
 			<a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@" title="#calendar-portlet.Manage_Item_Types#" class="button">#calendar-portlet.Manage_Item_Types#</a>
 		</if>
-
+       </p>
       </td>
 
       <td valign=top>
