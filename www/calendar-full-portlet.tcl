@@ -93,9 +93,9 @@ if {[llength $list_of_calendar_ids] > 1} {
 }
 
 # permissions
-set create_p [ad_permission_p $force_calendar_id cal_item_create]
-set edit_p [ad_permission_p $force_calendar_id cal_item_edit]
-set admin_p [ad_permission_p $force_calendar_id calendar_admin]
+set create_p [permission::permission_p -object_id $force_calendar_id -privilege cal_item_create]
+set edit_p [permission::permission_p -object_id $force_calendar_id -privilege cal_item_edit]
+set admin_p [permission::permission_p -object_id $force_calendar_id -privilege calendar_admin]
 
 if {[empty_string_p $view]} {
     set view $config(default_view)
