@@ -27,15 +27,21 @@
 
 -- $Id$
 
-create function inline_0()
-returns integer as '
-declare
+
+
+--
+-- procedure inline_0/0
+--
+CREATE OR REPLACE FUNCTION inline_0(
+
+) RETURNS integer AS $$
+DECLARE
   ds_id portal_datasources.datasource_id%TYPE;
-begin
+BEGIN
   ds_id := portal_datasource__new(
-    ''calendar_list_portlet'',
-    ''Displays the calendar list as a schedule'',
-    ''/resources/calendar''
+    'calendar_list_portlet',
+    'Displays the calendar list as a schedule',
+    '/resources/calendar'
   );
 
   
@@ -44,55 +50,55 @@ begin
   -- shadeable_p 
   perform portal_datasource__set_def_param (
  ds_id,
- ''t'',
- ''t'',
- ''shadeable_p'',
- ''t''
+ 't',
+ 't',
+ 'shadeable_p',
+ 't'
 );	
 
 
   -- hideable_p 
   perform portal_datasource__set_def_param (
  ds_id,
- ''t'',
- ''t'',
- ''hideable_p'',
- ''t''
+ 't',
+ 't',
+ 'hideable_p',
+ 't'
 );	
 
     perform portal_datasource__set_def_param(
  ds_id,
- ''t'',
- ''f'',
- ''scoped_p'',
- ''t''
+ 't',
+ 'f',
+ 'scoped_p',
+ 't'
     );
 
   -- user_editable_p 
   perform portal_datasource__set_def_param (
  ds_id,
- ''t'',
- ''t'',
- ''user_editable_p'',
- ''f''
+ 't',
+ 't',
+ 'user_editable_p',
+ 'f'
 );	
 
   -- shaded_p 
   perform portal_datasource__set_def_param (
  ds_id,
- ''t'',
- ''t'',
- ''shaded_p'',
- ''f''
+ 't',
+ 't',
+ 'shaded_p',
+ 'f'
 );	
 
   -- link_hideable_p 
   perform portal_datasource__set_def_param (
  ds_id,
- ''t'',
- ''t'',
- ''link_hideable_p'',
- ''t''
+ 't',
+ 't',
+ 'link_hideable_p',
+ 't'
 );	
 
 
@@ -101,20 +107,20 @@ begin
   -- calendar_id must be configured 
   perform portal_datasource__set_def_param (
  ds_id,
- ''t'',
- ''f'',
- ''calendar_id'',
- ''''
+ 't',
+ 'f',
+ 'calendar_id',
+ ''
 );
 
 
   -- default_view see cal-table-create__sql
   perform portal_datasource__set_def_param (
  ds_id,
- ''t'',
- ''t'',
- ''default_view'',
- ''day''
+ 't',
+ 't',
+ 'default_view',
+ 'day'
 );	
 
 
@@ -122,112 +128,134 @@ begin
 
    return 0;
 
-end;' language 'plpgsql';
+END;
+$$ LANGUAGE plpgsql;
 select inline_0();
 drop function inline_0();
 
-create function inline_0()
-returns integer as '
-declare
+
+
+--
+-- procedure inline_0/0
+--
+CREATE OR REPLACE FUNCTION inline_0(
+
+) RETURNS integer AS $$
+DECLARE
 	foo integer;
-begin
+BEGIN
 	-- create the implementation
 	foo := acs_sc_impl__new (
-		''portal_datasource'',
-		''calendar_list_portlet'',
-		''calendar_list_portlet''
+		'portal_datasource',
+		'calendar_list_portlet',
+		'calendar_list_portlet'
 	);
 
 	return 0;
 
-end;' language 'plpgsql';
+END;
+$$ LANGUAGE plpgsql;
 select inline_0();
 drop function inline_0();
 
-create function inline_0()
-returns integer as '
-declare
+
+
+--
+-- procedure inline_0/0
+--
+CREATE OR REPLACE FUNCTION inline_0(
+
+) RETURNS integer AS $$
+DECLARE
 	foo integer;
-begin
+BEGIN
 
 	-- add all the hooks
 	foo := acs_sc_impl_alias__new (
-	       ''portal_datasource'',
-	       ''calendar_list_portlet'',
-	       ''GetMyName'',
-	       ''calendar_list_portlet::get_my_name'',
-	       ''TCL''
+	       'portal_datasource',
+	       'calendar_list_portlet',
+	       'GetMyName',
+	       'calendar_list_portlet::get_my_name',
+	       'TCL'
 	);
 
 	foo := acs_sc_impl_alias__new (
-	       ''portal_datasource'',
-	       ''calendar_list_portlet'',
-	       ''GetPrettyName'',
-	       ''calendar_list_portlet::get_pretty_name'',
-	       ''TCL''
+	       'portal_datasource',
+	       'calendar_list_portlet',
+	       'GetPrettyName',
+	       'calendar_list_portlet::get_pretty_name',
+	       'TCL'
 	);
 
 	foo := acs_sc_impl_alias__new (
-	       ''portal_datasource'',
-	       ''calendar_list_portlet'',
-	       ''Link'',
-	       ''calendar_list_portlet::link'',
-	       ''TCL''
+	       'portal_datasource',
+	       'calendar_list_portlet',
+	       'Link',
+	       'calendar_list_portlet::link',
+	       'TCL'
 	);
 
 	foo := acs_sc_impl_alias__new (
-	       ''portal_datasource'',
-	       ''calendar_list_portlet'',
-	       ''AddSelfToPage'',
-	       ''calendar_list_portlet::add_self_to_page'',
-	       ''TCL''
+	       'portal_datasource',
+	       'calendar_list_portlet',
+	       'AddSelfToPage',
+	       'calendar_list_portlet::add_self_to_page',
+	       'TCL'
 	);
 
 	foo := acs_sc_impl_alias__new (
-	       ''portal_datasource'',
-	       ''calendar_list_portlet'',
-	       ''Show'',
-	       ''calendar_list_portlet::show'',
-	       ''TCL''
+	       'portal_datasource',
+	       'calendar_list_portlet',
+	       'Show',
+	       'calendar_list_portlet::show',
+	       'TCL'
 	);
 
 	foo := acs_sc_impl_alias__new (
-	       ''portal_datasource'',
-	       ''calendar_list_portlet'',
-	       ''Edit'',
-	       ''calendar_list_portlet::edit'',
-	       ''TCL''
+	       'portal_datasource',
+	       'calendar_list_portlet',
+	       'Edit',
+	       'calendar_list_portlet::edit',
+	       'TCL'
 	);
 
 	foo := acs_sc_impl_alias__new (
-	       ''portal_datasource'',
-	       ''calendar_list_portlet'',
-	       ''RemoveSelfFromPage'',
-	       ''calendar_list_portlet::remove_self_from_page'',
-	       ''TCL''
+	       'portal_datasource',
+	       'calendar_list_portlet',
+	       'RemoveSelfFromPage',
+	       'calendar_list_portlet::remove_self_from_page',
+	       'TCL'
 	);
 
 	return 0;
 
-end;' language 'plpgsql';
+END;
+$$ LANGUAGE plpgsql;
 select inline_0();
 drop function inline_0();
 
-create function inline_0()
-returns integer as '
-declare
+
+
+--
+-- procedure inline_0/0
+--
+CREATE OR REPLACE FUNCTION inline_0(
+
+) RETURNS integer AS $$
+DECLARE
 	foo integer;
-begin
+BEGIN
 
 	-- Add the binding
 	perform acs_sc_binding__new (
- ''portal_datasource'',
- ''calendar_list_portlet''
+ 'portal_datasource',
+ 'calendar_list_portlet'
 
 	);
 
     return 0;
 
-end;' language 'plpgsql';
+END;
+$$ LANGUAGE plpgsql;
 select inline_0();
 drop function inline_0();
