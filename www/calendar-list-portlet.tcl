@@ -22,7 +22,7 @@ ad_page_contract {
     @cvs_id $Id$
 } {
     {view ""}
-    {page_num ""}
+    {page_num:naturalnum ""}
     {date ""}
     {julian_date ""}
     {period_days:optional}
