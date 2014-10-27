@@ -22,7 +22,7 @@ ad_page_contract {
     @cvs_id $Id$
 } {
     {view ""}
-    {page_num ""}
+    {page_num:naturalnum ""}
     {date ""}
     {period_days:optional}
     {julian_date ""}
@@ -30,7 +30,7 @@ ad_page_contract {
     
 } -validate {
     valid_date -requires { date } {
-        if {![string equal $date ""]} {
+        if {$date ne "" } {
             if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
                 ad_complain "Your input ($date) was not valid. It has to be in the form YYYYMMDD."
             }
@@ -40,7 +40,7 @@ ad_page_contract {
 
 # get stuff out of the config array
 array set config $cf
-if {[empty_string_p $view]} {
+if {$view eq ""} {
     set view $config(default_view)
 }
 set list_of_calendar_ids $config(calendar_id)
@@ -72,7 +72,7 @@ if {[apm_package_installed_p dotlrn]} {
 set calendar_id [lindex $list_of_calendar_ids 0]
 db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
 if { ![info exists period_days] } {
-    if { [exists_and_not_null community_id] } {
+    if { ([info exists community_id] && $community_id ne "") } {
         set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
     } else {
         foreach calendar $list_of_calendar_ids {
@@ -97,13 +97,13 @@ set create_p [permission::permission_p -object_id $force_calendar_id -privilege 
 set edit_p [permission::permission_p -object_id $force_calendar_id -privilege cal_item_edit]
 set admin_p [permission::permission_p -object_id $force_calendar_id -privilege calendar_admin]
 
-if {[empty_string_p $view]} {
+if {$view eq ""} {
     set view $config(default_view)
 }
 
 # set up some vars
-if {[empty_string_p $date]} {
-    if {[empty_string_p $julian_date]} {
+if {$date eq ""} {
+    if {$julian_date eq ""} {
         set date [dt_sysdate]
     } else {
         set date [db_string select_from_julian "select to_date(:julian_date ,'J') from dual"]
@@ -117,7 +117,7 @@ set return_url "[ns_conn url]?[ns_conn query]"
 
 set add_item_url [export_vars -base "calendar/cal-item-new" {{date $current_date} {time_p 1} return_url}]
 
-if {$view == "list"} {
+if {$view eq "list"} {
     set sort_by [ns_queryget sort_by]
 
 
@@ -131,7 +131,7 @@ set export [ns_queryget export]
 if { [lsearch [list csv vcalendar] $export] != -1 } {
     set user_id [ad_conn user_id]
     set package_id [ad_conn package_id]
-    if { [string equal $view list] } {
+    if {$view eq "list"} {
         calendar::export::$export -calendar_id_list $list_of_calendar_ids -view $view -date $date -start_date $start_date -end_date $end_date $user_id $package_id
     } else {
         calendar::export::$export -calendar_id_list $list_of_calendar_ids -view $view -date $date $user_id $package_id

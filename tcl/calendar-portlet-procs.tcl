@@ -67,11 +67,11 @@ namespace eval calendar_portlet {
     } {
         
         # allow overrides of pretty_name and force_region
-        if {[empty_string_p $pretty_name]} {
+        if {$pretty_name eq ""} {
             set pretty_name [get_pretty_name]
         }
 
-        if {[empty_string_p $force_region]} {
+        if {$force_region eq ""} {
             set force_region [parameter::get_from_package_key \
                                   -package_key [my_package_key] \
                                   -parameter "force_region"
@@ -79,7 +79,7 @@ namespace eval calendar_portlet {
         }
 
         set extra_params ""
-        if {![empty_string_p $scoped_p]} {
+        if {$scoped_p ne ""} {
             set extra_params [list scoped_p $scoped_p]
         }
         

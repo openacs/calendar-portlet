@@ -22,7 +22,7 @@ ad_page_contract {
     @cvs_id $Id$
 } {
     {view ""}
-    {page_num ""}
+    {page_num:naturalnum ""}
     {date ""}
     {period_days:optional}
     {julian_date ""}
@@ -30,7 +30,7 @@ ad_page_contract {
     
 }  -validate {
     valid_date -requires { date } {
-        if {![string equal $date ""]} {
+        if {$date ne "" } {
             if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
                 ad_complain "Your input ($date) was not valid. It has to be in the form YYYYMMDD."
             }
@@ -63,19 +63,19 @@ if {[llength $list_of_calendar_ids] > 1} {
 
 # set up some vars
 set date [ns_queryget date]
-if {[empty_string_p $date]} {
+if {$date eq ""} {
     set date [dt_sysdate]
 }
 set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
 
-if {$view == "list"} {
+if {$view eq "list"} {
     set sort_by [ns_queryget sort_by]
 
-    set thirty_days [expr 60*60*24*30]
+    set thirty_days [expr {60*60*24*30}]
 
-    set start_date [ns_fmttime [expr [ns_time] - $thirty_days] "%Y-%m-%d 00:00"]
-    set end_date [ns_fmttime [expr [ns_time] + $thirty_days] "%Y-%m-%d 00:00"]
+    set start_date [ns_fmttime [expr {[ns_time] - $thirty_days}] "%Y-%m-%d 00:00"]
+    set end_date [ns_fmttime [expr {[ns_time] + $thirty_days}] "%Y-%m-%d 00:00"]
 
 }
 

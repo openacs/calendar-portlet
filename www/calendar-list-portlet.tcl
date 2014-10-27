@@ -22,7 +22,7 @@ ad_page_contract {
     @cvs_id $Id$
 } {
     {view ""}
-    {page_num ""}
+    {page_num:naturalnum ""}
     {date ""}
     {julian_date ""}
     {period_days:optional}
@@ -31,7 +31,7 @@ ad_page_contract {
     
 }  -validate {
     valid_date -requires { date } {
-        if {![string equal $date ""]} {
+        if {$date ne "" } {
             if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
                 ad_complain "Your input was not valid. It has to be in the form YYYYMMDD."
             }
@@ -43,7 +43,7 @@ set calendar_url [ad_conn package_url]calendar/
 
 # get stuff out of the config array
 array set config $cf
-if {[empty_string_p $view]} {
+if {$view eq ""} {
     set view $config(default_view)
 }
 set list_of_calendar_ids $config(calendar_id)
@@ -73,8 +73,8 @@ if {[llength $list_of_calendar_ids] > 1} {
 }
 
 # set up some vars
-if {[empty_string_p $date]} {
-    if {[empty_string_p $julian_date]} {
+if {$date eq ""} {
+    if {$julian_date eq ""} {
         set date [dt_sysdate]
     } else {
         set date [db_string select_from_julian "select to_date(:julian_date ,'J') from dual"]

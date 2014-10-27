@@ -61,7 +61,7 @@ namespace eval calendar_list_portlet {
 
 	@return element_id The new element's id
     } {
-        if {[empty_string_p $scoped_p]} {
+        if {$scoped_p eq ""} {
             set scoped_p f
         }
 

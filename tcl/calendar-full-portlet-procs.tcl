@@ -63,7 +63,7 @@ namespace eval calendar_full_portlet {
 	@return element_id The new element's id
     } {
         set extra_params ""
-        if {![empty_string_p $scoped_p]} {
+        if {$scoped_p ne ""} {
             set extra_params [list scoped_p $scoped_p]
         }        
 

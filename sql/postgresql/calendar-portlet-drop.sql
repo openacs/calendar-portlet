@@ -32,16 +32,22 @@
 -- License version 2 or higher.  Full text of the license is available
 -- from the GNU Project: http://www.fsf.org/copyleft/gpl.html
 
-create function inline_0()
-returns integer as '
-declare  
+
+
+--
+-- procedure inline_0/0
+--
+CREATE OR REPLACE FUNCTION inline_0(
+
+) RETURNS integer AS $$
+DECLARE  
   ds_id portal_datasources.datasource_id%TYPE;
-begin
+BEGIN
 
 --  begin 
     select datasource_id into ds_id
       from portal_datasources
-     where name = ''calendar-portlet'';
+     where name = 'calendar-portlet';
 --   exception when no_data_found then
 --     ds_id := null;
 --  end;
@@ -52,76 +58,84 @@ begin
 
   return 0;
 
-end;' language 'plpgsql';
+END;
+$$ LANGUAGE plpgsql;
 select inline_0();
 drop function inline_0();
 
 
-create function inline_0()
-returns integer as '
-declare
+
+
+--
+-- procedure inline_0/0
+--
+CREATE OR REPLACE FUNCTION inline_0(
+
+) RETURNS integer AS $$
+DECLARE
 	foo integer;
-begin
+BEGIN
 
 	-- drop the hooks
 	foo := acs_sc_impl_alias__delete (
-	       ''portal_datasource'',
-	       ''calendar_portlet'',
-	       ''GetMyName''
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'GetMyName'
 	);
 
 	foo := acs_sc_impl_alias__delete (
-	       ''portal_datasource'',
-	       ''calendar_portlet'',
-	       ''GetPrettyName''
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'GetPrettyName'
 	);
 
 
 	foo := acs_sc_impl_alias__delete (
-	       ''portal_datasource'',
-	       ''calendar_portlet'',
-	       ''Link''
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'Link'
 	);
 
 	foo := acs_sc_impl_alias__delete (
-	       ''portal_datasource'',
-	       ''calendar_portlet'',
-	       ''AddSelfToPage''
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'AddSelfToPage'
 	);
 
 	foo := acs_sc_impl_alias__delete (
-	       ''portal_datasource'',
-	       ''calendar_portlet'',
-	       ''Show''
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'Show'
 	);
 
 	foo := acs_sc_impl_alias__delete (
-	       ''portal_datasource'',
-	       ''calendar_portlet'',
-	       ''Edit''
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'Edit'
 	);
 
 	foo := acs_sc_impl_alias__delete (
-	       ''portal_datasource'',
-	       ''calendar_portlet'',
-	       ''RemoveSelfFromPage''
+	       'portal_datasource',
+	       'calendar_portlet',
+	       'RemoveSelfFromPage'
 	);
 
 	-- Drop the binding
 	perform acs_sc_binding__delete (
-	        ''portal_datasource'',
-		''calendar_portlet''
+	        'portal_datasource',
+		'calendar_portlet'
 	);
 
 	-- drop the impl
 	foo := acs_sc_impl__delete (
-		''portal_datasource'',
-		''calendar_portlet''
+		'portal_datasource',
+		'calendar_portlet'
 	);
 
 	return 0;
 
-end;' language 'plpgsql';
+END;
+$$ LANGUAGE plpgsql;
 select inline_0();
 drop function inline_0();
 
