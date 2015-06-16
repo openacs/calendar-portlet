@@ -45,7 +45,7 @@
        </p>
       </td>
 
-      <td valign=top>
+      <td valign="top">
 
 
  <switch @view@>
