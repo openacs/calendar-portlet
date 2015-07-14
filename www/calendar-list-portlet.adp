@@ -20,15 +20,15 @@
 
 <if @config.shaded_p@ ne "t">
   <include src="/packages/calendar/www/view-list-display" 
-  start_date=@start_date@ 
-  end_date=@end_date@ 
-  date=@current_date@ 
-  period_days=@period_days@
-  page_num=@page_num@
-  calendar_id_list=@list_of_calendar_ids@ 
-  calendar_url="@calendar_url@"
-  return_url="@return_url@"
-  sort_by=@sort_by@> 
+  start_date="@start_date;literal@" 
+  end_date="@end_date;literal@" 
+  date="@current_date;literal@" 
+  period_days="@period_days;literal@"
+  page_num="@page_num;literal@"
+  calendar_id_list="@list_of_calendar_ids;literal@" 
+  calendar_url="@calendar_url;literal@"
+  return_url="@return_url;literal@"
+  sort_by="@sort_by;literal@"> 
 </if>
 <else>
   <small>

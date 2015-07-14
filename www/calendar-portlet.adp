@@ -23,45 +23,45 @@
  <switch @view@>
    <case value="day">
      <include src="/packages/calendar/www/view-one-day-display" 
-     return_url="@return_url;noquote@"
-     date="@date@" 
+     return_url="@return_url;literal@"
+     date="@date;literal@" 
      start_display_hour=7 
      end_display_hour=22
-     page_num=@page_num@
-     calendar_url="@calendar_url@"
-     calendar_id_list="@list_of_calendar_ids@">
+     page_num="@page_num;literal@"
+     calendar_url="@calendar_url;literal@"
+     calendar_id_list="@list_of_calendar_ids;literal@">
    </case>
 
     <case value="list">
       <include src="/packages/calendar/www/view-list-display" 
-      return_url="@return_url;noquote@"
-      start_date=@start_date@ 
-      end_date=@end_date@ 
-      date=@current_date@ 
-      period_days=@period_days@
-      item_template="@item_template;noquote@"
-      calendar_id_list=@list_of_calendar_ids@ 
-      page_num=@page_num@
-      calendar_url="@calendar_url@"
-      sort_by=@sort_by@> 
+      return_url="@return_url;literal@"
+      start_date="@start_date;literal@" 
+      end_date="@end_date;literal@" 
+      date="@current_date;literal@" 
+      period_days="@period_days;literal@"
+      item_template="@item_template;literal@"
+      calendar_id_list="@list_of_calendar_ids;literal@" 
+      page_num="@page_num;literal@"
+      calendar_url="@calendar_url;literal@"
+      sort_by="@sort_by;literal@"> 
     </case>
    
     <case value="week">
       <include src="/packages/calendar/www/view-week-display" 
-      return_url="@return_url;noquote@"
-      date="@current_date@"
-      calendar_id_list=@list_of_calendar_ids@ 
-      calendar_url="@calendar_url@"
-      page_num=@page_num@
+      return_url="@return_url;literal@"
+      date="@current_date;literal@"
+      calendar_id_list="@list_of_calendar_ids;literal@" 
+      calendar_url="@calendar_url;literal@"
+      page_num="@page_num;literal@"
     </case>
 
     <case value="month">
       <include src="/packages/calendar/www/view-month-display"
-      return_url="@return_url;noquote@"
-      date=@current_date@
-      calendar_id_list=@list_of_calendar_ids@ 
-      page_num=@page_num@
-      calendar_url="@calendar_url@"
+      return_url="@return_url;literal@"
+      date="@current_date;literal@"
+      calendar_id_list="@list_of_calendar_ids;literal@" 
+      page_num="@page_num;literal@"
+      calendar_url="@calendar_url;literal@"
     </case>
   </switch>
 </if>

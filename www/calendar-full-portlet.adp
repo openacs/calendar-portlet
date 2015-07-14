@@ -20,20 +20,20 @@
 <if @config.shaded_p@ false>
 
   <include src="/packages/calendar/www/navbar"
-    date="@date@"
-    period_days="@period_days@"
-    base_url="@ad_conn_url@"
-    page_num="@page_num@"
-    view="@view@">
+    date="@date;literal@"
+    period_days="@period_days;literal@"
+    base_url="@ad_conn_url;literal@"
+    page_num="@page_num;literal@"
+    view="@view;literal@">
 
   <table id="valign-hack" border="0" width="100%">
     <tr>
       <td valign="top" style="width: 200px">
 
 	<include src="/packages/calendar/www/mini-calendar" 
-          view="@view@" 
-          date="@date@" 
-          page_num="@page_num@">
+          view="@view;literal@" 
+          date="@date;literal@" 
+          page_num="@page_num;literal@">
  
        <p>
 		<if @create_p@> 
@@ -51,46 +51,46 @@
  <switch @view@>
    <case value="day">
      <include src="/packages/calendar/www/view-one-day-display" 
-     date="@date@" 
+     date="@date;literal@" 
      start_display_hour=7 
      end_display_hour=22
-     page_num=@page_num@
-     calendar_id_list=@list_of_calendar_ids@ 
-     calendar_url="@calendar_url@"
-     return_url="@return_url;noquote@">
+     page_num="@page_num;literal@"
+     calendar_id_list="@list_of_calendar_ids;literal@" 
+     calendar_url="@calendar_url;literal@"
+     return_url="@return_url;literal@">
    </case>
 
   <case value="list">
      <include src="/packages/calendar/www/view-list-display" 
-     start_date=@start_date@ 
-     end_date=@end_date@ 
-     date=@current_date@ 
-     period_days=@period_days@
-     calendar_id_list=@list_of_calendar_ids@ 
-     page_num=@page_num@
-     calendar_url="@calendar_url@"
-     return_url="@return_url;noquote@">
+     start_date="@start_date;literal@" 
+     end_date="@end_date;literal@" 
+     date="@current_date;literal@" 
+     period_days="@period_days;literal@"
+     calendar_id_list="@list_of_calendar_ids;literal@" 
+     page_num="@page_num;literal@"
+     calendar_url="@calendar_url;literal@"
+     return_url="@return_url;literal@">
   </case>
   
   <case value="week">
      <include src="/packages/calendar/www/view-week-display" 
-     date="@current_date@"
-     calendar_id_list=@list_of_calendar_ids@ 
-     page_num=@page_num@
-     return_url="@return_url;noquote@"
-     calendar_url="@calendar_url@"
-     export=@export@>
+     date="@current_date;literal@"
+     calendar_id_list="@list_of_calendar_ids;literal@" 
+     page_num="@page_num;literal@"
+     return_url="@return_url;literal@"
+     calendar_url="@calendar_url;literal@"
+     export="@export;literal@">
  </case>
 
   <case value="month">
      <include src="/packages/calendar/www/view-month-display"
-     date=@current_date@
-     calendar_id_list=@list_of_calendar_ids@ 
-     page_num=@page_num@
-     show_calendar_name_p="@show_calendar_name_p;noquote@"
-     return_url="@return_url;noquote@"
-     calendar_url="@calendar_url@"
-     export=@export@>
+     date="@current_date;literal@"
+     calendar_id_list="@list_of_calendar_ids;literal@" 
+     page_num="@page_num;literal@"
+     show_calendar_name_p="@show_calendar_name_p;literal@"
+     return_url="@return_url;literal@"
+     calendar_url="@calendar_url;literal@"
+     export="@export;literal@">
   </case>
  </switch>
       </td>
