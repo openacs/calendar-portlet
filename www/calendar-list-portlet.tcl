@@ -25,7 +25,7 @@ ad_page_contract {
     {page_num:naturalnum ""}
     {date ""}
     {julian_date ""}
-    {period_days:optional}
+    {period_days:integer,optional ""}
     {sort_by ""}
 } -properties {
     
@@ -55,7 +55,7 @@ set calendar_id [lindex $list_of_calendar_ids 0]
 # Get the package_id depending on which calender_id was set
 db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
 
-if { ![info exists period_days] } {
+if { $period_days eq "" } {
     set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
 }
 
