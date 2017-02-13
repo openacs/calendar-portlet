@@ -24,7 +24,7 @@ ad_page_contract {
     {view ""}
     {page_num:naturalnum ""}
     {date ""}
-    {period_days:optional}
+    {period_days:naturalnum,optional}
     {julian_date ""}
 } -properties {
     
