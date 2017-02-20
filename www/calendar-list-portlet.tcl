@@ -13,8 +13,6 @@
 #  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 #  details.
 #
-
-# www/calendar-portlet.tcl
 ad_page_contract {
     The display logic for the calendar portlet
 
@@ -52,8 +50,16 @@ set list_of_calendar_ids $config(calendar_id)
 # dotlrn. Otherwise the list will actually contain only one calendar_id
 # (the first one, though)
 set calendar_id [lindex $list_of_calendar_ids 0]
-# Get the package_id depending on which calender_id was set
-db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
+
+#
+# Get the package_id of the calender_id
+#
+db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id = :calendar_id}
+if {![info exists package_id]} {
+    ad_log error "Invalid calendar_id in portlet configuration (calendar_id '$calendar_id')"
+    ad_return_complaint 1 "Invalid calendar_id in portlet configuration (calendar_id '$calendar_id')"
+    ad_script_abort
+}
 
 if { $period_days eq "" } {
     set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
