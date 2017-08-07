@@ -346,3 +346,9 @@ ad_proc calendar_portlet::twt::display_date {date} {
     }
     return $response
 }
+
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:

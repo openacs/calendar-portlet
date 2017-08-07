@@ -24,7 +24,7 @@ ad_page_contract {
     {view ""}
     {page_num:naturalnum ""}
     {date ""}
-    {period_days:optional}
+    {period_days:naturalnum,optional}
     {julian_date ""}
 } -properties {
     
@@ -32,7 +32,7 @@ ad_page_contract {
     valid_date -requires { date } {
         if {$date ne "" } {
             if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
-                ad_complain "Your input ($date) was not valid. It has to be in the form YYYYMMDD."
+                ad_complain "Your input ($date) was not valid. It has to be in the form YYYY-MM-DD."
             }
         }
     }
@@ -140,3 +140,9 @@ if { [lsearch [list csv vcalendar] $export] != -1 } {
 } else {
     ad_return_template 
 }
+
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:

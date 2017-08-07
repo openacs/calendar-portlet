@@ -48,3 +48,9 @@ if {[llength $list_of_calendar_ids] > 1} {
 set url "calendar/"
 
 ad_return_template
+
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:

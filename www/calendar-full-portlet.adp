@@ -17,7 +17,7 @@
     #
 
 %>
-<if @config.shaded_p@ false>
+<if @config.shaded_p;literal@ false>
 
   <include src="/packages/calendar/www/navbar"
     date="@date;literal@"
@@ -36,10 +36,10 @@
           page_num="@page_num;literal@">
  
        <p>
-		<if @create_p@> 
+		<if @create_p;literal@ true> 
 			<a href="@add_item_url@" title="#calendar-portlet.Add_an_item#" class="button">#calendar-portlet.Add_an_item#</a>
 		</if>
-		<if @admin_p@>
+		<if @admin_p;literal@ true>
 			<a href="calendar/calendar-item-types?calendar_id=@force_calendar_id@" title="#calendar-portlet.Manage_Item_Types#" class="button">#calendar-portlet.Manage_Item_Types#</a>
 		</if>
        </p>

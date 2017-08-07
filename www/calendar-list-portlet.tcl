@@ -13,8 +13,6 @@
 #  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 #  details.
 #
-
-# www/calendar-portlet.tcl
 ad_page_contract {
     The display logic for the calendar portlet
 
@@ -25,7 +23,7 @@ ad_page_contract {
     {page_num:naturalnum ""}
     {date ""}
     {julian_date ""}
-    {period_days:optional}
+    {period_days:naturalnum,optional ""}
     {sort_by ""}
 } -properties {
     
@@ -33,7 +31,7 @@ ad_page_contract {
     valid_date -requires { date } {
         if {$date ne "" } {
             if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
-                ad_complain "Your input was not valid. It has to be in the form YYYYMMDD."
+                ad_complain "Your input was not valid. It has to be in the form YYYY-MM-DD."
             }
         }
     }
@@ -52,10 +50,18 @@ set list_of_calendar_ids $config(calendar_id)
 # dotlrn. Otherwise the list will actually contain only one calendar_id
 # (the first one, though)
 set calendar_id [lindex $list_of_calendar_ids 0]
-# Get the package_id depending on which calender_id was set
-db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
 
-if { ![info exists period_days] } {
+#
+# Get the package_id of the calender_id
+#
+db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id = :calendar_id}
+if {![info exists package_id]} {
+    ad_log error "Invalid calendar_id in portlet configuration (calendar_id '$calendar_id')"
+    ad_return_complaint 1 "Invalid calendar_id in portlet configuration (calendar_id '$calendar_id')"
+    ad_script_abort
+}
+
+if { $period_days eq "" } {
     set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
 }
 
@@ -96,3 +102,9 @@ template::head::add_css -href "/resources/calendar/calendar.css"
 template::head::add_css -alternate -href "/resources/calendar/calendar-hc.css" -title "highContrast"
 
 ad_return_template
+
+# Local variables:
+#    mode: tcl
+#    tcl-indent-level: 4
+#    indent-tabs-mode: nil
+# End:
