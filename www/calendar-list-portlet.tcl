@@ -83,7 +83,8 @@ if {$date eq ""} {
     if {$julian_date eq ""} {
         set date [dt_sysdate]
     } else {
-        set date [db_string select_from_julian "select to_date(:julian_date ,'J') from dual"]
+        set date [clock scan [expr {int($julian_date)}] -format "%J"]
+        set date [clock format $date -format %Y-%m-%d]        
     }
 }
 
@@ -91,17 +92,12 @@ set current_date $date
 set date_format "YYYY-MM-DD HH24:MI"
 set return_url "[ns_conn url]?[ns_conn query]"
 
-# List view only
-set sort_by [ns_queryget sort_by]
-
 set start_date [ns_fmttime [expr [ns_time]] "%Y-%m-%d 00:00"]
 set end_date [ns_fmttime [expr {[ns_time] + 60*60*24*$period_days}] "%Y-%m-%d 00:00"]
 
 # Stylesheet
 template::head::add_css -href "/resources/calendar/calendar.css"
 template::head::add_css -alternate -href "/resources/calendar/calendar-hc.css" -title "highContrast"
-
-ad_return_template
 
 # Local variables:
 #    mode: tcl
