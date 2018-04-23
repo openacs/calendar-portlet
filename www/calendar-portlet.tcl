@@ -22,12 +22,12 @@ ad_page_contract {
     @cvs_id $Id$
 } {
     {view ""}
-    {page_num:naturalnum ""}
+    {page_num:naturalnum 0}
     {date ""}
     {period_days:naturalnum,optional}
     {julian_date ""}
 } -properties {
-    
+
 }  -validate {
     valid_date -requires { date } {
         if {$date ne "" } {
