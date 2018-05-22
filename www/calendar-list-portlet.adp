@@ -18,7 +18,7 @@
 
 %>
 
-<if @config.shaded_p;literal@ ne "t">
+<if @config.shaded_p;literal@ false>
   <include src="/packages/calendar/www/view-list-display"
   start_date="@start_date;literal@"
   end_date="@end_date;literal@"

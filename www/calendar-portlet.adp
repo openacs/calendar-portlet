@@ -18,7 +18,7 @@
 
 %>
 
-<if @config.shaded_p;literal@ ne "t">
+<if @config.shaded_p;literal@ false>
 
  <switch @view@>
    <case value="day">
