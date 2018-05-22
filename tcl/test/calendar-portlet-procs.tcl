@@ -48,7 +48,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_calendar_por
         # Get Start and End date Week
         set date [template::util::date::today]
         set year [template::util::date::get_property year $date]
-        set number_week [expr [clock format [clock scan now] -format %W]-1]
+        set number_week [expr {[clock format [clock scan now] -format %W]-1}]
 
         set start_end_date_week [calendar_portlet::twt::get_start_end_week_date $number_week $year]
 
