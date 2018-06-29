@@ -19,7 +19,7 @@ ad_page_contract {
     The display logic for the calendar portlet
 
     @author Arjun Sanyal (arjun@openforce.net)
-    @cvs_id $Id$
+    @cvs-id $Id$
 } {
     {view ""}
     {page_num:naturalnum 0}
