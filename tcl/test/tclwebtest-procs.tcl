@@ -8,7 +8,7 @@ ad_library {
 
 namespace eval calendar_portlet::twt {}
 
-ad_proc calendar_portlet::twt::get_start_end_week_date {number_week year} {
+ad_proc -private calendar_portlet::twt::get_start_end_week_date {number_week year} {
     
     set date [clock scan "$number_week weeks" -base [clock scan "01/01/$year"]]
     set st [clock scan "sunday" -base [expr {$date - 436800}]]
@@ -29,7 +29,7 @@ ad_proc calendar_portlet::twt::get_start_end_week_date {number_week year} {
     return [list $start_week $end_week]
 }
 
-ad_proc calendar_portlet::twt::go_to_dotlrn_calendar_page_url {} {
+ad_proc -private calendar_portlet::twt::go_to_dotlrn_calendar_page_url {} {
 
     # The admin dotlrn page url
     set dotlrn_admin_page_url "[site_node::get_package_url -package_key dotlrn]admin"
@@ -46,11 +46,11 @@ ad_proc calendar_portlet::twt::go_to_dotlrn_calendar_page_url {} {
     tclwebtest::link follow {My Calendar}
 }
 
-ad_proc calendar_portlet::twt::follow_calendar_link {} {
+ad_proc -private calendar_portlet::twt::follow_calendar_link {} {
     tclwebtest::link follow {My Calendar}
 }
 
-ad_proc calendar_portlet::twt::display_day {date} {
+ad_proc -private calendar_portlet::twt::display_day {date} {
 
     set response 0
     
@@ -74,7 +74,7 @@ ad_proc calendar_portlet::twt::display_day {date} {
 }
 
 
-ad_proc calendar_portlet::twt::display_week {start_date_week end_date_week} {
+ad_proc -private calendar_portlet::twt::display_week {start_date_week end_date_week} {
 
     set response 0
     
@@ -97,7 +97,7 @@ ad_proc calendar_portlet::twt::display_week {start_date_week end_date_week} {
     return $response
 }
 
-ad_proc calendar_portlet::twt::display_month {date} {
+ad_proc -private calendar_portlet::twt::display_month {date} {
 
     set response 0
 
@@ -125,7 +125,7 @@ ad_proc calendar_portlet::twt::display_month {date} {
 }
 
 
-ad_proc calendar_portlet::twt::item_add {item_title item_description item_date} {
+ad_proc -private calendar_portlet::twt::item_add {item_title item_description item_date} {
 
     set response 0
     
@@ -167,7 +167,7 @@ ad_proc calendar_portlet::twt::item_add {item_title item_description item_date} 
     return $response
 }
 
-ad_proc calendar_portlet::twt::item_edit {item_title item_new_title item_new_description item_date} {
+ad_proc -private calendar_portlet::twt::item_edit {item_title item_new_title item_new_description item_date} {
 
     set response 0
 
@@ -205,7 +205,7 @@ ad_proc calendar_portlet::twt::item_edit {item_title item_new_title item_new_des
     return $response
 }
 
-ad_proc calendar_portlet::twt::item_delete {item_title} {
+ad_proc -private calendar_portlet::twt::item_delete {item_title} {
 
     set response 0
 
@@ -237,7 +237,7 @@ ad_proc calendar_portlet::twt::item_delete {item_title} {
     return $response
 }
 
-ad_proc calendar_portlet::twt::item_display_list {item_title_1 item_title_2 item_title_3} {
+ad_proc -private calendar_portlet::twt::item_display_list {item_title_1 item_title_2 item_title_3} {
 
     set response 0
 
@@ -261,7 +261,7 @@ ad_proc calendar_portlet::twt::item_display_list {item_title_1 item_title_2 item
     return $response
 }
 
-ad_proc calendar_portlet::twt::request_notification {} {
+ad_proc -private calendar_portlet::twt::request_notification {} {
 
     set response 0
     
@@ -291,7 +291,7 @@ ad_proc calendar_portlet::twt::request_notification {} {
     return $response
 }
 
-ad_proc calendar_portlet::twt::unsubscribe {} {
+ad_proc -private calendar_portlet::twt::unsubscribe {} {
 
     set response 0
 
@@ -316,7 +316,7 @@ ad_proc calendar_portlet::twt::unsubscribe {} {
     return $response
 }
 
-ad_proc calendar_portlet::twt::display_date {date} {
+ad_proc -private calendar_portlet::twt::display_date {date} {
 
     set response 0
 
