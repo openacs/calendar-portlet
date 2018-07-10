@@ -40,10 +40,14 @@ namespace eval calendar_list_portlet {
 
     ad_proc -public get_pretty_name {
     } {
+        Get portlet pretty name.
+    } {
         return "\#calendar-portlet.Schedule\#"
     }
 
     ad_proc -public link {
+    } {
+        Get portlet link (empty).
     } {
 	return ""
     }
@@ -54,7 +58,7 @@ namespace eval calendar_list_portlet {
 	{-calendar_id:required}
         {-scoped_p ""}
     } {
-	Adds a "list" calendar PE to the given portal
+	Adds a "list" calendar PE to the given portal.
 
 	@param portal_id The page to add self to
 	@param calendar_id The new calendar_id to add
@@ -80,7 +84,7 @@ namespace eval calendar_list_portlet {
         calendar_id
     } {
         Removes a "list" calendar PE from the given page or
-        a calendar_id from its params
+        a calendar_id from its params.
     } {
         portal::remove_element_parameters \
             -portal_id $portal_id \
@@ -92,6 +96,7 @@ namespace eval calendar_list_portlet {
     ad_proc -public show {
 	 cf
     } {
+        Show list calendar portlet.
     } {
         portal::show_proc_helper \
             -package_key [my_package_key] \
