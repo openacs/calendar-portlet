@@ -52,7 +52,7 @@ set list_of_calendar_ids $config(calendar_id)
 set calendar_id [lindex $list_of_calendar_ids 0]
 
 #
-# Get the package_id of the calender_id
+# Get the package_id of the calendar_id
 #
 db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id = :calendar_id}
 if {![info exists package_id]} {
