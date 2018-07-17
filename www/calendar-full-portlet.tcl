@@ -27,7 +27,7 @@ ad_page_contract {
     {period_days:naturalnum,optional}
     {julian_date ""}
 } -properties {
-    
+
 } -validate {
     valid_date -requires { date } {
         if {$date ne "" } {
@@ -138,7 +138,7 @@ if { [lsearch [list csv vcalendar] $export] != -1 } {
     }
     ad_script_abort
 } else {
-    ad_return_template 
+    ad_return_template
 }
 
 # Local variables:
