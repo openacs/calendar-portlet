@@ -72,7 +72,7 @@ if {[apm_package_installed_p dotlrn]} {
 set calendar_id [lindex $list_of_calendar_ids 0]
 db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
 if { ![info exists period_days] } {
-    if { ([info exists community_id] && $community_id ne "") } {
+    if { [info exists community_id] && $community_id ne "" } {
         set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
     } else {
         foreach calendar $list_of_calendar_ids {
