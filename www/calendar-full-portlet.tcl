@@ -27,7 +27,7 @@ ad_page_contract {
     {period_days:naturalnum,optional}
     {julian_date ""}
 } -properties {
-    
+
 } -validate {
     valid_date -requires { date } {
         if {$date ne "" } {
@@ -64,7 +64,7 @@ template::head::add_css -alternate -href "/resources/calendar/calendar-hc.css" -
 if {[apm_package_installed_p dotlrn]} {
     set site_node [site_node::get_node_id_from_object_id -object_id [ad_conn package_id]]
     set dotlrn_package_id [site_node::closest_ancestor_package -node_id $site_node -package_key dotlrn -include_self]
-    set community_id [db_string get_community_id {select community_id from dotlrn_communities_all where package_id=:dotlrn_package_id} -default [db_null]]
+    set community_id [db_string get_community_id {select community_id from dotlrn_communities_all where package_id=:dotlrn_package_id} -default ""]
 } else {
     set community_id ""
 }
@@ -72,7 +72,7 @@ if {[apm_package_installed_p dotlrn]} {
 set calendar_id [lindex $list_of_calendar_ids 0]
 db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
 if { ![info exists period_days] } {
-    if { ([info exists community_id] && $community_id ne "") } {
+    if { [info exists community_id] && $community_id ne "" } {
         set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
     } else {
         foreach calendar $list_of_calendar_ids {
@@ -138,7 +138,7 @@ if { [lsearch [list csv vcalendar] $export] != -1 } {
     }
     ad_script_abort
 } else {
-    ad_return_template 
+    ad_return_template
 }
 
 # Local variables:
