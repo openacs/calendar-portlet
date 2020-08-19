@@ -327,23 +327,6 @@ aa_register_case -procs {
     aa_equals "Calendar portlet link"       "[calendar_portlet::link]" ""
 }
 
-aa_register_case -procs {
-        calendar_full_portlet::link
-        calendar_admin_portlet::link
-        calendar_list_portlet::link
-        calendar_portlet::link
-    } -cats {
-        api
-        production_safe
-    } calendar_portlet_links {
-        Test diverse link procs.
-} {
-    aa_equals "Calendar full portlet link"  "[calendar_full_portlet::link]" ""
-    aa_equals "Calendar admin portlet link" "[calendar_admin_portlet::link]" ""
-    aa_equals "Calendar list portlet link"  "[calendar_list_portlet::link]" ""
-    aa_equals "Calendar portlet link"       "[calendar_portlet::link]" ""
-}
-
 # Local variables:
 #    mode: tcl
 #    tcl-indent-level: 4
