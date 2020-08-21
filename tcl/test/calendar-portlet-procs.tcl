@@ -315,16 +315,20 @@ aa_register_case -procs {
         calendar_admin_portlet::link
         calendar_list_portlet::link
         calendar_portlet::link
+        calendar_admin_portlet::get_pretty_name
+        calendar_list_portlet::get_pretty_name
     } -cats {
         api
         production_safe
-    } calendar_portlet_links {
-        Test diverse link procs.
+    } calendar_portlet_links_names {
+        Test diverse link and name procs.
 } {
-    aa_equals "Calendar full portlet link"  "[calendar_full_portlet::link]" ""
-    aa_equals "Calendar admin portlet link" "[calendar_admin_portlet::link]" ""
-    aa_equals "Calendar list portlet link"  "[calendar_list_portlet::link]" ""
-    aa_equals "Calendar portlet link"       "[calendar_portlet::link]" ""
+    aa_equals "Calendar full portlet link"          "[calendar_full_portlet::link]" ""
+    aa_equals "Calendar admin portlet link"         "[calendar_admin_portlet::link]" ""
+    aa_equals "Calendar list portlet link"          "[calendar_list_portlet::link]" ""
+    aa_equals "Calendar portlet link"               "[calendar_portlet::link]" ""
+    aa_equals "Calendar admin portlet pretty name"  "[calendar_admin_portlet::get_pretty_name]" "#calendar-portlet.admin_pretty_name#"
+    aa_equals "Calendar list portlet pretty name"   "[calendar_list_portlet::get_pretty_name]" "\#calendar-portlet.Schedule\#"
 }
 
 # Local variables:
