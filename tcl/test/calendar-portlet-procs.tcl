@@ -331,6 +331,133 @@ aa_register_case -procs {
     aa_equals "Calendar list portlet pretty name"   "[calendar_list_portlet::get_pretty_name]" "\#calendar-portlet.Schedule\#"
 }
 
+aa_register_case -procs {
+        calendar_portlet::add_self_to_page
+        calendar_portlet::remove_self_from_page
+        calendar_list_portlet::add_self_to_page
+        calendar_list_portlet::remove_self_from_page
+        calendar_full_portlet::add_self_to_page
+        calendar_full_portlet::remove_self_from_page
+        calendar_admin_portlet::add_self_to_page
+        calendar_admin_portlet::remove_self_from_page
+    } -cats {
+        api
+    } calendar_portlet_add_remove_from_page {
+        Test add/remove portlet procs.
+} {
+    #
+    # Helper proc to check portal elements
+    #
+    proc portlet_exists_p {portal_id portlet_name} {
+        return [db_0or1row portlet_in_portal {
+            select 1 from dual where exists (
+              select 1
+                from portal_element_map pem,
+                     portal_pages pp
+               where pp.portal_id = :portal_id
+                 and pp.page_id = pem.page_id
+                 and pem.name = :portlet_name
+            )
+        }]
+    }
+    #
+    # Start the tests
+    #
+    aa_run_with_teardown -rollback -test_code {
+        #
+        # Create a community.
+        #
+        # As this is running in a transaction, it should be cleaned up
+        # automatically.
+        #
+        set community_id [dotlrn_community::new -community_type dotlrn_community -pretty_name foo]
+        set calendar_id [calendar::new -owner_id [ad_conn user_id] -calendar_name foo]
+        if {$community_id ne ""} {
+            aa_log "Community created: $community_id"
+            set portal_id [dotlrn_community::get_admin_portal_id -community_id $community_id]
+            set package_id [dotlrn::instantiate_and_mount $community_id [calendar_portlet::my_package_key]]
+            #
+            # calendar_portlet
+            #
+            set portlet_name [calendar_portlet::get_my_name]
+            #
+            # Add portlet.
+            #
+            calendar_portlet::add_self_to_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_true "Portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Remove portlet.
+            #
+            calendar_portlet::remove_self_from_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_false "Portlet is in community portal after removal" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Add portlet.
+            #
+            calendar_portlet::add_self_to_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_true "Portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # calendar_list_portlet
+            #
+            set portlet_name [calendar_list_portlet::get_my_name]
+            #
+            # Add portlet.
+            #
+            calendar_list_portlet::add_self_to_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_true "List portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Remove portlet.
+            #
+            calendar_list_portlet::remove_self_from_page $portal_id $calendar_id
+            aa_false "List portlet is in community portal after removal" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Add portlet.
+            #
+            calendar_list_portlet::add_self_to_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_true "List portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # calendar_full_portlet
+            #
+            set portlet_name [calendar_full_portlet::get_my_name]
+            #
+            # Add portlet.
+            #
+            calendar_full_portlet::add_self_to_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_true "Full portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Remove portlet.
+            #
+            calendar_full_portlet::remove_self_from_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_false "Full portlet is in community portal after removal" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Add portlet.
+            #
+            calendar_full_portlet::add_self_to_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_true "Full portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # admin_portlet
+            #
+            set portlet_name [calendar_admin_portlet::get_my_name]
+            #
+            # Add portlet.
+            #
+            calendar_admin_portlet::add_self_to_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_true "Admin portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Remove portlet.
+            #
+            calendar_admin_portlet::remove_self_from_page $portal_id
+            aa_false "Admin portlet is in community portal after removal" "[portlet_exists_p $portal_id $portlet_name]"
+            #
+            # Add portlet.
+            #
+            calendar_admin_portlet::add_self_to_page -portal_id $portal_id -calendar_id $calendar_id
+            aa_true "Admin portlet is in community portal after addition" "[portlet_exists_p $portal_id $portlet_name]"
+        } else {
+            aa_error "Community creation failed"
+        }
+    }
+}
+
 # Local variables:
 #    mode: tcl
 #    tcl-indent-level: 4
