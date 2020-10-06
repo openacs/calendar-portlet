@@ -315,20 +315,30 @@ aa_register_case -procs {
         calendar_admin_portlet::link
         calendar_list_portlet::link
         calendar_portlet::link
+        calendar_full_portlet::get_pretty_name
         calendar_admin_portlet::get_pretty_name
         calendar_list_portlet::get_pretty_name
+        calendar_portlet::get_pretty_name
     } -cats {
         api
         production_safe
     } calendar_portlet_links_names {
         Test diverse link and name procs.
 } {
+    set pretty_name     [parameter::get_from_package_key \
+                            -package_key [calendar_portlet::my_package_key] \
+                            -parameter pretty_name]
+    set fp_pretty_name  [parameter::get_from_package_key \
+                            -package_key [calendar_full_portlet::my_package_key] \
+                            -parameter full_portlet_pretty_name]
     aa_equals "Calendar full portlet link"          "[calendar_full_portlet::link]" ""
     aa_equals "Calendar admin portlet link"         "[calendar_admin_portlet::link]" ""
     aa_equals "Calendar list portlet link"          "[calendar_list_portlet::link]" ""
     aa_equals "Calendar portlet link"               "[calendar_portlet::link]" ""
+    aa_equals "Calendar full portlet pretty name"   "[calendar_full_portlet::get_pretty_name]" "$fp_pretty_name"
     aa_equals "Calendar admin portlet pretty name"  "[calendar_admin_portlet::get_pretty_name]" "#calendar-portlet.admin_pretty_name#"
     aa_equals "Calendar list portlet pretty name"   "[calendar_list_portlet::get_pretty_name]" "\#calendar-portlet.Schedule\#"
+    aa_equals "Calendar portlet pretty name"        "[calendar_portlet::get_pretty_name]" "$pretty_name"
 }
 
 aa_register_case -procs {
