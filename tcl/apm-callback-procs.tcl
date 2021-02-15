@@ -1,5 +1,5 @@
 ad_library {
-    
+
     APM callback procs for calendar-portlet
 
     @author Don Baccus (dhogaza@pacifier.com)
