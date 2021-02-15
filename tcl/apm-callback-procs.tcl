@@ -5,9 +5,9 @@ ad_library {
     @author Don Baccus (dhogaza@pacifier.com)
 }
 
-namespace eval calendar-portlet {}
+namespace eval calendar_portlet {}
 
-ad_proc -private calendar-portlet::after_upgrade {
+ad_proc -private calendar_portlet::after_upgrade {
     {-from_version_name:required}
     {-to_version_name:required}
 } {

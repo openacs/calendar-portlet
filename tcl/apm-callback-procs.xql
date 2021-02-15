@@ -2,7 +2,7 @@
 
 <queryset>
 
-  <fullquery name="calendar-portlet::after_upgrade.update_portal_datasources">
+  <fullquery name="calendar_portlet::after_upgrade.update_portal_datasources">
     <querytext>
       update portal_datasources
       set css_dir = '/resources/calendar'
