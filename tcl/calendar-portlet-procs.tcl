@@ -16,7 +16,7 @@
 
 ad_library {
 
-    Procedures to support the (normal, narrow) calendar portlet a.k.a.
+    Procedures to support the (normal, narrow) calendar portlet aka
     "Day Summary". Not to be confused with the "full" calendar portlet.
 
     @author arjun@openforce.net

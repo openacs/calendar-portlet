@@ -59,7 +59,7 @@ if {$scoped_p == "t"} {
 template::head::add_css -href "/resources/calendar/calendar.css"
 template::head::add_css -alternate -href "/resources/calendar/calendar-hc.css" -title "highContrast"
 
-# set the period_days for calendar's list view, therefore we need
+# set the period_days for calendar's list view, therefore, we need
 # to check which instance of calendar is currently displayed
 if {[apm_package_installed_p dotlrn]} {
     set site_node [site_node::get_node_id_from_object_id -object_id [ad_conn package_id]]
