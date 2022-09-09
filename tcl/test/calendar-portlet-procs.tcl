@@ -15,7 +15,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_calendar_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
@@ -40,7 +40,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_calendar_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
@@ -73,7 +73,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_calendar_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
@@ -98,7 +98,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_calendar_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
@@ -127,7 +127,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_calendar_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
@@ -161,7 +161,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_calendar_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
@@ -195,7 +195,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_calendar_por
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
@@ -239,7 +239,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_request_noti
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
@@ -268,7 +268,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_unsubscribe 
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
@@ -298,7 +298,7 @@ aa_register_case -cats {web smoke} -libraries tclwebtest tclwebtest_display_date
 
         tclwebtest::cookies clear
         # Login user
-        array set user_info [twt::user::create -admin]
+        array set user_info [acs::test::user::create -admin]
         twt::user::login $user_info(email) $user_info(password)
 
         calendar_portlet::twt::go_to_dotlrn_calendar_page_url
