@@ -61,10 +61,8 @@ template::head::add_css -alternate -href "/resources/calendar/calendar-hc.css" -
 
 # set the period_days for calendar's list view, therefore, we need
 # to check which instance of calendar is currently displayed
-if {[apm_package_installed_p dotlrn]} {
-    set site_node [site_node::get_node_id_from_object_id -object_id [ad_conn package_id]]
-    set dotlrn_package_id [site_node::closest_ancestor_package -node_id $site_node -package_key dotlrn -include_self]
-    set community_id [db_string get_community_id {select community_id from dotlrn_communities_all where package_id=:dotlrn_package_id} -default ""]
+if { [namespace which ::dotlrn_community::get_community_id] ne "" } {
+    set community_id [dotlrn_community::get_community_id -package_id [ad_conn package_id]]
 } else {
     set community_id ""
 }
