@@ -54,8 +54,29 @@ set calendar_id [lindex $list_of_calendar_ids 0]
 #
 # Get the package_id of the calendar_id
 #
-db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id = :calendar_id}
-if {![info exists package_id]} {
+if {$calendar_id == 0} {
+
+    #
+    # A calendar_id 0 may happen when showcasing the portal layout in
+    # "Portal Templates". This will be a dummy calendar portlet, so we
+    # deactivate the links used to create new events.
+    #
+    set package_id 0
+    template::add_body_handler -event load -script {
+        for (const link of document.querySelectorAll('#cal-table-day a')) {
+           link.removeAttribute('href');
+        }
+    }
+
+} elseif {![db_0or1row select_calendar_package_id {
+    select package_id from calendars
+     where calendar_id = :calendar_id
+}]} {
+
+    #
+    # Could not find the supplied calendar_id, we complain in this
+    # case.
+    #
     ad_log error "Invalid calendar_id in portlet configuration (calendar_id '$calendar_id')"
     ad_return_complaint 1 "Invalid calendar_id in portlet configuration (calendar_id '$calendar_id')"
     ad_script_abort
