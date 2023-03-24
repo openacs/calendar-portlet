@@ -468,6 +468,72 @@ aa_register_case -procs {
     }
 }
 
+aa_register_case -procs {
+    calendar_admin_portlet::show
+    calendar_portlet::show
+} -cats {
+    api
+    smoke
+} calendar_render_portlet {
+    Test the rendering of the portlet
+} {
+
+    set calendar_id [db_string get_a_calendar {
+        select max(calendar_id) from calendars
+    }]
+
+    aa_section "Standard Portlet"
+
+    foreach default_view {day list week month} {
+        set cf [list \
+                    calendar_id $calendar_id \
+                    default_view $default_view \
+                    shaded_p false
+               ]
+
+        set portlet [acs_sc::invoke \
+                         -contract portal_datasource \
+                         -operation Show \
+                         -impl calendar_portlet \
+                         -call_args [list $cf]]
+
+        aa_log "Portlet returns: [ns_quotehtml $portlet]"
+
+        aa_false "View: $default_view - No error was returned" {
+            [string first "Error in include template" $portlet] >= 0
+        }
+
+        aa_true "View: $default_view - Portlet looks like HTML" \
+            [ad_looks_like_html_p $portlet]
+    }
+
+
+    aa_section "Admin Portlet"
+
+    foreach default_view {day list week month} {
+        set cf [list \
+                    calendar_id $calendar_id \
+                    default_view $default_view
+               ]
+
+        set portlet [acs_sc::invoke \
+                         -contract portal_datasource \
+                         -operation Show \
+                         -impl calendar_admin_portlet \
+                         -call_args [list $cf]]
+
+        aa_log "Portlet returns: [ns_quotehtml $portlet]"
+
+        aa_false "View: $default_view - No error was returned" {
+            [string first "Error in include template" $portlet] >= 0
+        }
+
+        aa_true "View: $default_view - Portlet looks like HTML" \
+            [ad_looks_like_html_p $portlet]
+    }
+
+}
+
 # Local variables:
 #    mode: tcl
 #    tcl-indent-level: 4
