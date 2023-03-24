@@ -39,7 +39,6 @@
       end_date="@end_date;literal@"
       date="@current_date;literal@"
       period_days="@period_days;literal@"
-      item_template="@item_template;literal@"
       calendar_id_list="@list_of_calendar_ids;literal@"
       page_num="@page_num;literal@"
       calendar_url="@calendar_url;literal@"
@@ -52,7 +51,7 @@
       date="@current_date;literal@"
       calendar_id_list="@list_of_calendar_ids;literal@"
       calendar_url="@calendar_url;literal@"
-      page_num="@page_num;literal@"
+      page_num="@page_num;literal@">
     </case>
 
     <case value="month">
@@ -61,7 +60,7 @@
       date="@current_date;literal@"
       calendar_id_list="@list_of_calendar_ids;literal@"
       page_num="@page_num;literal@"
-      calendar_url="@calendar_url;literal@"
+      calendar_url="@calendar_url;literal@">
     </case>
   </switch>
 </if>
