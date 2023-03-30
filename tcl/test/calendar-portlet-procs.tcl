@@ -470,9 +470,13 @@ aa_register_case -procs {
 
 aa_register_case -procs {
     calendar_admin_portlet::show
+    calendar_admin_portlet::get_my_name
     calendar_full_portlet::show
+    calendar_full_portlet::get_my_name
     calendar_list_portlet::show
+    calendar_list_portlet::get_my_name
     calendar_portlet::show
+    calendar_portlet::get_my_name
     calendar::new
 } -cats {
     api
@@ -507,7 +511,7 @@ aa_register_case -procs {
             set portlet [acs_sc::invoke \
                              -contract portal_datasource \
                              -operation Show \
-                             -impl calendar_portlet \
+                             -impl [calendar_portlet::get_my_name] \
                              -call_args [list $cf]]
 
             aa_log "Portlet returns: [ns_quotehtml $portlet]"
@@ -532,7 +536,7 @@ aa_register_case -procs {
             set portlet [acs_sc::invoke \
                              -contract portal_datasource \
                              -operation Show \
-                             -impl calendar_admin_portlet \
+                             -impl [calendar_admin_portlet::get_my_name] \
                              -call_args [list $cf]]
 
             aa_log "Portlet returns: [ns_quotehtml $portlet]"
@@ -558,7 +562,7 @@ aa_register_case -procs {
             set portlet [acs_sc::invoke \
                              -contract portal_datasource \
                              -operation Show \
-                             -impl calendar_list_portlet \
+                             -impl [calendar_list_portlet::get_my_name] \
                              -call_args [list $cf]]
 
             aa_log "Portlet returns: [ns_quotehtml $portlet]"
@@ -584,7 +588,7 @@ aa_register_case -procs {
             set portlet [acs_sc::invoke \
                              -contract portal_datasource \
                              -operation Show \
-                             -impl calendar_full_portlet \
+                             -impl [calendar_full_portlet::get_my_name] \
                              -call_args [list $cf]]
 
             aa_log "Portlet returns: [ns_quotehtml $portlet]"
