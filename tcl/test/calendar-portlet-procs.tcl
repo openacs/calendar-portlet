@@ -470,68 +470,138 @@ aa_register_case -procs {
 
 aa_register_case -procs {
     calendar_admin_portlet::show
+    calendar_full_portlet::show
+    calendar_list_portlet::show
     calendar_portlet::show
+    calendar::new
 } -cats {
     api
     smoke
 } calendar_render_portlet {
-    Test the rendering of the portlet
+    Test the rendering of the portlets
 } {
+    set orig_user_id [ad_conn user_id]
+    set user [acs::test::user::create]
+    set user_id [dict get $user user_id]
+    ad_conn -set user_id $user_id
 
-    set calendar_id [db_string get_a_calendar {
-        select max(calendar_id) from calendars
-    }]
+    aa_run_with_teardown -rollback -test_code {
+        set package_id [site_node::instantiate_and_mount \
+                             -package_key calendar \
+                             -node_name __test_calendar_portlet]
 
-    aa_section "Standard Portlet"
+        set calendar_id [calendar::new \
+                             -owner_id $user_id -private_p t \
+                             -calendar_name __test_portlet_calendar \
+                             -package_id $package_id]
 
-    foreach default_view {day list week month} {
-        set cf [list \
-                    calendar_id $calendar_id \
-                    default_view $default_view \
-                    shaded_p false
-               ]
+        aa_section "Standard Portlet"
 
-        set portlet [acs_sc::invoke \
-                         -contract portal_datasource \
-                         -operation Show \
-                         -impl calendar_portlet \
-                         -call_args [list $cf]]
+        foreach default_view {day list week month} {
+            set cf [list \
+                        calendar_id $calendar_id \
+                        default_view $default_view \
+                        shaded_p false
+                   ]
 
-        aa_log "Portlet returns: [ns_quotehtml $portlet]"
+            set portlet [acs_sc::invoke \
+                             -contract portal_datasource \
+                             -operation Show \
+                             -impl calendar_portlet \
+                             -call_args [list $cf]]
 
-        aa_false "View: $default_view - No error was returned" {
-            [string first "Error in include template" $portlet] >= 0
+            aa_log "Portlet returns: [ns_quotehtml $portlet]"
+
+            aa_false "View: $default_view - No error was returned" {
+                [string first "Error in include template" $portlet] >= 0
+            }
+
+            aa_true "View: $default_view - Portlet looks like HTML" \
+                [ad_looks_like_html_p $portlet]
         }
 
-        aa_true "View: $default_view - Portlet looks like HTML" \
-            [ad_looks_like_html_p $portlet]
-    }
 
+        aa_section "Admin Portlet"
 
-    aa_section "Admin Portlet"
+        foreach default_view {day list week month} {
+            set cf [list \
+                        calendar_id $calendar_id \
+                        default_view $default_view
+                   ]
 
-    foreach default_view {day list week month} {
-        set cf [list \
-                    calendar_id $calendar_id \
-                    default_view $default_view
-               ]
+            set portlet [acs_sc::invoke \
+                             -contract portal_datasource \
+                             -operation Show \
+                             -impl calendar_admin_portlet \
+                             -call_args [list $cf]]
 
-        set portlet [acs_sc::invoke \
-                         -contract portal_datasource \
-                         -operation Show \
-                         -impl calendar_admin_portlet \
-                         -call_args [list $cf]]
+            aa_log "Portlet returns: [ns_quotehtml $portlet]"
 
-        aa_log "Portlet returns: [ns_quotehtml $portlet]"
+            aa_false "View: $default_view - No error was returned" {
+                [string first "Error in include template" $portlet] >= 0
+            }
 
-        aa_false "View: $default_view - No error was returned" {
-            [string first "Error in include template" $portlet] >= 0
+            aa_true "View: $default_view - Portlet looks like HTML" \
+                [ad_looks_like_html_p $portlet]
         }
 
-        aa_true "View: $default_view - Portlet looks like HTML" \
-            [ad_looks_like_html_p $portlet]
-    }
+        aa_section "List Portlet"
 
+        foreach default_view {day list week month} {
+            set cf [list \
+                        calendar_id $calendar_id \
+                        default_view $default_view \
+                        scoped_p false \
+                        shaded_p false \
+                       ]
+
+            set portlet [acs_sc::invoke \
+                             -contract portal_datasource \
+                             -operation Show \
+                             -impl calendar_list_portlet \
+                             -call_args [list $cf]]
+
+            aa_log "Portlet returns: [ns_quotehtml $portlet]"
+
+            aa_false "View: $default_view - No error was returned" {
+                [string first "Error in include template" $portlet] >= 0
+            }
+
+            aa_true "View: $default_view - Portlet looks like HTML" \
+                [ad_looks_like_html_p $portlet]
+        }
+
+        aa_section "Full Portlet"
+
+        foreach default_view {day list week month} {
+            set cf [list \
+                        calendar_id $calendar_id \
+                        default_view $default_view \
+                        scoped_p false \
+                        shaded_p false \
+                       ]
+
+            set portlet [acs_sc::invoke \
+                             -contract portal_datasource \
+                             -operation Show \
+                             -impl calendar_full_portlet \
+                             -call_args [list $cf]]
+
+            aa_log "Portlet returns: [ns_quotehtml $portlet]"
+
+            aa_false "View: $default_view - No error was returned" {
+                [string first "Error in include template" $portlet] >= 0
+            }
+
+            aa_true "View: $default_view - Portlet looks like HTML" \
+                [ad_looks_like_html_p $portlet]
+        }
+    } -teardown_code {
+        ad_conn -set user_id $orig_user_id
+        if {[info exists user_id]} {
+            acs::test::user::delete -user_id $user_id
+        }
+    }
 }
 
 # Local variables:
