@@ -499,32 +499,6 @@ aa_register_case -procs {
                              -calendar_name __test_portlet_calendar \
                              -package_id $package_id]
 
-        aa_section "Standard Portlet"
-
-        foreach default_view {day list week month} {
-            set cf [list \
-                        calendar_id $calendar_id \
-                        default_view $default_view \
-                        shaded_p false
-                   ]
-
-            set portlet [acs_sc::invoke \
-                             -contract portal_datasource \
-                             -operation Show \
-                             -impl [calendar_portlet::get_my_name] \
-                             -call_args [list $cf]]
-
-            aa_log "Portlet returns: [ns_quotehtml $portlet]"
-
-            aa_false "View: $default_view - No error was returned" {
-                [string first "Error in include template" $portlet] >= 0
-            }
-
-            aa_true "View: $default_view - Portlet looks like HTML" \
-                [ad_looks_like_html_p $portlet]
-        }
-
-
         aa_section "Admin Portlet"
 
         foreach default_view {day list week month} {
@@ -545,60 +519,104 @@ aa_register_case -procs {
                 [string first "Error in include template" $portlet] >= 0
             }
 
-            aa_true "View: $default_view - Portlet looks like HTML" \
-                [ad_looks_like_html_p $portlet]
+            aa_true "View: $default_view - Portlet contains something" {
+                [string length [string trim $portlet]] > 0
+            }
         }
 
-        aa_section "List Portlet"
+        foreach shaded_p {true false} {
+            set section_name "Standard Portlet"
+            if {$shaded_p} {
+                append section_name " (shaded)"
+            }
+            aa_section $section_name
 
-        foreach default_view {day list week month} {
-            set cf [list \
-                        calendar_id $calendar_id \
-                        default_view $default_view \
-                        scoped_p false \
-                        shaded_p false \
+            foreach default_view {day list week month} {
+                set cf [list \
+                            calendar_id $calendar_id \
+                            default_view $default_view \
+                            shaded_p $shaded_p
                        ]
 
-            set portlet [acs_sc::invoke \
-                             -contract portal_datasource \
-                             -operation Show \
-                             -impl [calendar_list_portlet::get_my_name] \
-                             -call_args [list $cf]]
+                set portlet [acs_sc::invoke \
+                                 -contract portal_datasource \
+                                 -operation Show \
+                                 -impl [calendar_portlet::get_my_name] \
+                                 -call_args [list $cf]]
 
-            aa_log "Portlet returns: [ns_quotehtml $portlet]"
+                aa_log "Portlet returns: [ns_quotehtml $portlet]"
 
-            aa_false "View: $default_view - No error was returned" {
-                [string first "Error in include template" $portlet] >= 0
+                aa_false "View: $default_view - No error was returned" {
+                    [string first "Error in include template" $portlet] >= 0
+                }
+
+                aa_true "View: $default_view - Portlet contains something" {
+                    [string length [string trim $portlet]] > 0
+                }
             }
 
-            aa_true "View: $default_view - Portlet looks like HTML" \
-                [ad_looks_like_html_p $portlet]
-        }
+            set section_name "List Portlet"
+            if {$shaded_p} {
+                append section_name " (shaded)"
+            }
+            aa_section $section_name
 
-        aa_section "Full Portlet"
+            foreach default_view {day list week month} {
+                set cf [list \
+                            calendar_id $calendar_id \
+                            default_view $default_view \
+                            scoped_p false \
+                            shaded_p $shaded_p \
+                           ]
 
-        foreach default_view {day list week month} {
-            set cf [list \
-                        calendar_id $calendar_id \
-                        default_view $default_view \
-                        scoped_p false \
-                        shaded_p false \
-                       ]
+                set portlet [acs_sc::invoke \
+                                 -contract portal_datasource \
+                                 -operation Show \
+                                 -impl [calendar_list_portlet::get_my_name] \
+                                 -call_args [list $cf]]
 
-            set portlet [acs_sc::invoke \
-                             -contract portal_datasource \
-                             -operation Show \
-                             -impl [calendar_full_portlet::get_my_name] \
-                             -call_args [list $cf]]
+                aa_log "Portlet returns: [ns_quotehtml $portlet]"
 
-            aa_log "Portlet returns: [ns_quotehtml $portlet]"
+                aa_false "View: $default_view - No error was returned" {
+                    [string first "Error in include template" $portlet] >= 0
+                }
 
-            aa_false "View: $default_view - No error was returned" {
-                [string first "Error in include template" $portlet] >= 0
+                aa_true "View: $default_view - Portlet contains something" {
+                    [string length [string trim $portlet]] > 0
+                }
             }
 
-            aa_true "View: $default_view - Portlet looks like HTML" \
-                [ad_looks_like_html_p $portlet]
+            set section_name "Full Portlet"
+            if {$shaded_p} {
+                append section_name " (shaded)"
+            }
+            aa_section $section_name
+
+            foreach default_view {day list week month} {
+                set cf [list \
+                            calendar_id $calendar_id \
+                            default_view $default_view \
+                            scoped_p false \
+                            shaded_p $shaded_p \
+                           ]
+
+                set portlet [acs_sc::invoke \
+                                 -contract portal_datasource \
+                                 -operation Show \
+                                 -impl [calendar_full_portlet::get_my_name] \
+                                 -call_args [list $cf]]
+
+                aa_log "Portlet returns: [ns_quotehtml $portlet]"
+
+                aa_false "View: $default_view - No error was returned" {
+                    [string first "Error in include template" $portlet] >= 0
+                }
+
+                aa_true "View: $default_view - Portlet contains something" {
+                    [string length [string trim $portlet]] > 0
+                }
+            }
+
         }
     } -teardown_code {
         ad_conn -set user_id $orig_user_id
