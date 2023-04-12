@@ -519,6 +519,10 @@ aa_register_case -procs {
                 [string first "Error in include template" $portlet] >= 0
             }
 
+            aa_false "View: $default_view - No unresolved message keys" {
+                [string first "MESSAGE KEY MISSING: " $portlet] >= 0
+            }
+
             aa_true "View: $default_view - Portlet contains something" {
                 [string length [string trim $portlet]] > 0
             }
@@ -548,6 +552,10 @@ aa_register_case -procs {
 
                 aa_false "View: $default_view - No error was returned" {
                     [string first "Error in include template" $portlet] >= 0
+                }
+
+                aa_false "View: $default_view - No unresolved message keys" {
+                    [string first "MESSAGE KEY MISSING: " $portlet] >= 0
                 }
 
                 aa_true "View: $default_view - Portlet contains something" {
@@ -581,6 +589,10 @@ aa_register_case -procs {
                     [string first "Error in include template" $portlet] >= 0
                 }
 
+                aa_false "View: $default_view - No unresolved message keys" {
+                    [string first "MESSAGE KEY MISSING: " $portlet] >= 0
+                }
+
                 aa_true "View: $default_view - Portlet contains something" {
                     [string length [string trim $portlet]] > 0
                 }
@@ -610,6 +622,10 @@ aa_register_case -procs {
 
                 aa_false "View: $default_view - No error was returned" {
                     [string first "Error in include template" $portlet] >= 0
+                }
+
+                aa_false "View: $default_view - No unresolved message keys" {
+                    [string first "MESSAGE KEY MISSING: " $portlet] >= 0
                 }
 
                 aa_true "View: $default_view - Portlet contains something" {
