@@ -43,7 +43,11 @@ array set config $cf
 if {$view eq ""} {
     set view $config(default_view)
 }
-set list_of_calendar_ids $config(calendar_id)
+
+#
+# Cleanup empty strings from the id list
+#
+set list_of_calendar_ids [lsearch -all -inline -not -exact $config(calendar_id) {}]
 
 set ad_conn_url [ad_conn url]
 set calendar_url [ad_conn package_url]calendar/
