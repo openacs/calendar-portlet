@@ -43,11 +43,6 @@ set period_days [parameter::get -parameter ListView_DefaultPeriodDays -default 3
 array set config $cf
 set view $config(default_view)
 
-#
-# Cleanup empty strings from the id list
-#
-set list_of_calendar_ids [lsearch -all -inline -not -exact $config(calendar_id) {}]
-
 set calendar_url [ad_conn package_url]calendar/
 
 if {[llength $list_of_calendar_ids] > 1} {

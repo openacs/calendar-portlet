@@ -45,11 +45,6 @@ if {$view eq ""} {
     set view $config(default_view)
 }
 
-#
-# Cleanup empty strings from the id list
-#
-set list_of_calendar_ids [lsearch -all -inline -not -exact $config(calendar_id) {}]
-
 # Set the first list entry to calendar_id. Will not be used if under
 # dotlrn. Otherwise the list will actually contain only one calendar_id
 # (the first one, though)
