@@ -42,6 +42,7 @@ set period_days [parameter::get -parameter ListView_DefaultPeriodDays -default 3
 # get stuff out of the config array
 array set config $cf
 set view $config(default_view)
+set list_of_calendar_ids $config(calendar_id)
 
 set calendar_url [ad_conn package_url]calendar/
 

@@ -43,6 +43,7 @@ array set config $cf
 if {$view eq ""} {
     set view $config(default_view)
 }
+set list_of_calendar_ids $config(calendar_id)
 
 set ad_conn_url [ad_conn url]
 set calendar_url [ad_conn package_url]calendar/
