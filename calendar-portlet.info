@@ -9,16 +9,16 @@
     <implements-subsite-p>f</implements-subsite-p>
     <inherit-templates-p>t</inherit-templates-p>
 
-    <version name="2.10.0" url="http://openacs.org/repository/download/apm/calendar-portlet-2.10.0.apm">
+    <version name="2.10.1b1" url="http://openacs.org/repository/download/apm/calendar-portlet-2.10.0.apm">
         <owner url="http://openacs.org">OpenACS</owner>
         <summary>Portlet for the &quot;new-portal&quot; system for the calendar package</summary>
-        <release-date>2021-09-15</release-date>
+        <release-date>2021-09-16</release-date>
         <vendor url="http://dotlrn.org">DotLRN Consortium</vendor>
         <maturity>2</maturity>
 
-        <provides url="calendar-portlet" version="2.10.0"/>
-        <requires url="calendar" version="2.10.0"/>
-        <requires url="new-portal" version="2.10.0"/>
+        <provides url="calendar-portlet" version="2.10.1b1"/>
+        <requires url="calendar" version="2.10.1b1"/>
+        <requires url="new-portal" version="2.10.1b1"/>
 
         <callbacks>
             <callback type="after-upgrade"  proc="calendar_portlet::after_upgrade"/>
