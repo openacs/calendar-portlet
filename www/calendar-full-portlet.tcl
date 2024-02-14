@@ -23,19 +23,9 @@ ad_page_contract {
 } {
     {view ""}
     {page_num:naturalnum 0}
-    {date ""}
+    {date:clock(%Y-%m-%d) ""}
     {period_days:naturalnum,optional}
     {julian_date ""}
-} -properties {
-
-} -validate {
-    valid_date -requires { date } {
-        if {$date ne "" } {
-            if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
-                ad_complain "Your input ($date) was not valid. It has to be in the form YYYY-MM-DD."
-            }
-        }
-    }
 }
 
 # get stuff out of the config array

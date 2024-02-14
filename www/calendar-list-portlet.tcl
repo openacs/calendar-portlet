@@ -21,20 +21,10 @@ ad_page_contract {
 } {
     {view ""}
     {page_num:naturalnum 0}
-    {date ""}
+    {date:clock(%Y-%m-%d) ""}
     {julian_date ""}
     {period_days:naturalnum,optional ""}
     {sort_by ""}
-} -properties {
-    
-}  -validate {
-    valid_date -requires { date } {
-        if {$date ne "" } {
-            if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
-                ad_complain "Your input was not valid. It has to be in the form YYYY-MM-DD."
-            }
-        }
-    }
 }
 
 set calendar_url [ad_conn package_url]calendar/
