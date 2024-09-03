@@ -23,19 +23,9 @@ ad_page_contract {
 } {
     {view ""}
     {page_num:naturalnum 0}
-    {date ""}
+    {date:clock(%Y-%m-%d) ""}
     {period_days:naturalnum,optional}
     {julian_date ""}
-} -properties {
-
-} -validate {
-    valid_date -requires { date } {
-        if {$date ne "" } {
-            if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
-                ad_complain "Your input ($date) was not valid. It has to be in the form YYYY-MM-DD."
-            }
-        }
-    }
 }
 
 # get stuff out of the config array
@@ -59,18 +49,59 @@ if {$scoped_p == "t"} {
 template::head::add_css -href "/resources/calendar/calendar.css"
 template::head::add_css -alternate -href "/resources/calendar/calendar-hc.css" -title "highContrast"
 
-# set the period_days for calendar's list view, therefore we need
+# set the period_days for calendar's list view, therefore, we need
 # to check which instance of calendar is currently displayed
-if {[apm_package_installed_p dotlrn]} {
-    set site_node [site_node::get_node_id_from_object_id -object_id [ad_conn package_id]]
-    set dotlrn_package_id [site_node::closest_ancestor_package -node_id $site_node -package_key dotlrn -include_self]
-    set community_id [db_string get_community_id {select community_id from dotlrn_communities_all where package_id=:dotlrn_package_id} -default ""]
+if { [namespace which ::dotlrn_community::get_community_id] ne "" } {
+    set community_id [dotlrn_community::get_community_id -url [ad_conn url]]
 } else {
     set community_id ""
 }
 
 set calendar_id [lindex $list_of_calendar_ids 0]
-db_0or1row select_calendar_package_id {select package_id from calendars where calendar_id=:calendar_id}
+
+#
+# Get the package_id of the calendar_id
+#
+if {$calendar_id == 0} {
+
+    #
+    # A calendar_id 0 may happen when showcasing the portal layout in
+    # "Portal Templates". This will be a dummy calendar portlet, so we
+    # deactivate the UI by disabling all links and buttons.
+    #
+    set package_id 0
+    set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]
+    template::add_body_handler -event load -script {
+        // Remove event listeners set on the mini-calendar
+        for (const day of document.querySelectorAll('[id^="mini-calendar-"]')) {
+            day.replaceWith(day.cloneNode(true));
+        }
+        // Disable all links
+        for (const link of document.querySelectorAll('[name="calendar"] ~ * a')) {
+            link.addEventListener('click', function (e) {
+                link.removeAttribute('href');
+            });
+        }
+        // Disable all buttons
+        for (const input of document.querySelectorAll('[name="calendar"] ~ * input, [name="calendar"] ~ * button')) {
+            input.disabled = true;
+        }
+    }
+
+} elseif {![db_0or1row select_calendar_package_id {
+    select package_id from calendars
+     where calendar_id = :calendar_id
+}]} {
+
+    #
+    # Could not find the supplied calendar_id, we complain in this
+    # case.
+    #
+    ad_log error "Invalid calendar_id in portlet configuration (calendar_id '$calendar_id')"
+    ad_return_complaint 1 "Invalid calendar_id in portlet configuration (calendar_id '$calendar_id')"
+    ad_script_abort
+}
+
 if { ![info exists period_days] } {
     if { [info exists community_id] && $community_id ne "" } {
         set period_days [parameter::get -package_id $package_id -parameter ListView_DefaultPeriodDays -default 31]

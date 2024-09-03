@@ -28,10 +28,15 @@ ad_library {
 
 namespace eval calendar_portlet_display {
     
-    ad_proc -public get_url_stub {
+    ad_proc -deprecated get_url_stub {
         calendar_id
     } {
         Get the URL this calendar is mapped to.
+
+        DEPRECATED: this proc has no use in current codebase and is
+        also a very trivial wrapper.
+
+        @see site_node_object_map::get_url
 
         @return a URL
     } {

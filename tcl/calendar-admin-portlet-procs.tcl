@@ -54,7 +54,7 @@ namespace eval calendar_admin_portlet {
 	{-portal_id:required}
 	{-calendar_id:required}
     } {
-	Adds a admin calendar PE to the given portal.
+	Adds an admin calendar PE to the given portal.
 
 	@param portal_id The page to add self to
 	@param calendar_id The new calendar_id to add

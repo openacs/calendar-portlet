@@ -23,19 +23,9 @@ ad_page_contract {
 } {
     {view ""}
     {page_num:naturalnum 0}
-    {date ""}
+    {date:clock(%Y-%m-%d) ""}
     {period_days:naturalnum,optional}
     {julian_date ""}
-} -properties {
-
-}  -validate {
-    valid_date -requires { date } {
-        if {$date ne "" } {
-            if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
-                ad_complain "Your input ($date) was not valid. It has to be in the form YYYY-MM-DD."
-            }
-        }
-    }
 }
 
 set return_url "[ns_conn url]?[ns_conn query]"
@@ -45,6 +35,7 @@ set period_days [parameter::get -parameter ListView_DefaultPeriodDays -default 3
 array set config $cf
 set view $config(default_view)
 set list_of_calendar_ids $config(calendar_id)
+
 set calendar_url [ad_conn package_url]calendar/
 
 if {[llength $list_of_calendar_ids] > 1} {

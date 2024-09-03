@@ -33,7 +33,8 @@ namespace eval calendar_full_portlet {
         return "calendar-portlet"
     }
 
-    ad_proc -private get_my_name {
+    ad_proc -public get_my_name {} {
+        Return the portlet name
     } {
         return "calendar_full_portlet"
     }

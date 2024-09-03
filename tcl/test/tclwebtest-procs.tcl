@@ -141,7 +141,7 @@ ad_proc -private calendar_portlet::twt::item_add {item_title item_description it
     tclwebtest::field fill $item_date
     tclwebtest::form submit
     
-    aa_log "Add Item form submited"
+    aa_log "Add Item form submitted"
 
     # Convert date in format mm/dd/yyyy
     set date [template::util::date::today]
@@ -184,7 +184,7 @@ ad_proc -private calendar_portlet::twt::item_edit {item_title item_new_title ite
     tclwebtest::field fill $item_new_description
     tclwebtest::form submit
 
-    aa_log "Edit Item form submited"
+    aa_log "Edit Item form submitted"
 
     set response_url [tclwebtest::response url]
 
@@ -216,7 +216,7 @@ ad_proc -private calendar_portlet::twt::item_delete {item_title} {
     tclwebtest::link follow "Delete"
     tclwebtest::link follow  {yes, delete it} 
 
-    aa_log "Delete Item form submited"
+    aa_log "Delete Item form submitted"
 
     set response_url [tclwebtest::response url]
 
@@ -329,7 +329,7 @@ ad_proc -private calendar_portlet::twt::display_date {date} {
     tclwebtest::field find ~n date
     tclwebtest::field fill $given_date    
     tclwebtest::form submit
-    aa_log "Get date form submited"
+    aa_log "Get date form submitted"
 
     set response_url [tclwebtest::response url]
 

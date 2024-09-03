@@ -22,9 +22,7 @@ ad_page_contract {
     @author Ben Adida (ben@openforce.net)
     @cvs-id $Id$
 } {
-    {period_days:optional}
-} -properties {
-    
+    {period_days:naturalnum,optional}
 }
 
 # get stuff out of the config array
